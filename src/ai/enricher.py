@@ -36,6 +36,19 @@ class ContentEnricher:
         concurrency = getattr(config, "enrichment_concurrency", 1)
         return max(concurrency, 1)
 
+    def _get_enrichment_system_prompt(self) -> str:
+        """Append an optional audience-specific editorial profile."""
+        config = getattr(self.client, "config", None)
+        profile = getattr(config, "curation_profile", None)
+        if not profile:
+            return CONTENT_ENRICHMENT_SYSTEM
+        return (
+            f"{CONTENT_ENRICHMENT_SYSTEM}\n\n"
+            "Audience-specific editorial profile (apply it to audience relevance "
+            "and framing; do not invent facts):\n"
+            f"{profile}"
+        )
+
     async def enrich_batch(self, items: List[ContentItem]) -> None:
         """Enrich items in-place with background knowledge.
 
@@ -186,7 +199,7 @@ class ContentEnricher:
         )
 
         response = await self.client.complete(
-            system=CONTENT_ENRICHMENT_SYSTEM,
+            system=self._get_enrichment_system_prompt(),
             user=user_prompt,
         )
 

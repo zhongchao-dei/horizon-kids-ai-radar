@@ -51,6 +51,19 @@ class ContentAnalyzer:
         concurrency = getattr(config, "analysis_concurrency", 1)
         return max(concurrency, 1)
 
+    def _get_system_prompt(self) -> str:
+        """Append an optional audience-specific curation profile."""
+        config = getattr(self.client, "config", None)
+        profile = getattr(config, "curation_profile", None)
+        if not profile:
+            return CONTENT_ANALYSIS_SYSTEM
+        return (
+            f"{CONTENT_ANALYSIS_SYSTEM}\n\n"
+            "Audience-specific curation profile (this profile takes priority "
+            "when judging relevance, while factual accuracy remains mandatory):\n"
+            f"{profile}"
+        )
+
     async def analyze_batch(self, items: List[ContentItem]) -> List[ContentItem]:
         throttle_sec = self._get_throttle_sec()
         concurrency = self._get_concurrency()
@@ -151,7 +164,7 @@ class ContentAnalyzer:
 
         # Get AI completion
         response = await self.client.complete(
-            system=CONTENT_ANALYSIS_SYSTEM,
+            system=self._get_system_prompt(),
             user=user_prompt,
         )
 
