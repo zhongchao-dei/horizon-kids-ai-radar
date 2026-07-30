@@ -3,7 +3,7 @@ name: Daily Horizon Summary
 on:
   schedule:
     # A non-round minute reduces GitHub Actions peak-time delay.
-    - cron: '45 9 * * *'
+    - cron: '30 9 * * *'
       timezone: 'Asia/Shanghai'
   workflow_dispatch:
     inputs:
