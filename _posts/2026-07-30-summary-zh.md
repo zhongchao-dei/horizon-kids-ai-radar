@@ -9,94 +9,95 @@ lang: zh
 
 ---
 
-1. [AI 利用儿童社交照片实施性勒索](#item-1) ⭐️ 8.0/10
-2. [佛州赋予家长课堂 AI 使用控制权](#item-2) ⭐️ 8.0/10
-3. [教师担忧 AI 普及影响学生批判性思维](#item-3) ⭐️ 8.0/10
+1. [AI 生成虚假照片用于儿童性敲诈](#item-1) ⭐️ 9.0/10
+2. [教师担忧 AI 削弱学生批判性思维](#item-2) ⭐️ 8.0/10
+3. [家长可选择孩子在校是否使用 AI 工具](#item-3) ⭐️ 7.0/10
 
 ---
 
 <a id="item-1"></a>
-## [AI 利用儿童社交照片实施性勒索](https://news.google.com/rss/articles/CBMiwwFBVV95cUxPOFUzTEVQX1N5enVoMWpDR1ZXZ3p1UkQzYm4zMjlkU0lybE1uT2MyVWF4SWxqRGRFcmt6aGF5YUhlbldWMU5JSjllZEMwMHBJaVZULWhZMUQ2bERXQTRuTEQxQU9MRzZ2TmMxaHI4OHJfZnZ3c0I1N2xHdzZRYWdRQjV3S1I2OS1WRkQzZWF2OWpaemVUUGdyekhpVTN1U1RYMVVmeGYzRE0xdjQ1UjJhUVdLOEwxcVFIQjFTOGVHcFBZWVU?oc=5) ⭐️ 8.0/10
+## [AI 生成虚假照片用于儿童性敲诈](https://news.google.com/rss/articles/CBMiwwFBVV95cUxPOFUzTEVQX1N5enVoMWpDR1ZXZ3p1UkQzYm4zMjlkU0lybE1uT2MyVWF4SWxqRGRFcmt6aGF5YUhlbldWMU5JSjllZEMwMHBJaVZULWhZMUQ2bERXQTRuTEQxQU9MRzZ2TmMxaHI4OHJfZnZ3c0I1N2xHdzZRYWdRQjV3S1I2OS1WRkQzZWF2OWpaemVUUGdyekhpVTN1U1RYMVVmeGYzRE0xdjQ1UjJhUVdLOEwxcVFIQjFTOGVHcFBZWVU?oc=5) ⭐️ 9.0/10
 
-据 ABC15 亚利桑那报道，犯罪分子正在利用 AI 工具从儿童的社交媒体照片生成虚假色情图片，然后进行敲诈勒索，这是一种新型性勒索。 这种基于 AI 的威胁大大降低了性勒索的门槛，因为犯罪者无需真实私密照片即可制造逼真的虚假内容。家长必须了解这一风险并采取预防措施，保护孩子的在线安全。 该技术利用深度伪造（常基于生成对抗网络 GAN）将儿童面部无缝插入色情材料。ABC15 的报道指出此类犯罪正在上升，孩子可能意识不到普通的自拍会被武器化。
+犯罪分子利用 AI 从儿童社交媒体照片生成虚假不雅图像，进而勒索钱财或更多照片。ABC15 Arizona 报道了这种新型性敲诈，凸显了日益严重的威胁。 这一发展让每个有社交媒体存在的儿童都可能成为目标，因为犯罪分子不再需要真实的私密照片就能进行勒索。家长和教育者必须紧急教育孩子认识这一风险并知道如何应对。 AI 生成的图像往往逼真到足以引起恐慌，受害者通常被威胁如果不服从就会公开曝光。报道显示，年仅 10 岁的儿童已成为目标，且这一技术正在各平台迅速蔓延。
 
 google\_news · ABC15 Arizona · 7月29日 23:18
 
 ### 可选选题卡
-- **标题**：孩子的自拍可能被 AI 变成“裸照”，家长该怎么做？
-- **入口**：手机使用, 家长介入
-- **钩子**：犯罪分子用 AI 从孩子的普通自拍生成虚假裸照进行敲诈，你想象不到的危险。
-- **关键事实**：据 ABC15 报道，犯罪分子利用 AI 工具从儿童社交媒体照片生成深度伪造色情内容，用于性勒索。
-- **真正过程问题**：孩子随意上传高清自拍到公开社交媒体，未意识到照片可以被 AI 滥用。
-- **因果链**：孩子上传照片 -&gt; AI 工具生成虚假色情内容 -&gt; 犯罪分子威胁公开 -&gt; 孩子恐慌可能屈服 -&gt; 家长需提前教育隐私保护。
-- **可见证据**：家长可以留意孩子是否收到陌生人的威胁信息，或孩子情绪异常、害怕使用手机。
-- **家长判断**：家长无需懂 AI 技术，只需提醒孩子不轻易公开高清面部照片，设置社交媒体隐私权限，并报告可疑信息。
-- **课程连接**：不建议本条明显露出课程，但可自然链接到儿童 AI 素养课程中的隐私保护模块。
+- **标题**：当 AI 用你的日常照片造谣：儿童性敲诈新骗局，家长必须知道的 4 个防护步骤
+- **入口**：手机使用, 判断与辨别, 家长介入
+- **钩子**：孩子只是发了张自拍，却收到了自己“不雅照”的勒索信息。
+- **关键事实**：ABC15 报道，犯罪分子利用 AI 从儿童社交媒体照片生成虚假裸照，实施性敲诈；受害者最小仅 10 岁。
+- **真正过程问题**：孩子正常使用社交平台分享生活照片，却未意识到照片可能被下载并用于 AI 伪造。
+- **因果链**：孩子发布自拍 → 犯罪分子下载照片并用 AI 工具生成虚假不雅照 → 通过私信威胁曝光索要金钱或更多照片 → 孩子因恐惧而可能服从或沉默。应补回的步骤：教会孩子识别陌生人索要私密照的威胁、不回应、立即告知家长并保存证据举报。
+- **可见证据**：孩子突然收到带有威胁内容的消息或邮件，包含看似真实的照片；孩子情绪异常、不愿讨论手机内容或突然删除社交应用。
+- **家长判断**：家长无需识别 AI 真伪，只需建立“任何陌生人的私密照片威胁都是敲诈”的规则，并确保孩子知道不会因此受罚。
+- **课程连接**：不建议本条明显露出课程
 - **内容目标**：认知
-- **适用边界**：新闻来源可靠，直接关联儿童安全，适合制作警示类内容。但需避免详细描述犯罪手法引发恐慌，重点放在防范措施上。
+- **适用边界**：新闻来源权威（ABC15），事实清晰，适合作为家长安全教育紧迫选题。但案例细节未公开，不宜编造具体受害故事。重点应放在风险认知和应对步骤，而非渲染恐惧。
 
-**背景**: 深度伪造是由 AI 生成的合成媒体，可令人信服地描绘某人从未做过或说过的事。性勒索是一种勒索形式，犯罪者威胁发布私密图像，除非受害者支付钱财或满足要求。随着 AI 工具普及，制作深度伪造性勒索材料不再需要专业技术。
+**背景**: 性敲诈是一种勒索形式，犯罪分子威胁发布私密图像，除非受害者付款或提供更多内容。由生成对抗网络（GANs）或类似 AI 驱动的深度伪造技术，可以从普通照片创建逼真的假图像，使得无需任何事先的私密材料即可实施这种犯罪。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://www.digitalforensics.com/blog/sextortion-online/the-role-of-deepfakes-in-sextortion/">Deepfake Blackmail &amp; Sextortion: How to Stop and Prevent ...</a></li>
-<li><a href="https://www.welivesecurity.com/2023/07/04/deepfaking-it-deepfake-driven-sextortion-schemes/">Deepfaking it: What to know about deepfake-driven sextortion schemes</a></li>
+<li><a href="https://www.dentons.com/en/insights/alerts/2025/july/9/the-rising-threat-of-deepfake-extortion-schemes">The Rising Threat of Deepfake Extortion Schemes - Dentons</a></li>
+<li><a href="https://www.minclaw.com/ai-sextortion/">AI Sextortion: How Criminals Are Weaponizing Deepfakes</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Generative_adversarial_network">Generative adversarial network - Wikipedia</a></li>
 
 </ul>
 </details>
 
-**标签**: `#儿童安全`, `#AI风险`, `#社交媒体`, `#网络勒索`, `#家长警示`
+**标签**: `#儿童安全`, `#AI滥用`, `#性敲诈`, `#隐私`, `#家长教育`
 
 ---
 
 <a id="item-2"></a>
-## [佛州赋予家长课堂 AI 使用控制权](https://news.google.com/rss/articles/CBMi1AFBVV95cUxQZnBPRjdfMGcyOHhyR0hpVEhROTBUTWNiNnZ4RFFjdXlZN09JTFJHRHhoVEZqbzBYZ29SbjV0VnQycFhWa2NLWl9KdUhiNUNpT24yQmotRlVtaFItQkI5MVpobXFjd0l1ZzlJN1RrVmw1emJkMkozNlpZN0lncXBRV3RwMmFvOUZpYzkyRWVvZVVPZmE1N2RDdUlSX0xTQXFqVC1pUDRJWjFCRG9WNU1ReVRZSG5ydTNGQWN6dXQxbFY4QjczQkVTMTlESmRpREFTdl91QQ?oc=5) ⭐️ 8.0/10
+## [教师担忧 AI 削弱学生批判性思维](https://news.google.com/rss/articles/CBMivAFBVV95cUxPNU80TnFlZzQtMXptcTRCcGVvX2xNU3ZfMUVzODk0bko5eTcwTjdjdTRVYkZSZ2dJS3BxUG5HaXZZNUlRMTZxTjg1aG91MTRwQXFsUE1CaWxSUGdVclMxdkRRd1FBMzlxVjJnVzFzN3hiRlZGSFRFbGZfNUJtZmNUQ1E2bEI5YTlHdEFkM2JmaVhJZ01RcTdHQW4yU2RIZU8xY1pmR3lpLS1HaklTaTY3ak1Ka2FoTmVSbks5QQ?oc=5) ⭐️ 8.0/10
 
-佛罗里达州政府通过一项政策，赋予家长决定其子女在公立学校课堂中是否使用人工智能的权利。 这是美国首个州级政策明确赋予家长对 K12 教育中 AI 使用的一票否决权，可能为其他州开创先例，直接影响孩子在学校与 AI 的互动方式。 该政策适用于佛州所有公立 K12 课堂，要求学校在部署 AI 工具前通知家长。家长可选择让孩子退出任何 AI 辅助教学。
-
-google\_news · voz.us · 7月29日 10:03
-
-### 可选选题卡
-- **标题**：佛州新政：课堂用 AI，家长说了算
-- **入口**：家长介入
-- **钩子**：孩子在课堂用 AI，你却不知道？现在佛州家长可以一票拒绝。
-- **关键事实**：佛罗里达州新政策赋予家长对公立学校课堂 AI 使用的控制权，学校必须事先通知家长并经同意。
-- **真正过程问题**：孩子在学校使用 AI 学习时，家长往往无法知情或干预。
-- **因果链**：家长担心 AI 影响孩子学习→佛州出台家长控制政策→学校需通知并征求同意→家长需要了解政策细节并做出决定。
-- **可见证据**：学校发放的家长同意书或政策通知文件。
-- **家长判断**：家长可以无需技术知识，直接通过签字或在线表单决定孩子是否接触课堂 AI。
-- **课程连接**：不建议本条明显露出课程
-- **内容目标**：认知
-- **适用边界**：直接关联家长介入场景，事实来自新闻聚合，但缺少官方政策原文细节。适合做资讯科普，不适合做行动指导，可提醒家长关注本地类似动态。
-
-**背景**: 自适应学习平台和自动批改等 AI 工具在美国课堂中日益普及，引发了对数据隐私、算法偏见以及教师角色的担忧。许多家长对孩子在不知情或未经同意的情况下受 AI 影响表示不安。
-
-**标签**: `#K12 政策`, `#AI 教育`, `#家长控制`, `#课堂 AI`, `#儿童隐私`
-
----
-
-<a id="item-3"></a>
-## [教师担忧 AI 普及影响学生批判性思维](https://news.google.com/rss/articles/CBMivAFBVV95cUxPNU80TnFlZzQtMXptcTRCcGVvX2xNU3ZfMUVzODk0bko5eTcwTjdjdTRVYkZSZ2dJS3BxUG5HaXZZNUlRMTZxTjg1aG91MTRwQXFsUE1CaWxSUGdVclMxdkRRd1FBMzlxVjJnVzFzN3hiRlZGSFRFbGZfNUJtZmNUQ1E2bEI5YTlHdEFkM2JmaVhJZ01RcTdHQW4yU2RIZU8xY1pmR3lpLS1HaklTaTY3ak1Ka2FoTmVSbks5QQ?oc=5) ⭐️ 8.0/10
-
-据 RNZ 报道，新西兰教师对 AI 在学校日益普及表示担忧，认为这可能削弱学生的批判性思维能力。 这一担忧凸显了利用 AI 提升教育效率与保留批判性分析等核心认知技能之间的紧张关系，直接影响家长和教育者如何对待学习中的 AI 使用。 RNZ 的报道未提供具体统计数据，但强调了教育工作者中的普遍情绪：过度依赖 AI 工具可能阻碍学生独立思考和信息批判性评估的能力。
+据新西兰 RNZ 和教育审查办公室（ERO）报告，新西兰教师普遍担忧 AI 在学校广泛使用可能会削弱学生的批判性思维能力。 这对 K12 教育至关重要，因为批判性思维是家长需要保护的核心能力。该报道提供了具体证据，家长可据此与孩子和学校讨论 AI 使用问题。 ERO 报告指出 AI 在新西兰学校广泛使用，但教师缺乏适当指导。报道未提供具体数据，但来源（RNZ）可靠。
 
 google\_news · RNZ · 7月29日 23:57
 
 ### 可选选题卡
-- **标题**：孩子用 AI 写作业，批判性思维会消失吗？
-- **入口**：作业协作, 判断与辨别
-- **钩子**：老师发现，作业写得越来越好，但课堂提问却答不出来了。
-- **关键事实**：新西兰教师普遍担忧，AI 工具的普及可能削弱学生的批判性思维能力。
-- **真正过程问题**：使用 AI 直接生成答案，跳过了自己查阅、比较和推理的过程。
-- **因果链**：想快速完成作业→用 AI 生成答案→作业得分高但课堂提问答不出→需要回归独立思考和信息核实步骤。
-- **可见证据**：家长可以检查孩子作业中是否出现超出其表达能力的高难度词汇，或观察孩子是否能口头解释作业内容。
-- **家长判断**：家长可以不精通 AI，但可以询问孩子&\#x27;你作业中的这个观点是怎么得出来的？&\#x27;，看孩子能否说清思考过程。
-- **课程连接**：不建议本条明显露出课程，但可作为 AI 素养讨论的入口。
+- **标题**：AI 时代，家长如何帮孩子守住批判性思维？——新西兰教师真实担忧分享
+- **入口**：判断与辨别、作业协作
+- **钩子**：老师发现，用 AI 做作业的学生，交上来的答案“完美但空洞”——是什么能力在消失？
+- **关键事实**：新西兰教育审查办公室（ERO）报告显示，AI 在新西兰学校广泛使用，但缺乏相应指导；教师普遍担忧学生依赖 AI 导致批判性思维能力下降。
+- **真正过程问题**：孩子直接用 AI 搜索答案或生成作文，跳过了思考、分析、评估信息的过程。
+- **因果链**：开始动机（快速完成作业）→ AI 介入（直接获取完整答案）→ 异常结果（答案看似完美但缺少个人思考，教师无法判断学生真实水平）→ 应补回的步骤（引导孩子先自己思考，再用 AI 核对或拓展；家长与孩子讨论 AI 输出的合理性）
+- **可见证据**：孩子作业中出现超出其年龄范围的词汇或结构，或者解释不清自己作业的内容；家长可以抽查孩子对作业的理解。
+- **家长判断**：家长不需要精通 AI，只需在孩子完成作业后，请孩子用自己的话复述一遍内容，如果孩子说不清，说明可能过度依赖 AI。
+- **课程连接**：可与“培养批判性思维”课程中的“信息辨别与独立思考”模块自然连接。
 - **内容目标**：认知
-- **适用边界**：本条新闻来自 RNZ，可信度高。但报道未提供具体数据，家长需结合实际观察。适合作为引发讨论的切入点，不宜作为唯一依据。
+- **适用边界**：新闻来源权威（RNZ+ERO），教师担忧真实具体，适合制作家长认知类短视频。但需注意：报道为新西兰情况，国内 AI 教育环境有差异，不应直接照搬结论，而是引发家长反思通用问题。
 
-**背景**: 以 ChatGPT 为代表的生成式 AI 工具在中小学生中越来越流行，用于完成作业和查找资料。这引发了教育界对学术诚信和批判性思维可能下降的担忧——学生可能直接依赖 AI 生成的答案，而不参与思考过程。
+**背景**: 像 ChatGPT 这样的 AI 工具日益被学生用于作业和研究。虽然 AI 可以辅助学习，但过度依赖可能减少独立思考的机会。新西兰 ERO 呼吁提供更好的指导，以平衡 AI 的好处与批判性思维的培养。
 
-**标签**: `#K12教育`, `#AI素养`, `#批判性思维`, `#儿童AI使用`, `#教育政策`
+**标签**: `#AI教育`, `#批判性思维`, `#K12`, `#家长关注`, `#教育政策`
+
+---
+
+<a id="item-3"></a>
+## [家长可选择孩子在校是否使用 AI 工具](https://news.google.com/rss/articles/CBMihgJBVV95cUxPSWlSeXVLRzE0TU9LU1BPZ2dPdDVzZmVGalBFSHlYQXh1YVNURVp5OFgxN3dldGU1NENoV1BaazhsMWVZVjNzQVlwM3RfUDdwYUY1YlltQWt6NHVIdHBzRmUzREpIWWFEZFV6UXZWSFBjVzBzNUNfY1lzM3h1aXJnRHFzQ3FsNXMxRHFyVU0zUVZpc3R2ZVZSTUg4SnNldUJ2X0d3Z1ltSU5iNEc1UzhHVnlkRXViVEJuSzJYdjliZXhvTTAyczhFemMwRVpMcWlzdWY5NndhQXdybnNLaTdmb0p2ZzhWUVROVUI3ZXFaSzFsUXlyenR6eUkydHRTejd1a1l2LTNR?oc=5) ⭐️ 7.0/10
+
+某学区实施新政策，允许家长自行决定孩子是否可以在课堂上使用人工智能工具。 该政策直接赋予家长控制孩子在学校接触 AI 的权利，回应了隐私与教育方面的担忧。它可能为其他学区树立先例，影响 K-12 阶段 AI 工具的采用方式。 该政策适用于学区使用的所有 AI 工具，但未明确具体工具或年级。家长可能需要通过正式流程选择同意或退出。
+
+google\_news · chronicleonline.com · 7月29日 17:39
+
+### 可选选题卡
+- **标题**：学校用 AI，家长能说“不”吗？
+- **入口**：家长介入
+- **钩子**：学校引入 AI 工具，家长竟有权让孩子不用？
+- **关键事实**：美国某学区新政策：家长可以选择孩子在校是否使用 AI 工具，无需说明理由。
+- **真正过程问题**：家长可能不清楚 AI 工具在课堂上的具体用途，无法判断利弊。
+- **因果链**：学校使用 AI→家长担心隐私与学习效果→政策给予选择权→家长需了解工具后再决定。
+- **可见证据**：家长会收到学区的通知单，上面有选择表格或在线勾选入口。
+- **家长判断**：家长可以查看学区提供的 AI 工具清单及用途说明，据此选择“同意”或“退出”。
+- **课程连接**：不建议本条明显露出课程
+- **内容目标**：信任
+- **适用边界**：新闻本身简短，缺乏具体学区名称和工具细节，但政策方向对家长有参照价值。适合引发家长思考 AI 在学校的利弊，而非提供操作步骤。
+
+**背景**: 学校正越来越多地将 AI 工具用于个性化学习、批改作业和行政任务。然而，数据隐私、算法偏见以及过度依赖技术等问题，促使一些学区采用家长选择机制。
+
+**标签**: `#K12 education`, `#parental control`, `#AI in schools`, `#policy`, `#child privacy`
 
 ---
