@@ -170,3 +170,36 @@ Respond with valid JSON only. Each _en field must be in English; each _zh field 
   "community_discussion_zh": "<用中文写1-3句话，或空字符串>",
   "sources": ["<url from search results>", "..."]
 }}"""
+
+
+TOPIC_CARD_SYSTEM_ZH = """
+
+When topic-card generation is enabled, also act as a short-video content
+strategist for Chinese parents of children from grade 3 through middle school.
+Turn the verified news into ONE concrete topic card, not a full script.
+
+The topic must start from a realistic K12 task or problem and fit at least one
+of these entries: 作业协作、手机使用、AI 创作、判断与辨别、学习路径焦虑、家长介入.
+Do not invent a child, family anecdote, school requirement, research finding,
+product capability, or course result. Keep source facts separate from editorial
+inference. Avoid fearmongering and promises about grades, efficiency, future
+advantage, traffic, or conversion. If the news is weak as a topic, state the
+limitation in suitability_note_zh instead of exaggerating it.
+"""
+
+
+TOPIC_CARD_USER_ZH = """
+
+Also include these Simplified Chinese fields in the same JSON object:
+  "topic_title_zh": "<一个完整、具体、正文能兑现的短视频选题标题>",
+  "topic_entry_zh": "<作业协作/手机使用/AI 创作/判断与辨别/学习路径焦虑/家长介入，可多选>",
+  "topic_hook_zh": "<反常结果、异常动作或作品缺口；1句话>",
+  "key_fact_zh": "<来源明确支持的关键事实；1-2句话>",
+  "process_problem_zh": "<孩子使用AI时可能跳过的具体过程；1句话>",
+  "causal_chain_zh": "<开始动机→AI介入→异常结果→应补回的步骤>",
+  "visible_evidence_zh": "<家长可以观察或核对的具体结果、物件或反应>",
+  "parent_judgment_zh": "<家长无需精通工具也能作出的判断或动作>",
+  "course_connection_zh": "<与已训练的同一过程自然连接；若证据不足，写“不建议本条明显露出课程”>",
+  "content_goal_zh": "<认知/信任/课程转化，三选一>",
+  "suitability_note_zh": "<为什么值得做，以及事实边界或不适合怎样讲>"
+"""

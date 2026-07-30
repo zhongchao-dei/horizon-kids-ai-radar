@@ -104,6 +104,33 @@ def test_max_items_works_without_category_groups() -> None:
     assert [item.id for item in result.items] == ["higher"]
 
 
+def test_filter_items_adds_quality_floor_fallbacks_to_reach_minimum() -> None:
+    filtering = FilteringConfig(
+        ai_score_threshold=7.0,
+        min_items=3,
+        fallback_score_floor=6.0,
+        max_items=5,
+    )
+    orchestrator = make_orchestrator(filtering)
+    items = [
+        make_item("strong", 8.0, None),
+        make_item("fallback-1", 6.8, None),
+        make_item("fallback-2", 6.2, None),
+        make_item("too-weak", 5.9, None),
+    ]
+
+    result = asyncio.run(
+        orchestrator.filter_items(items, topic_dedup=False, log=False)
+    )
+
+    assert [item.id for item in result.items] == [
+        "strong",
+        "fallback-1",
+        "fallback-2",
+    ]
+    assert result.threshold_count == 1
+
+
 def test_duplicate_category_warns_and_first_group_wins() -> None:
     filtering = FilteringConfig(
         category_groups={

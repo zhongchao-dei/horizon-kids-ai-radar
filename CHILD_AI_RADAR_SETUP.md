@@ -5,7 +5,7 @@
 - 受众：小学三年级至初中阶段孩子的家长
 - 输出：简体中文
 - 运行时间：每天北京时间 09:30（GitHub Actions 定时任务可能延迟）
-- 日报上限：12 条
+- 日报目标：3—5 条完整选题卡（不足时只补充 AI 评分不低于 6.0 的备选，不硬凑低质量内容）
 - 重点栏目：
   - 中国儿童与中小学 AI 教育
   - K12 实践与学习
@@ -15,19 +15,19 @@
 
 ## 需要添加的 GitHub Secrets
 
-定时任务默认使用 Gemini；DeepSeek 作为手动备用模型。**不要把 API Key 写进仓库、Issue、聊天记录或 `data/config.github.json`。**
+定时任务默认使用 DeepSeek；Gemini 作为手动备用模型。**不要把 API Key 写进仓库、Issue、聊天记录或 `data/config.github.json`。**
 
 在本 Fork 中打开：
 
 `Settings` → `Secrets and variables` → `Actions` → `New repository secret`
 
-- Name：`GOOGLE_API_KEY`
-- Secret：粘贴你的 Gemini API Key
+- Name：`DEEPSEEK_API_KEY`
+- Secret：粘贴你的 DeepSeek API Key
 
 如需测试备用模型，再添加：
 
-- Name：`DEEPSEEK_API_KEY`
-- Secret：粘贴你的 DeepSeek API Key
+- Name：`GOOGLE_API_KEY`
+- Secret：粘贴你的 Gemini API Key
 
 `GITHUB_TOKEN` 由 GitHub Actions 自动提供，不需要自己创建。
 
@@ -36,8 +36,8 @@
 1. 打开 `Actions`。
 2. 选择 `Daily Horizon Summary`。
 3. 点击 `Run workflow`。
-4. Provider 先选择 `gemini`，等待任务成功完成。
-5. 如需验证备用模型，再选择 `deepseek` 手动运行一次。
+4. Provider 先选择 `deepseek`，等待任务成功完成。
+5. 如需验证备用模型，再选择 `gemini` 手动运行一次。
 
 如果 GitHub 提示工作流尚未启用，先点击 `I understand my workflows, go ahead and enable them`。
 
@@ -67,4 +67,3 @@
 - 邮件日报：配置 SMTP/IMAP 和邮箱授权码
 - 调整时间：修改工作流中的 UTC cron 表达式
 - 调整每日数量：修改 `filtering.max_items` 和各栏目 `limit`
-

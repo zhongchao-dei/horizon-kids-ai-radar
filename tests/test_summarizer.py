@@ -124,6 +124,40 @@ def test_generate_summary_zh_uses_localized_selection_header_and_numeric_date():
     assert "Apr 25, 08:00" not in result
 
 
+def test_generate_summary_zh_renders_complete_topic_card():
+    summarizer = DailySummarizer()
+    item = _make_item(1)
+    item.metadata.update(
+        {
+            "topic_title_zh": "孩子交上 AI 作业后，为什么还要讲一遍思路",
+            "topic_entry_zh": "作业协作、家长介入",
+            "topic_hook_zh": "作业答案全对，孩子却说不清第一步。",
+            "key_fact_zh": "来源显示，部分课堂正在使用生成式 AI 辅助作业。",
+            "process_problem_zh": "孩子跳过了理解和验证。",
+            "causal_chain_zh": "完成作业→让 AI 给答案→无法解释→补回验证",
+            "visible_evidence_zh": "让孩子不用看答案讲出第一步。",
+            "parent_judgment_zh": "家长只核对孩子能否解释方法。",
+            "course_connection_zh": "不建议本条明显露出课程",
+            "content_goal_zh": "认知",
+            "suitability_note_zh": "可讲使用边界，不能推断所有学生都依赖 AI。",
+        }
+    )
+
+    result = _run_async(
+        summarizer.generate_summary(
+            [item],
+            date="2026-04-25",
+            total_fetched=10,
+            language="zh",
+        )
+    )
+
+    assert "### 可选选题卡" in result
+    assert "**标题**：孩子交上 AI 作业后" in result
+    assert "**真正过程问题**：孩子跳过了理解和验证。" in result
+    assert "**适用边界**：可讲使用边界" in result
+
+
 def test_generate_empty_summary_zh_uses_localized_analyzed_line():
     summarizer = DailySummarizer()
 

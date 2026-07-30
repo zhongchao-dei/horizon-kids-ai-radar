@@ -647,22 +647,55 @@ class HorizonOrchestrator:
             if threshold is not None
             else self.config.filtering.ai_score_threshold
         )
-        threshold_items = [
+        scored_items = [
             item
             for item in items
-            if item.ai_score is not None and item.ai_score >= effective_threshold
+            if item.ai_score is not None
         ]
-        threshold_items.sort(key=lambda item: item.ai_score or 0, reverse=True)
+        scored_items.sort(key=lambda item: item.ai_score or 0, reverse=True)
+        threshold_items = [
+            item for item in scored_items if (item.ai_score or 0) >= effective_threshold
+        ]
 
         if log:
             self.console.print(
                 f"⭐️ {len(threshold_items)} items scored ≥ {effective_threshold}\n"
             )
 
-        deduped_items = threshold_items
-        if topic_dedup and deduped_items:
-            deduped_items = await self.merge_topic_duplicates(deduped_items, log=log)
-        topic_dedup_removed = len(threshold_items) - len(deduped_items)
+        minimum = self.config.filtering.min_items
+        floor = self.config.filtering.fallback_score_floor
+        eligible_items = threshold_items
+        if minimum and floor is not None and len(threshold_items) < minimum:
+            eligible_items = [
+                item for item in scored_items if (item.ai_score or 0) >= floor
+            ]
+
+        deduped_eligible = eligible_items
+        if topic_dedup and deduped_eligible:
+            deduped_eligible = await self.merge_topic_duplicates(
+                deduped_eligible, log=log
+            )
+
+        deduped_items = [
+            item
+            for item in deduped_eligible
+            if (item.ai_score or 0) >= effective_threshold
+        ]
+        if minimum and floor is not None and len(deduped_items) < minimum:
+            lower_ranked = [
+                item
+                for item in deduped_eligible
+                if floor <= (item.ai_score or 0) < effective_threshold
+            ]
+            needed = minimum - len(deduped_items)
+            deduped_items.extend(lower_ranked[:needed])
+            if log and lower_ranked:
+                self.console.print(
+                    f"🧭 Added {min(needed, len(lower_ranked))} editorial fallback "
+                    f"items scoring ≥ {floor} to target {minimum} choices\n"
+                )
+
+        topic_dedup_removed = len(eligible_items) - len(deduped_eligible)
 
         if log and topic_dedup_removed:
             self.console.print(

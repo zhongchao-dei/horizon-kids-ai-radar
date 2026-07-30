@@ -19,6 +19,7 @@ from .client import AIClient
 from .prompts import (
     CONCEPT_EXTRACTION_SYSTEM, CONCEPT_EXTRACTION_USER,
     CONTENT_ENRICHMENT_SYSTEM, CONTENT_ENRICHMENT_USER,
+    TOPIC_CARD_SYSTEM_ZH, TOPIC_CARD_USER_ZH,
 )
 from .utils import parse_json_response
 from ..models import ContentItem
@@ -40,14 +41,16 @@ class ContentEnricher:
         """Append an optional audience-specific editorial profile."""
         config = getattr(self.client, "config", None)
         profile = getattr(config, "curation_profile", None)
-        if not profile:
-            return CONTENT_ENRICHMENT_SYSTEM
-        return (
-            f"{CONTENT_ENRICHMENT_SYSTEM}\n\n"
-            "Audience-specific editorial profile (apply it to audience relevance "
-            "and framing; do not invent facts):\n"
-            f"{profile}"
-        )
+        prompt = CONTENT_ENRICHMENT_SYSTEM
+        if profile:
+            prompt += (
+                "\n\nAudience-specific editorial profile (apply it to audience "
+                "relevance and framing; do not invent facts):\n"
+                f"{profile}"
+            )
+        if getattr(config, "topic_cards_enabled", False):
+            prompt += TOPIC_CARD_SYSTEM_ZH
+        return prompt
 
     async def enrich_batch(self, items: List[ContentItem]) -> None:
         """Enrich items in-place with background knowledge.
@@ -197,6 +200,8 @@ class ContentEnricher:
             comments_section=f"\n**Community Comments:**\n{comments_text}" if comments_text else "",
             web_context=web_context or "No web search results available.",
         )
+        if getattr(getattr(self.client, "config", None), "topic_cards_enabled", False):
+            user_prompt += TOPIC_CARD_USER_ZH
 
         response = await self.client.complete(
             system=self._get_enrichment_system_prompt(),
@@ -233,6 +238,24 @@ class ContentEnricher:
             if result.get(f"community_discussion_{lang}"):
                 val = result[f"community_discussion_{lang}"]
                 item.metadata[f"community_discussion_{lang}"] = val.get("text") or str(val) if isinstance(val, dict) else str(val)
+
+        topic_card_fields = (
+            "topic_title_zh",
+            "topic_entry_zh",
+            "topic_hook_zh",
+            "key_fact_zh",
+            "process_problem_zh",
+            "causal_chain_zh",
+            "visible_evidence_zh",
+            "parent_judgment_zh",
+            "course_connection_zh",
+            "content_goal_zh",
+            "suitability_note_zh",
+        )
+        for field in topic_card_fields:
+            value = result.get(field)
+            if value:
+                item.metadata[field] = str(value)
 
         # Store citation sources — only URLs that actually came from our search results
         if result.get("sources") and available_urls:

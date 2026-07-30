@@ -9,7 +9,7 @@ on:
       provider:
         description: '本次运行使用的 AI 服务'
         required: true
-        default: 'gemini'
+        default: 'deepseek'
         type: choice
         options:
           - gemini
@@ -50,12 +50,12 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           MANUAL_PROVIDER: ${{ inputs.provider }}
         run: |
-          if [[ "$EVENT_NAME" == "workflow_dispatch" && "$MANUAL_PROVIDER" == "deepseek" ]]; then
-            cp data/config.github.deepseek.json data/config.json
-            echo "HORIZON_PROVIDER=deepseek" >> "$GITHUB_ENV"
-          else
+          if [[ "$EVENT_NAME" == "workflow_dispatch" && "$MANUAL_PROVIDER" == "gemini" ]]; then
             cp data/config.github.json data/config.json
             echo "HORIZON_PROVIDER=gemini" >> "$GITHUB_ENV"
+          else
+            cp data/config.github.deepseek.json data/config.json
+            echo "HORIZON_PROVIDER=deepseek" >> "$GITHUB_ENV"
           fi
 
       - name: Run Horizon

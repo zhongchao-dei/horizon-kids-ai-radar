@@ -73,6 +73,7 @@ LABELS = {
         "discussion": "社区讨论",
         "references": "参考链接",
         "tags": "标签",
+        "topic_card": "可选选题卡",
         "selected_items": "从 {total} 条内容中筛选出 {selected} 条重要资讯。",
         "empty_analyzed": "已分析 {total} 条内容，但没有达到重要性阈值的条目。",
         "empty_body": (
@@ -258,6 +259,27 @@ class DailySummarizer:
             "",
             source_line,
         ]
+
+        if language == "zh" and meta.get("topic_title_zh"):
+            topic_fields = (
+                ("标题", "topic_title_zh"),
+                ("入口", "topic_entry_zh"),
+                ("钩子", "topic_hook_zh"),
+                ("关键事实", "key_fact_zh"),
+                ("真正过程问题", "process_problem_zh"),
+                ("因果链", "causal_chain_zh"),
+                ("可见证据", "visible_evidence_zh"),
+                ("家长判断", "parent_judgment_zh"),
+                ("课程连接", "course_connection_zh"),
+                ("内容目标", "content_goal_zh"),
+                ("适用边界", "suitability_note_zh"),
+            )
+            lines.extend(["", f"### {labels['topic_card']}"])
+            for label, field in topic_fields:
+                value = meta.get(field)
+                if value:
+                    rendered = _pangu(_escape_markdown(value))
+                    lines.append(f"- **{label}**：{rendered}")
 
         if background:
             lines.append("")

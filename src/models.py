@@ -145,6 +145,7 @@ class AIConfig(BaseModel):
     enrichment_concurrency: int = 1
     languages: List[str] = Field(default_factory=lambda: ["en"])
     curation_profile: Optional[str] = None
+    topic_cards_enabled: bool = False
     # Azure OpenAI specific; required when provider == AZURE
     azure_endpoint_env: Optional[str] = None
     api_version: Optional[str] = None
@@ -483,6 +484,8 @@ class FilteringConfig(BaseModel):
     """Content filtering configuration."""
 
     ai_score_threshold: float = 7.0
+    min_items: Optional[int] = Field(default=None, gt=0)
+    fallback_score_floor: Optional[float] = Field(default=None, ge=0, le=10)
     time_window_hours: int = 24
     max_items: Optional[int] = Field(default=None, gt=0)
     category_groups: Dict[str, CategoryGroupConfig] = Field(default_factory=dict)
