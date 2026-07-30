@@ -134,9 +134,12 @@ def test_no_fallback_on_unexpected_error():
 def test_should_fallback_detects_retryable_errors():
     """_should_fallback correctly identifies retryable errors."""
     assert ChainedAIClient._should_fallback(Exception("429 rate limit")) is True
+    assert ChainedAIClient._should_fallback(Exception("402 Insufficient Balance")) is True
+    assert ChainedAIClient._should_fallback(Exception("余额不足")) is True
     assert ChainedAIClient._should_fallback(Exception("401 unauthorized")) is True
     assert ChainedAIClient._should_fallback(Exception("403 forbidden")) is True
     assert ChainedAIClient._should_fallback(Exception("quota exceeded")) is True
+    assert ChainedAIClient._should_fallback(Exception("500 server error")) is True
     assert ChainedAIClient._should_fallback(Exception("502 bad gateway")) is True
     assert ChainedAIClient._should_fallback(Exception("503 service unavailable")) is True
     assert ChainedAIClient._should_fallback(Exception("Empty response from provider")) is True

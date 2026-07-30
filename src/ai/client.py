@@ -626,9 +626,17 @@ class ChainedAIClient(AIClient):
         msg = str(exc).lower()
         if "429" in msg or "rate limit" in msg:
             return True
+        if "402" in msg or "insufficient balance" in msg or "余额不足" in msg:
+            return True
         if "401" in msg or "403" in msg or "quota" in msg or "exceeded" in msg:
             return True
-        if "502" in msg or "503" in msg or "service unavailable" in msg:
+        if (
+            "500" in msg
+            or "502" in msg
+            or "503" in msg
+            or "server error" in msg
+            or "service unavailable" in msg
+        ):
             return True
         if "empty response" in msg:
             return True
