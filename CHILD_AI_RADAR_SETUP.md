@@ -15,19 +15,16 @@
 
 ## 需要添加的 GitHub Secrets
 
-定时任务默认使用 Gemini；DeepSeek 作为手动备用模型。**不要把 API Key 写进仓库、Issue、聊天记录或 `data/config.github.json`。**
+定时任务默认优先使用 DeepSeek；当 DeepSeek 出现余额／配额不足、限流、鉴权失败、服务不可用或空响应时，自动切换到 Gemini。**不要把 API Key 写进仓库、Issue、聊天记录或配置文件。**
 
 在本 Fork 中打开：
 
 `Settings` → `Secrets and variables` → `Actions` → `New repository secret`
 
-- Name：`GOOGLE_API_KEY`
-- Secret：粘贴你的 Gemini API Key
-
-如需测试备用模型，再添加：
-
 - Name：`DEEPSEEK_API_KEY`
 - Secret：粘贴你的 DeepSeek API Key
+- Name：`GOOGLE_API_KEY`
+- Secret：粘贴你的 Gemini API Key
 
 `GITHUB_TOKEN` 由 GitHub Actions 自动提供，不需要自己创建。
 
@@ -36,8 +33,8 @@
 1. 打开 `Actions`。
 2. 选择 `Daily Horizon Summary`。
 3. 点击 `Run workflow`。
-4. Provider 先选择 `gemini`，等待任务成功完成。
-5. 如需验证备用模型，再选择 `deepseek` 手动运行一次。
+4. Provider 选择 `deepseek`，等待任务成功完成。
+5. 如需单独验证 Gemini，再选择 `gemini` 手动运行一次。
 
 如果 GitHub 提示工作流尚未启用，先点击 `I understand my workflows, go ahead and enable them`。
 
@@ -55,7 +52,8 @@
 
 ## 主要定制文件
 
-- `data/config.github.json`：模型、新闻源、栏目配额和受众筛选规则
+- `data/config.github.deepseek.json`：定时任务的 DeepSeek 主模型及 Gemini 自动回退顺序
+- `data/config.github.json`：手动从 Gemini 开始时的配置及 DeepSeek 自动回退顺序
 - `src/models.py`：允许配置 `ai.curation_profile`
 - `src/ai/analyzer.py`：在新闻评分阶段加载受众筛选规则
 - `src/ai/enricher.py`：在二次整理阶段加载受众编辑规则

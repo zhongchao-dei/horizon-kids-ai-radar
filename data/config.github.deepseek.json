@@ -2,6 +2,7 @@
   "version": "1.0",
   "ai": {
     "provider": "deepseek",
+    "provider_chain": "deepseek,gemini",
     "model": "deepseek-v4-flash",
     "base_url": "https://api.deepseek.com",
     "api_key_env": "DEEPSEEK_API_KEY",
