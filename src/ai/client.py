@@ -576,8 +576,12 @@ class ChainedAIClient(AIClient):
         configs: List[AIConfig],
         clients: Optional[List[AIClient]] = None,
         client_factory: Optional[Any] = None,
+        config: Optional[AIConfig] = None,
     ):
         self.configs = configs
+        # Expose the root configuration so analyzer/enricher custom profiles
+        # still apply when requests are routed through a provider chain.
+        self.config = config or configs[0]
         self._client_factory = client_factory or _create_single_client
         self._client_cache: Dict[int, AIClient] = {}
         # Allow tests to inject pre-built clients directly
@@ -646,11 +650,16 @@ def _create_chained_client(config: AIConfig) -> ChainedAIClient:
             raise ValueError(f"Unsupported AI provider in chain: {name}")
 
         defaults = AI_PROVIDER_DEFAULTS.get(provider, {})
-        base_url = config.base_url if provider == config.provider else defaults.get("base_url")
+        is_primary = provider == config.provider
+        base_url = config.base_url if is_primary else defaults.get("base_url")
         cfg = AIConfig(
             provider=provider,
-            model=defaults.get("model", config.model),
-            api_key_env=defaults.get("api_key_env", config.api_key_env),
+            model=config.model if is_primary else defaults.get("model", config.model),
+            api_key_env=(
+                config.api_key_env
+                if is_primary
+                else defaults.get("api_key_env", config.api_key_env)
+            ),
             base_url=base_url,
             temperature=config.temperature,
             max_tokens=config.max_tokens,
@@ -658,6 +667,8 @@ def _create_chained_client(config: AIConfig) -> ChainedAIClient:
             analysis_concurrency=config.analysis_concurrency,
             enrichment_concurrency=config.enrichment_concurrency,
             languages=config.languages,
+            curation_profile=config.curation_profile,
+            topic_cards_enabled=config.topic_cards_enabled,
             azure_endpoint_env=(
                 config.azure_endpoint_env or defaults.get("azure_endpoint_env")
                 if provider == AIProvider.AZURE
@@ -671,7 +682,7 @@ def _create_chained_client(config: AIConfig) -> ChainedAIClient:
         )
         chain_configs.append(cfg)
 
-    return ChainedAIClient(chain_configs)
+    return ChainedAIClient(chain_configs, config=config)
 
 
 def create_ai_client(config: AIConfig) -> AIClient:

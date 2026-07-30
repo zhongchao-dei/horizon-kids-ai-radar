@@ -197,8 +197,16 @@ def test_create_chained_client_uses_provider_defaults_without_leaking_base_url()
     assert [entry.provider for entry in chained.configs] == providers
     for entry in chained.configs:
         defaults = AI_PROVIDER_DEFAULTS[entry.provider]
-        assert entry.model == defaults["model"]
-        assert entry.api_key_env == defaults["api_key_env"]
+        expected_model = (
+            config.model if entry.provider == config.provider else defaults["model"]
+        )
+        expected_key_env = (
+            config.api_key_env
+            if entry.provider == config.provider
+            else defaults["api_key_env"]
+        )
+        assert entry.model == expected_model
+        assert entry.api_key_env == expected_key_env
         expected_base_url = (
             config.base_url
             if entry.provider == config.provider
@@ -257,6 +265,27 @@ def test_create_chained_client_applies_azure_connection_defaults():
 
     assert azure.azure_endpoint_env == "AZURE_OPENAI_ENDPOINT"
     assert azure.api_version == "2024-10-21"
+
+
+
+def test_create_chained_client_preserves_editorial_settings_on_root_config():
+    config = AIConfig(
+        provider=AIProvider.GEMINI,
+        provider_chain="gemini,deepseek",
+        model="custom-gemini",
+        api_key_env="GOOGLE_API_KEY",
+        curation_profile="parent audience",
+        topic_cards_enabled=True,
+    )
+
+    chained = _create_chained_client(config)
+
+    assert chained.config is config
+    assert chained.configs[0].model == "custom-gemini"
+    assert chained.configs[0].curation_profile == "parent audience"
+    assert chained.configs[1].model == "deepseek-v4-flash"
+    assert chained.configs[1].topic_cards_enabled is True
+
 
 
 def test_create_chained_client_rejects_unknown_provider():
