@@ -15,19 +15,19 @@
 
 ## 需要添加的 GitHub Secrets
 
-定时任务默认使用 DeepSeek；Gemini 作为手动备用模型。**不要把 API Key 写进仓库、Issue、聊天记录或 `data/config.github.json`。**
+定时任务默认使用 Gemini；DeepSeek 作为手动备用模型。**不要把 API Key 写进仓库、Issue、聊天记录或 `data/config.github.json`。**
 
 在本 Fork 中打开：
 
 `Settings` → `Secrets and variables` → `Actions` → `New repository secret`
 
-- Name：`DEEPSEEK_API_KEY`
-- Secret：粘贴你的 DeepSeek API Key
+- Name：`GOOGLE_API_KEY`
+- Secret：粘贴你的 Gemini API Key
 
 如需测试备用模型，再添加：
 
-- Name：`GOOGLE_API_KEY`
-- Secret：粘贴你的 Gemini API Key
+- Name：`DEEPSEEK_API_KEY`
+- Secret：粘贴你的 DeepSeek API Key
 
 `GITHUB_TOKEN` 由 GitHub Actions 自动提供，不需要自己创建。
 
@@ -36,8 +36,8 @@
 1. 打开 `Actions`。
 2. 选择 `Daily Horizon Summary`。
 3. 点击 `Run workflow`。
-4. Provider 先选择 `deepseek`，等待任务成功完成。
-5. 如需验证备用模型，再选择 `gemini` 手动运行一次。
+4. Provider 先选择 `gemini`，等待任务成功完成。
+5. 如需验证备用模型，再选择 `deepseek` 手动运行一次。
 
 如果 GitHub 提示工作流尚未启用，先点击 `I understand my workflows, go ahead and enable them`。
 
