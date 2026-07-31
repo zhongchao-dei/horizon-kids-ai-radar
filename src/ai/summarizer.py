@@ -240,6 +240,73 @@ class DailySummarizer:
 
         return "\n".join(lines) + "\n"
 
+    def generate_low_score_watchlist(
+        self,
+        items: List[ContentItem],
+        date: str,
+        parent_selected_ids: Set[str],
+        teacher_selected_ids: Set[str],
+        low_score_floor: float,
+        language: str = "zh",
+    ) -> str:
+        """Render only unselected candidates that are low for both audiences."""
+        if language != "zh":
+            raise ValueError("The low-score watchlist currently supports zh only")
+
+        low_items = [
+            item
+            for item in items
+            if item.id not in parent_selected_ids
+            and item.id not in teacher_selected_ids
+            and max(
+                self._numeric_score(item.metadata.get("parent_score", item.ai_score)),
+                self._numeric_score(item.metadata.get("teacher_score", item.ai_score)),
+            )
+            < low_score_floor
+        ]
+        low_items.sort(
+            key=lambda item: max(
+                self._numeric_score(item.metadata.get("parent_score", item.ai_score)),
+                self._numeric_score(item.metadata.get("teacher_score", item.ai_score)),
+            ),
+            reverse=True,
+        )
+
+        lines = [
+            f"# K12 AI 低分待观察资讯｜{date}",
+            "",
+            (
+                f"> 收录当天未进入家长端或教师端选题池，且两端评分均低于 "
+                f"{low_score_floor:.1f} 分的 {len(low_items)} 条资讯。"
+            ),
+            "",
+            "> 仅供回看方向，不进入长期知识页，也不代表内容错误或永远无价值。",
+            "",
+        ]
+
+        if not low_items:
+            lines.append("今天没有符合条件的低分待观察资讯。")
+            return "\n".join(lines) + "\n"
+
+        for index, item in enumerate(low_items, start=1):
+            title = self._table_text(item.title, limit=120)
+            url = _safe_url(item.url)
+            title_link = f"[{title}]({url})" if url else title
+            overview = self._plain_text(
+                item.ai_summary or item.metadata.get("summary_zh") or item.ai_reason or item.title,
+                limit=180,
+            )
+            lines.extend(
+                [
+                    f"## {index}. {title_link}",
+                    "",
+                    f"- 简要概述：{overview}",
+                    "",
+                ]
+            )
+
+        return "\n".join(lines).rstrip() + "\n"
+
     def generate_webhook_overview(
         self,
         items: List[ContentItem],

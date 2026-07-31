@@ -49,7 +49,7 @@ jobs:
           if [[ "$EVENT_NAME" == "schedule" ]]; then
             BASE_URL="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/gh-pages/_posts"
             complete=true
-            for artifact in all-candidates parent-topics teacher-topics; do
+            for artifact in all-candidates low-score-watchlist parent-topics teacher-topics; do
               file="/tmp/${artifact}.md"
               if ! curl -fsSL "${BASE_URL}/${DATE}-${artifact}-zh.md?watchdog=${GITHUB_RUN_ID}" -o "$file" \
                 || ! grep -q "^artifact: ${artifact}$" "$file"; then

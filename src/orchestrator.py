@@ -309,6 +309,14 @@ class HorizonOrchestrator:
                         teacher_selected_ids,
                         language=lang,
                     )
+                    low_score_watchlist = summarizer.generate_low_score_watchlist(
+                        analyzed_items,
+                        today,
+                        parent_selected_ids,
+                        teacher_selected_ids,
+                        low_score_floor=self.config.filtering.fallback_score_floor,
+                        language=lang,
+                    )
                     parent_summary = await summarizer.generate_summary(
                         parent_items,
                         today,
@@ -325,6 +333,7 @@ class HorizonOrchestrator:
                     )
                     artifacts = (
                         ("all-candidates", candidate_summary, "K12 AI 全部候选资讯"),
+                        ("low-score-watchlist", low_score_watchlist, "K12 AI 低分待观察资讯"),
                         ("parent-topics", parent_summary, "家长端 K12 AI 每日选题"),
                         ("teacher-topics", teacher_summary, "教师端 K12 AI 每日选题"),
                     )

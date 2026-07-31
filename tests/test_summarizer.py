@@ -235,6 +235,30 @@ def test_generate_candidate_index_keeps_unselected_titles_and_links():
     assert result.count("CAND-") == 2
 
 
+def test_generate_low_score_watchlist_keeps_only_both_low_unselected_items():
+    summarizer = DailySummarizer()
+    selected = _make_item(1)
+    selected.metadata.update({"parent_score": 8.0, "teacher_score": 8.0})
+    low = _make_item(2)
+    low.ai_summary = "这是一条可留作方向回看的低分资讯。"
+    low.metadata.update({"parent_score": 4.0, "teacher_score": 5.5})
+    one_side_relevant = _make_item(3)
+    one_side_relevant.metadata.update({"parent_score": 7.0, "teacher_score": 3.0})
+
+    result = summarizer.generate_low_score_watchlist(
+        [selected, low, one_side_relevant],
+        "2026-08-01",
+        {selected.id},
+        {selected.id},
+        low_score_floor=6.0,
+    )
+
+    assert "低于 6.0 分的 1 条资讯" in result
+    assert "[Important Item 2](https://example.com/items/2)" in result
+    assert "可留作方向回看的低分资讯" in result
+    assert "Important Item 3" not in result
+
+
 def test_generate_empty_summary_zh_uses_localized_analyzed_line():
     summarizer = DailySummarizer()
 
