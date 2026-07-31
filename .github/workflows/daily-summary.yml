@@ -2,15 +2,20 @@ name: Daily Horizon Summary
 
 on:
   schedule:
-    # A non-round minute reduces GitHub Actions peak-time delay.
+    # Primary run at 09:30. Two later watchdog runs recover a delayed or
+    # dropped GitHub schedule; complete same-day output is detected and skipped.
     - cron: '30 9 * * *'
+      timezone: 'Asia/Shanghai'
+    - cron: '30 10 * * *'
+      timezone: 'Asia/Shanghai'
+    - cron: '30 12 * * *'
       timezone: 'Asia/Shanghai'
   workflow_dispatch:
     inputs:
       provider:
         description: '本次运行使用的 AI 服务'
         required: true
-        default: 'deepseek'
+        default: 'gemini'
         type: choice
         options:
           - gemini
@@ -33,45 +38,77 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
+      - name: Check whether today's summary already exists
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          DATE="$(date +'%Y-%m-%d')"
+          echo "DATE=$DATE" >> "$GITHUB_ENV"
+          echo "SKIP_RUN=false" >> "$GITHUB_ENV"
+
+          if [[ "$EVENT_NAME" == "schedule" ]]; then
+            RAW_URL="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/gh-pages/_posts/${DATE}-summary-zh.md"
+            if curl -fsSL "${RAW_URL}?watchdog=${GITHUB_RUN_ID}" -o /tmp/today-summary.md \
+              && grep -q '^### 可选选题卡' /tmp/today-summary.md; then
+              echo "Today's complete summary already exists; watchdog run will stop here."
+              echo "SKIP_RUN=true" >> "$GITHUB_ENV"
+            fi
+          fi
+
       - name: Set up Python
+        if: env.SKIP_RUN != 'true'
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
       - name: Install uv
+        if: env.SKIP_RUN != 'true'
         uses: astral-sh/setup-uv@v6
         with:
           version: "0.11.26"
 
       - name: Install dependencies
+        if: env.SKIP_RUN != 'true'
         run: uv sync
 
       - name: Select AI provider
+        if: env.SKIP_RUN != 'true'
         env:
           EVENT_NAME: ${{ github.event_name }}
           MANUAL_PROVIDER: ${{ inputs.provider }}
         run: |
-          if [[ "$EVENT_NAME" == "workflow_dispatch" && "$MANUAL_PROVIDER" == "gemini" ]]; then
-            cp data/config.github.json data/config.json
-            echo "HORIZON_PROVIDER=gemini" >> "$GITHUB_ENV"
-          else
+          if [[ "$EVENT_NAME" == "workflow_dispatch" && "$MANUAL_PROVIDER" == "deepseek" ]]; then
             cp data/config.github.deepseek.json data/config.json
             echo "HORIZON_PROVIDER=deepseek" >> "$GITHUB_ENV"
+          else
+            cp data/config.github.json data/config.json
+            echo "HORIZON_PROVIDER=gemini" >> "$GITHUB_ENV"
           fi
 
       - name: Run Horizon
+        if: env.SKIP_RUN != 'true'
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "Using provider: $HORIZON_PROVIDER"
+          if uv run horizon --hours 24; then
+            exit 0
+          fi
+
+          if [[ "$HORIZON_PROVIDER" != "gemini" ]]; then
+            echo "DeepSeek run failed; no further provider is configured."
+            exit 1
+          fi
+
+          echo "Gemini failed; retrying once with DeepSeek."
+          cp data/config.github.deepseek.json data/config.json
+          echo "HORIZON_PROVIDER=deepseek" >> "$GITHUB_ENV"
           uv run horizon --hours 24
 
-      - name: Set current date
-        run: echo "DATE=$(date +'%Y-%m-%d')" >> "$GITHUB_ENV"
-
       - name: Deploy to GitHub Pages
+        if: env.SKIP_RUN != 'true'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
