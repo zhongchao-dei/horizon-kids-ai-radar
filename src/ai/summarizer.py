@@ -436,9 +436,9 @@ class DailySummarizer:
         topic_title_field = topic_fields[0][1] if topic_fields else None
         if language == "zh" and topic_title_field and meta.get(topic_title_field):
             card_heading = (
-                "教师端选题卡"
+                "教师端正式选题卡"
                 if audience == "teacher"
-                else "家长端选题卡"
+                else "家长端正式选题卡"
                 if audience == "parent"
                 else labels["topic_card"]
             )
@@ -513,11 +513,13 @@ class DailySummarizer:
                 ("关键事实", "teacher_key_fact_zh"),
                 ("教学环节", "teaching_stage_zh"),
                 ("教师真实任务", "teacher_task_zh"),
+                ("AI 具体介入", "teacher_ai_intervention_zh"),
                 ("真正过程问题", "teacher_process_problem_zh"),
                 ("教师判断／动作", "teacher_action_zh"),
                 ("学生可见证据", "student_evidence_zh"),
                 ("课程连接", "teacher_course_connection_zh"),
                 ("内容目标", "teacher_content_goal_zh"),
+                ("证据成熟度", "teacher_evidence_maturity_zh"),
                 ("适用边界", "teacher_suitability_note_zh"),
             )
         return (
@@ -525,12 +527,15 @@ class DailySummarizer:
             ("入口", "topic_entry_zh"),
             ("钩子", "topic_hook_zh"),
             ("关键事实", "key_fact_zh"),
+            ("真实场景", "parent_real_scene_zh"),
+            ("AI 具体介入", "parent_ai_intervention_zh"),
             ("真正过程问题", "process_problem_zh"),
             ("因果链", "causal_chain_zh"),
             ("可见证据", "visible_evidence_zh"),
             ("家长判断", "parent_judgment_zh"),
             ("课程连接", "course_connection_zh"),
             ("内容目标", "content_goal_zh"),
+            ("证据成熟度", "parent_evidence_maturity_zh"),
             ("适用边界", "suitability_note_zh"),
         )
 

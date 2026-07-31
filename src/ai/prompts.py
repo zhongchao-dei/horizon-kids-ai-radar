@@ -214,6 +214,11 @@ When topic-card generation is enabled, also act as a short-video content
 strategist for Chinese parents of children from grade 3 through middle school.
 Turn the verified news into ONE concrete topic card, not a full script.
 
+This is a formal daily-entry card. It must make the child’s real scene and the
+specific AI action visible before describing the problem. The hook, fact,
+process problem, parent judgment, course connection, and observable evidence
+must belong to the same K12 causal chain.
+
 The topic must start from a realistic K12 task or problem and fit at least one
 of these entries: 作业协作、手机使用、AI 创作、判断与辨别、学习路径焦虑、家长介入.
 Do not invent a child, family anecdote, school requirement, research finding,
@@ -231,12 +236,15 @@ Also include these Simplified Chinese fields in the same JSON object:
   "topic_entry_zh": "<作业协作/手机使用/AI 创作/判断与辨别/学习路径焦虑/家长介入，可多选>",
   "topic_hook_zh": "<反常结果、异常动作或作品缺口；1句话>",
   "key_fact_zh": "<来源明确支持的关键事实；1-2句话>",
+  "parent_real_scene_zh": "<孩子为什么开始这个真实任务，以及家长能看见的具体场景>",
+  "parent_ai_intervention_zh": "<AI在问题暴露前具体替孩子做了哪一步>",
   "process_problem_zh": "<孩子使用AI时可能跳过的具体过程；1句话>",
   "causal_chain_zh": "<开始动机→AI介入→异常结果→应补回的步骤>",
   "visible_evidence_zh": "<家长可以观察或核对的具体结果、物件或反应>",
   "parent_judgment_zh": "<家长无需精通工具也能作出的判断或动作>",
   "course_connection_zh": "<与已训练的同一过程自然连接；若证据不足，写“不建议本条明显露出课程”>",
   "content_goal_zh": "<认知/信任/课程转化，三选一>",
+  "parent_evidence_maturity_zh": "<可开发/需补证据/暂缓，三选一>",
   "suitability_note_zh": "<为什么值得做，以及事实边界或不适合怎样讲>"
 """
 
@@ -250,6 +258,9 @@ It must fit at least one entry: 备课与教学设计、课堂教学与互动、
 
 Show where AI enters the teaching process, which professional judgment must
 remain with the teacher, and what observable evidence can show student learning.
+This is a formal daily-entry card: the teaching stage, real teacher task, AI
+intervention, process problem, teacher action, and student evidence must form
+one coherent classroom or school-practice scenario.
 Do not promise guaranteed workload reduction, grades, universal applicability,
 traffic, conversion, or school procurement. Mark policy, privacy, fairness,
 student safety, assessment validity, product capability, and course effects as
@@ -266,10 +277,12 @@ Also include these Simplified Chinese fields in the same JSON object:
   "teacher_key_fact_zh": "<来源明确支持的关键事实；1-2句话>",
   "teaching_stage_zh": "<备课/课堂/作业/评价/分层支持/教研治理>",
   "teacher_task_zh": "<教师原本要完成的真实任务>",
+  "teacher_ai_intervention_zh": "<AI在该教学环节具体生成、比较、反馈或整理了什么>",
   "teacher_process_problem_zh": "<AI介入后可能跳过的教学判断或学习过程>",
   "teacher_action_zh": "<教师无需迷信工具也能完成的核验、调整或设计动作>",
   "student_evidence_zh": "<学生理解、参与、修改或迁移的可见证据>",
   "teacher_course_connection_zh": "<与已交付教师课程或资源的同一过程连接；证据不足时写不建议露出课程>",
   "teacher_content_goal_zh": "<认知/信任/课程转化，三选一>",
+  "teacher_evidence_maturity_zh": "<可开发/需补证据/暂缓，三选一>",
   "teacher_suitability_note_zh": "<适用学科、年级、地区、事实边界和待确认事项>"
 """

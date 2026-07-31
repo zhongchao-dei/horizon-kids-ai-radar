@@ -133,12 +133,15 @@ def test_generate_summary_zh_renders_complete_topic_card():
             "topic_entry_zh": "作业协作、家长介入",
             "topic_hook_zh": "作业答案全对，孩子却说不清第一步。",
             "key_fact_zh": "来源显示，部分课堂正在使用生成式 AI 辅助作业。",
+            "parent_real_scene_zh": "孩子为了完成当天作业，请 AI 直接给出答案。",
+            "parent_ai_intervention_zh": "AI 先替孩子完成了解题和表述。",
             "process_problem_zh": "孩子跳过了理解和验证。",
             "causal_chain_zh": "完成作业→让 AI 给答案→无法解释→补回验证",
             "visible_evidence_zh": "让孩子不用看答案讲出第一步。",
             "parent_judgment_zh": "家长只核对孩子能否解释方法。",
             "course_connection_zh": "不建议本条明显露出课程",
             "content_goal_zh": "认知",
+            "parent_evidence_maturity_zh": "可开发",
             "suitability_note_zh": "可讲使用边界，不能推断所有学生都依赖 AI。",
         }
     )
@@ -154,7 +157,10 @@ def test_generate_summary_zh_renders_complete_topic_card():
 
     assert "### 可选选题卡" in result
     assert "**标题**：孩子交上 AI 作业后" in result
+    assert "**真实场景**：孩子为了完成当天作业" in result
+    assert "**AI 具体介入**：AI 先替孩子完成了解题和表述。" in result
     assert "**真正过程问题**：孩子跳过了理解和验证。" in result
+    assert "**证据成熟度**：可开发" in result
     assert "**适用边界**：可讲使用边界" in result
 
 
@@ -171,11 +177,13 @@ def test_generate_summary_zh_renders_teacher_topic_card_with_teacher_score():
             "teacher_key_fact_zh": "来源只确认工具可以生成教学材料。",
             "teaching_stage_zh": "备课",
             "teacher_task_zh": "根据本班学情设计一节课。",
+            "teacher_ai_intervention_zh": "AI 先生成教案初稿和活动建议。",
             "teacher_process_problem_zh": "把目标和评价标准也交给了 AI。",
             "teacher_action_zh": "先确定学生起点和本课评价证据。",
             "student_evidence_zh": "学生能否解释并迁移到新任务。",
             "teacher_course_connection_zh": "不建议本条明显露出课程",
             "teacher_content_goal_zh": "认知",
+            "teacher_evidence_maturity_zh": "可开发",
             "teacher_suitability_note_zh": "只适用于有人工审核的备课场景。",
         }
     )
@@ -190,10 +198,12 @@ def test_generate_summary_zh_renders_teacher_topic_card_with_teacher_score():
         )
     )
 
-    assert "### 教师端选题卡" in result
+    assert "### 教师端正式选题卡" in result
     assert "⭐️ 9.0/10" in result
     assert "**教学环节**：备课" in result
+    assert "**AI 具体介入**：AI 先生成教案初稿和活动建议。" in result
     assert "**学生可见证据**" in result
+    assert "**证据成熟度**：可开发" in result
     assert "家长判断" not in result
 
 
