@@ -20,6 +20,7 @@ from .prompts import (
     CONCEPT_EXTRACTION_SYSTEM, CONCEPT_EXTRACTION_USER,
     CONTENT_ENRICHMENT_SYSTEM, CONTENT_ENRICHMENT_USER,
     TOPIC_CARD_SYSTEM_ZH, TOPIC_CARD_USER_ZH,
+    TEACHER_TOPIC_CARD_SYSTEM_ZH, TEACHER_TOPIC_CARD_USER_ZH,
 )
 from .utils import parse_json_response
 from ..models import ContentItem
@@ -50,6 +51,8 @@ class ContentEnricher:
             )
         if getattr(config, "topic_cards_enabled", False):
             prompt += TOPIC_CARD_SYSTEM_ZH
+            if getattr(config, "dual_audience_enabled", False):
+                prompt += TEACHER_TOPIC_CARD_SYSTEM_ZH
         return prompt
 
     async def enrich_batch(self, items: List[ContentItem]) -> None:
@@ -202,6 +205,8 @@ class ContentEnricher:
         )
         if getattr(getattr(self.client, "config", None), "topic_cards_enabled", False):
             user_prompt += TOPIC_CARD_USER_ZH
+            if getattr(getattr(self.client, "config", None), "dual_audience_enabled", False):
+                user_prompt += TEACHER_TOPIC_CARD_USER_ZH
 
         response = await self.client.complete(
             system=self._get_enrichment_system_prompt(),
@@ -251,6 +256,18 @@ class ContentEnricher:
             "course_connection_zh",
             "content_goal_zh",
             "suitability_note_zh",
+            "teacher_topic_title_zh",
+            "teacher_topic_entry_zh",
+            "teacher_topic_hook_zh",
+            "teacher_key_fact_zh",
+            "teaching_stage_zh",
+            "teacher_task_zh",
+            "teacher_process_problem_zh",
+            "teacher_action_zh",
+            "student_evidence_zh",
+            "teacher_course_connection_zh",
+            "teacher_content_goal_zh",
+            "teacher_suitability_note_zh",
         )
         for field in topic_card_fields:
             value = result.get(field)

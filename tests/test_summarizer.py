@@ -158,6 +158,83 @@ def test_generate_summary_zh_renders_complete_topic_card():
     assert "**适用边界**：可讲使用边界" in result
 
 
+def test_generate_summary_zh_renders_teacher_topic_card_with_teacher_score():
+    summarizer = DailySummarizer()
+    item = _make_item(1)
+    item.metadata.update(
+        {
+            "parent_score": 5.5,
+            "teacher_score": 9.0,
+            "teacher_topic_title_zh": "AI 三分钟生成教案，老师最不能省掉哪一步",
+            "teacher_topic_entry_zh": "备课与教学设计",
+            "teacher_topic_hook_zh": "教案很完整，教学目标却不适合本班学生。",
+            "teacher_key_fact_zh": "来源只确认工具可以生成教学材料。",
+            "teaching_stage_zh": "备课",
+            "teacher_task_zh": "根据本班学情设计一节课。",
+            "teacher_process_problem_zh": "把目标和评价标准也交给了 AI。",
+            "teacher_action_zh": "先确定学生起点和本课评价证据。",
+            "student_evidence_zh": "学生能否解释并迁移到新任务。",
+            "teacher_course_connection_zh": "不建议本条明显露出课程",
+            "teacher_content_goal_zh": "认知",
+            "teacher_suitability_note_zh": "只适用于有人工审核的备课场景。",
+        }
+    )
+
+    result = _run_async(
+        summarizer.generate_summary(
+            [item],
+            date="2026-07-31",
+            total_fetched=32,
+            language="zh",
+            audience="teacher",
+        )
+    )
+
+    assert "### 教师端选题卡" in result
+    assert "⭐️ 9.0/10" in result
+    assert "**教学环节**：备课" in result
+    assert "**学生可见证据**" in result
+    assert "家长判断" not in result
+
+
+def test_generate_candidate_index_keeps_unselected_titles_and_links():
+    summarizer = DailySummarizer()
+    selected = _make_item(1)
+    selected.metadata.update(
+        {
+            "parent_score": 8.0,
+            "parent_reason": "适合家庭作业场景。",
+            "teacher_score": 9.0,
+            "teacher_reason": "适合课堂评价场景。",
+            "category": "k12-practice",
+        }
+    )
+    unselected = _make_item(2)
+    unselected.metadata.update(
+        {
+            "parent_score": 4.0,
+            "parent_reason": "缺少家庭场景。",
+            "teacher_score": 5.0,
+            "teacher_reason": "只有通用办公功能。",
+            "category": "ai-products",
+        }
+    )
+
+    result = summarizer.generate_candidate_index(
+        [selected, unselected],
+        "2026-07-31",
+        {selected.id},
+        {selected.id},
+    )
+
+    assert "进入 AI 评分阶段的 2 条候选" in result
+    assert "家长端入选 1 条，教师端入选 1 条" in result
+    assert "[Important Item 2](https://example.com/items/2)" in result
+    assert "家长：缺少家庭场景" in result
+    assert "教师：只有通用办公功能" in result
+    assert result.count("CAND-") == 2
+
+
 def test_generate_empty_summary_zh_uses_localized_analyzed_line():
     summarizer = DailySummarizer()
 

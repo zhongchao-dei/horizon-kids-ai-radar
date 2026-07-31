@@ -9,7 +9,12 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn, MofNCompleteColumn
 
 from .client import AIClient
-from .prompts import CONTENT_ANALYSIS_SYSTEM, CONTENT_ANALYSIS_USER
+from .prompts import (
+    CONTENT_ANALYSIS_SYSTEM,
+    CONTENT_ANALYSIS_USER,
+    DUAL_AUDIENCE_ANALYSIS_SYSTEM,
+    DUAL_AUDIENCE_ANALYSIS_USER,
+)
 from .utils import parse_json_response
 from ..models import ContentItem
 
@@ -23,6 +28,10 @@ class AnalysisResult(BaseModel):
     reason: str
     summary: str
     tags: list[str]
+    parent_score: Optional[float] = Field(default=None, ge=0, le=10, allow_inf_nan=False)
+    parent_reason: Optional[str] = None
+    teacher_score: Optional[float] = Field(default=None, ge=0, le=10, allow_inf_nan=False)
+    teacher_reason: Optional[str] = None
 
 
 class ContentAnalyzer:
@@ -55,14 +64,16 @@ class ContentAnalyzer:
         """Append an optional audience-specific curation profile."""
         config = getattr(self.client, "config", None)
         profile = getattr(config, "curation_profile", None)
-        if not profile:
-            return CONTENT_ANALYSIS_SYSTEM
-        return (
-            f"{CONTENT_ANALYSIS_SYSTEM}\n\n"
-            "Audience-specific curation profile (this profile takes priority "
-            "when judging relevance, while factual accuracy remains mandatory):\n"
-            f"{profile}"
-        )
+        prompt = CONTENT_ANALYSIS_SYSTEM
+        if profile:
+            prompt += (
+                "\n\nAudience-specific curation profile (this profile takes priority "
+                "when judging relevance, while factual accuracy remains mandatory):\n"
+                f"{profile}"
+            )
+        if getattr(config, "dual_audience_enabled", False):
+            prompt += DUAL_AUDIENCE_ANALYSIS_SYSTEM
+        return prompt
 
     async def analyze_batch(self, items: List[ContentItem]) -> List[ContentItem]:
         throttle_sec = self._get_throttle_sec()
@@ -161,6 +172,8 @@ class ContentAnalyzer:
             content_section=content_section,
             discussion_section=discussion_section
         )
+        if getattr(getattr(self.client, "config", None), "dual_audience_enabled", False):
+            user_prompt += DUAL_AUDIENCE_ANALYSIS_USER
 
         # Get AI completion
         response = await self.client.complete(
@@ -183,7 +196,20 @@ class ContentAnalyzer:
             return
 
         # Update item with analysis results
-        item.ai_score = result.score
-        item.ai_reason = result.reason
+        dual_enabled = getattr(
+            getattr(self.client, "config", None), "dual_audience_enabled", False
+        )
+        if dual_enabled:
+            parent_score = result.parent_score if result.parent_score is not None else result.score
+            teacher_score = result.teacher_score if result.teacher_score is not None else result.score
+            item.metadata["parent_score"] = parent_score
+            item.metadata["parent_reason"] = result.parent_reason or result.reason
+            item.metadata["teacher_score"] = teacher_score
+            item.metadata["teacher_reason"] = result.teacher_reason or result.reason
+            item.ai_score = max(parent_score, teacher_score)
+            item.ai_reason = result.reason
+        else:
+            item.ai_score = result.score
+            item.ai_reason = result.reason
         item.ai_summary = result.summary
         item.ai_tags = result.tags

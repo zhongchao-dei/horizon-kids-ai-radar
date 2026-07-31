@@ -127,6 +127,21 @@ class StorageManager:
 
         return filepath
 
+    def save_daily_artifact(
+        self,
+        date: str,
+        artifact: str,
+        markdown: str,
+        language: str = "zh",
+    ) -> Path:
+        """Save a named daily artifact without overwriting the legacy summary."""
+        if not re.fullmatch(r"[a-z0-9-]+", artifact):
+            raise ValueError(f"invalid daily artifact name: {artifact!r}")
+        filename = f"horizon-{date}-{artifact}-{language}.md"
+        filepath = safe_output_path(self.summaries_dir, filename)
+        _atomic_write_text(filepath, markdown)
+        return filepath
+
     def load_subscribers(self) -> list:
         """Loads the list of email subscribers."""
         subscribers_path = self.data_dir / "subscribers.json"

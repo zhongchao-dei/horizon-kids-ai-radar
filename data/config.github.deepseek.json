@@ -15,7 +15,9 @@
     "analysis_concurrency": 3,
     "enrichment_concurrency": 3,
     "topic_cards_enabled": true,
-    "curation_profile": "你为一名中文儿童 AI 教育启蒙博主筛选新闻，核心受众是小学三年级至初中阶段孩子的家长。优先保留：儿童与青少年使用生成式 AI 的真实行为和风险；K12 课堂、作业、创作、信息辨别与 AI 素养；家长可观察和介入的具体场景；儿童隐私、安全、平台规则和教育政策；有一手来源或明确研究证据的新工具、新功能和新发现。评分时判断它能否自然对应以下至少一个内容入口：作业协作、手机使用、AI 创作、判断与辨别、学习路径焦虑、家长介入。9-10 分只给会明显改变儿童 AI 使用、K12 教育实践或家长判断的重要事件；7-8 分给证据充分、可形成具体家长选题的内容；5-6 分给相关但缺少可执行场景或证据的内容；3-4 分给主要服务成人办公、企业采购或纯技术开发且与 K12 关系牵强的内容；0-2 分给炒作、恐吓式未来论、软广、无来源结论和只教按钮的泛教程。分析理由必须说明家长相关性、孩子的真实任务场景、证据质量与适合的内容入口。摘要用简体中文。不得把“孩子会领先”“提升成绩或效率倍数”当作新闻结论，也不要把推测写成事实。二次整理时：whats_new 只写可核实事实；why_it_matters 说明它对上述家长受众和 K12 真实任务的影响；key_details 写证据边界、风险或最适合的内容入口，并清楚区分来源事实与编辑推断。"
+    "curation_profile": "你为 K12 AI 教育内容系统筛选新闻，需要分别评估家长端和教师端价值。共享事实层优先保留：中小学 AI 教育政策、学校与课堂实践、作业与评价、学生 AI 使用与学术诚信、儿童安全与隐私、教师专业判断、研究证据、学校治理，以及与真实教学或家庭任务有关的产品变化。家长端受众是小学三年级至初中孩子的家长，入口包括作业协作、手机使用、AI 创作、判断与辨别、学习路径焦虑、家长介入。教师端是当前主定位，受众是小学至初中一线学科教师，入口包括备课与教学设计、课堂教学与互动、作业与评价反馈、分层教学与学习支持、学生 AI 素养与学术诚信、校本教研与学校治理。教师相关性不能只靠成人办公提效成立，必须落到真实教学任务、教师专业判断、学生学习证据或学校政策。9-10 分只给会明显改变 K12 教学实践、学生 AI 使用、学校治理或家长／教师判断的重要事件；7-8 分给证据充分且能形成具体选题的内容；5-6 分给相关但缺少可执行场景或原始证据的内容；3-4 分给纯成人办公、企业采购、与 K12 牵强的工具更新；0-2 分给炒作、恐吓式替代论、软广和无来源结论。摘要使用简体中文，事实、机构观点和编辑推断必须分开，不承诺成绩、效率倍数、流量或转化。",
+    "dual_audience_enabled": true,
+    "primary_audience": "teacher"
   },
   "sources": {
     "github": [],
@@ -64,7 +66,7 @@
       },
       {
         "name": "Google News 中文：儿童 AI 教育",
-        "url": "https://news.google.com/rss/search?q=%E5%84%BF%E7%AB%A5%20AI%20%E6%95%99%E8%82%B2%20OR%20%E4%B8%AD%E5%B0%8F%E5%AD%A6%20%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%99%E8%82%B2%20OR%20%E5%AD%A6%E7%94%9F%20%E7%94%9F%E6%88%90%E5%BC%8FAI%20OR%20AI%20%E4%BD%9C%E4%B8%9A%20OR%20AI%20%E7%B4%A0%E5%85%BB&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "url": "https://news.google.com/rss/search?q=%E4%B8%AD%E5%B0%8F%E5%AD%A6%20AI%20%E6%95%99%E8%82%B2%20OR%20%E6%95%99%E5%B8%88%20AI%20%E6%95%99%E5%AD%A6%20OR%20AI%20%E5%A4%87%E8%AF%BE%20OR%20%E5%AD%A6%E7%94%9F%20%E7%94%9F%E6%88%90%E5%BC%8FAI%20OR%20AI%20%E4%BD%9C%E4%B8%9A%20OR%20AI%20%E7%B4%A0%E5%85%BB&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
         "enabled": true,
         "category": "china-k12"
       }
@@ -110,7 +112,7 @@
     },
     "google_news": {
       "enabled": true,
-      "query": "(\"artificial intelligence\" OR \"generative AI\") (children OR students OR K-12 OR school OR homework OR parenting)",
+      "query": "(\"artificial intelligence\" OR \"generative AI\") (children OR students OR K-12 OR school OR teacher OR classroom OR homework OR lesson planning OR assessment OR academic integrity)",
       "language": "en",
       "country": "US",
       "ceid": "US:en",

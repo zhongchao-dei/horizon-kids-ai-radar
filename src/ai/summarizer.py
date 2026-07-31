@@ -1,8 +1,9 @@
 """Daily summary generation — pure programmatic rendering."""
 
 import html
+import hashlib
 import re
-from typing import Dict, List, Optional
+from typing import Dict, List, Literal, Optional, Set
 from urllib.parse import quote, urlsplit
 
 from ..models import ContentItem
@@ -102,6 +103,7 @@ class DailySummarizer:
         date: str,
         total_fetched: int,
         language: str = "en",
+        audience: Optional[Literal["parent", "teacher"]] = None,
     ) -> str:
         """Generate daily summary in Markdown format.
 
@@ -134,13 +136,109 @@ class DailySummarizer:
             t = _escape_markdown(_t)
             if language == "zh":
                 t = _pangu(t)
-            score = item.ai_score or "?"
+            score = self._audience_score(item, audience)
             toc_entries.append(f"{i + 1}. [{t}](#item-{i + 1}) \u2b50\ufe0f {score}/10")
         toc = "\n".join(toc_entries) + "\n\n---\n\n"
 
-        parts = [self._format_item(item, labels, language, i + 1) for i, item in enumerate(items)]
+        parts = [
+            self._format_item(item, labels, language, i + 1, audience=audience)
+            for i, item in enumerate(items)
+        ]
 
         return header + toc + "".join(parts)
+
+    def generate_candidate_index(
+        self,
+        items: List[ContentItem],
+        date: str,
+        parent_selected_ids: Set[str],
+        teacher_selected_ids: Set[str],
+        language: str = "zh",
+    ) -> str:
+        """Render every deduplicated, scored candidate as a compact audit table."""
+        if language != "zh":
+            raise ValueError("The dual-audience candidate index currently supports zh only")
+
+        sorted_items = sorted(
+            items,
+            key=lambda item: max(
+                self._numeric_score(item.metadata.get("parent_score")),
+                self._numeric_score(item.metadata.get("teacher_score")),
+                self._numeric_score(item.ai_score),
+            ),
+            reverse=True,
+        )
+        lines = [
+            f"# K12 AI 全部候选资讯｜{date}",
+            "",
+            (
+                f"> 保存当天去重后进入 AI 评分阶段的 {len(sorted_items)} 条候选。"
+                f"家长端入选 {len(parent_selected_ids)} 条，教师端入选 {len(teacher_selected_ids)} 条。"
+            ),
+            "",
+            "> 未入选不等于无价值；本表用于回看筛选方向。原始标题和链接会保留，候选不会仅因未进入前 3—5 条而消失。",
+            "",
+            "| 候选 ID | 原标题与链接 | 来源 | 发布时间 | 分类 | 家长端 | 教师端 | 未入选／待观察原因 |",
+            "|---|---|---|---|---|---|---|---|",
+        ]
+
+        for item in sorted_items:
+            candidate_id = self._candidate_id(item)
+            title = self._table_text(item.title, limit=100)
+            url = _safe_url(item.url)
+            title_link = f"[{title}]({url})" if url else title
+            meta = item.metadata
+            source = meta.get("feed_name") or item.author or item.source_type.value
+            source_text = self._table_text(source, limit=36)
+            published = item.published_at.strftime("%Y-%m-%d %H:%M") if item.published_at else "未知"
+            category = self._table_text(meta.get("category") or "other", limit=28)
+
+            parent_selected = item.id in parent_selected_ids
+            teacher_selected = item.id in teacher_selected_ids
+            parent_status = self._selection_status(
+                meta.get("parent_score", item.ai_score), parent_selected
+            )
+            teacher_status = self._selection_status(
+                meta.get("teacher_score", item.ai_score), teacher_selected
+            )
+
+            notes = []
+            if not parent_selected:
+                notes.append(
+                    "家长：" + self._plain_text(
+                        meta.get("parent_reason") or item.ai_reason or "相关性不足或排名未进入前列",
+                        limit=58,
+                    )
+                )
+            if not teacher_selected:
+                notes.append(
+                    "教师：" + self._plain_text(
+                        meta.get("teacher_reason") or item.ai_reason or "相关性不足或排名未进入前列",
+                        limit=58,
+                    )
+                )
+            if not notes:
+                notes.append("家长端、教师端均入选")
+            note_text = self._table_text("；".join(notes), limit=130)
+
+            lines.append(
+                "| "
+                + " | ".join(
+                    [
+                        candidate_id,
+                        title_link,
+                        source_text,
+                        published,
+                        category,
+                        parent_status,
+                        teacher_status,
+                        note_text,
+                    ]
+                )
+                + " |"
+            )
+
+        return "\n".join(lines) + "\n"
 
     def generate_webhook_overview(
         self,
@@ -191,13 +289,20 @@ class DailySummarizer:
         prefix = f"第 {index}/{total} 条\n\n" if language == "zh" else f"Item {index}/{total}\n\n"
         return prefix + self._format_item(item, labels, language, index).rstrip("-\n ")
 
-    def _format_item(self, item: ContentItem, labels: dict, language: str, index: int) -> str:
+    def _format_item(
+        self,
+        item: ContentItem,
+        labels: dict,
+        language: str,
+        index: int,
+        audience: Optional[Literal["parent", "teacher"]] = None,
+    ) -> str:
         """Format a single ContentItem into Markdown."""
         _title = item.metadata.get(f"title_{language}") or item.title
         title = _escape_markdown(_title)
         raw_url = str(item.url)
         url = _safe_url(raw_url)
-        score = item.ai_score or "?"
+        score = self._audience_score(item, audience)
         meta = item.metadata
 
         summary = (
@@ -260,21 +365,17 @@ class DailySummarizer:
             source_line,
         ]
 
-        if language == "zh" and meta.get("topic_title_zh"):
-            topic_fields = (
-                ("标题", "topic_title_zh"),
-                ("入口", "topic_entry_zh"),
-                ("钩子", "topic_hook_zh"),
-                ("关键事实", "key_fact_zh"),
-                ("真正过程问题", "process_problem_zh"),
-                ("因果链", "causal_chain_zh"),
-                ("可见证据", "visible_evidence_zh"),
-                ("家长判断", "parent_judgment_zh"),
-                ("课程连接", "course_connection_zh"),
-                ("内容目标", "content_goal_zh"),
-                ("适用边界", "suitability_note_zh"),
+        topic_fields = self._topic_fields(audience)
+        topic_title_field = topic_fields[0][1] if topic_fields else None
+        if language == "zh" and topic_title_field and meta.get(topic_title_field):
+            card_heading = (
+                "教师端选题卡"
+                if audience == "teacher"
+                else "家长端选题卡"
+                if audience == "parent"
+                else labels["topic_card"]
             )
-            lines.extend(["", f"### {labels['topic_card']}"])
+            lines.extend(["", f"### {card_heading}"])
             for label, field in topic_fields:
                 value = meta.get(field)
                 if value:
@@ -314,6 +415,79 @@ class DailySummarizer:
         lines.append("---")
 
         return "\n".join(lines) + "\n\n"
+
+    @staticmethod
+    def _numeric_score(value: object) -> float:
+        try:
+            return float(value)
+        except (TypeError, ValueError):
+            return 0.0
+
+    def _audience_score(
+        self,
+        item: ContentItem,
+        audience: Optional[Literal["parent", "teacher"]],
+    ) -> object:
+        if audience:
+            value = item.metadata.get(f"{audience}_score")
+            if value is not None:
+                return value
+        return item.ai_score if item.ai_score is not None else "?"
+
+    @staticmethod
+    def _topic_fields(
+        audience: Optional[Literal["parent", "teacher"]],
+    ) -> tuple[tuple[str, str], ...]:
+        if audience == "teacher":
+            return (
+                ("标题", "teacher_topic_title_zh"),
+                ("入口", "teacher_topic_entry_zh"),
+                ("钩子", "teacher_topic_hook_zh"),
+                ("关键事实", "teacher_key_fact_zh"),
+                ("教学环节", "teaching_stage_zh"),
+                ("教师真实任务", "teacher_task_zh"),
+                ("真正过程问题", "teacher_process_problem_zh"),
+                ("教师判断／动作", "teacher_action_zh"),
+                ("学生可见证据", "student_evidence_zh"),
+                ("课程连接", "teacher_course_connection_zh"),
+                ("内容目标", "teacher_content_goal_zh"),
+                ("适用边界", "teacher_suitability_note_zh"),
+            )
+        return (
+            ("标题", "topic_title_zh"),
+            ("入口", "topic_entry_zh"),
+            ("钩子", "topic_hook_zh"),
+            ("关键事实", "key_fact_zh"),
+            ("真正过程问题", "process_problem_zh"),
+            ("因果链", "causal_chain_zh"),
+            ("可见证据", "visible_evidence_zh"),
+            ("家长判断", "parent_judgment_zh"),
+            ("课程连接", "course_connection_zh"),
+            ("内容目标", "content_goal_zh"),
+            ("适用边界", "suitability_note_zh"),
+        )
+
+    @staticmethod
+    def _candidate_id(item: ContentItem) -> str:
+        digest = hashlib.sha1(str(item.url).encode("utf-8")).hexdigest()[:10]
+        return f"CAND-{digest}"
+
+    @staticmethod
+    def _plain_text(value: object, limit: int) -> str:
+        text = re.sub(r"\s+", " ", str(value)).strip()
+        if len(text) > limit:
+            text = text[: max(0, limit - 1)].rstrip() + "…"
+        return text
+
+    @classmethod
+    def _table_text(cls, value: object, limit: int) -> str:
+        return _escape_markdown(cls._plain_text(value, limit))
+
+    @classmethod
+    def _selection_status(cls, score: object, selected: bool) -> str:
+        numeric = cls._numeric_score(score)
+        label = "入选" if selected else "待观察"
+        return f"{label} {numeric:.1f}"
 
     def _generate_empty_summary(self, date: str, total_fetched: int, labels: dict) -> str:
         """Generate summary when no high-scoring items were found."""

@@ -13,9 +13,9 @@ on:
   workflow_dispatch:
     inputs:
       provider:
-        description: '本次运行使用的 AI 服务'
+        description: '本次运行优先使用的 AI 服务'
         required: true
-        default: 'gemini'
+        default: 'deepseek'
         type: choice
         options:
           - gemini
@@ -38,7 +38,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
-      - name: Check whether today's summary already exists
+      - name: Check whether today's three artifacts already exist
         env:
           EVENT_NAME: ${{ github.event_name }}
         run: |
@@ -47,10 +47,17 @@ jobs:
           echo "SKIP_RUN=false" >> "$GITHUB_ENV"
 
           if [[ "$EVENT_NAME" == "schedule" ]]; then
-            RAW_URL="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/gh-pages/_posts/${DATE}-summary-zh.md"
-            if curl -fsSL "${RAW_URL}?watchdog=${GITHUB_RUN_ID}" -o /tmp/today-summary.md \
-              && grep -q '^### 可选选题卡' /tmp/today-summary.md; then
-              echo "Today's complete summary already exists; watchdog run will stop here."
+            BASE_URL="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/gh-pages/_posts"
+            complete=true
+            for artifact in all-candidates parent-topics teacher-topics; do
+              file="/tmp/${artifact}.md"
+              if ! curl -fsSL "${BASE_URL}/${DATE}-${artifact}-zh.md?watchdog=${GITHUB_RUN_ID}" -o "$file" \
+                || ! grep -q "^artifact: ${artifact}$" "$file"; then
+                complete=false
+              fi
+            done
+            if [[ "$complete" == "true" ]]; then
+              echo "Today's complete candidate pool and both topic paths already exist; watchdog run will stop here."
               echo "SKIP_RUN=true" >> "$GITHUB_ENV"
             fi
           fi
@@ -77,12 +84,12 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           MANUAL_PROVIDER: ${{ inputs.provider }}
         run: |
-          if [[ "$EVENT_NAME" == "workflow_dispatch" && "$MANUAL_PROVIDER" == "deepseek" ]]; then
-            cp data/config.github.deepseek.json data/config.json
-            echo "HORIZON_PROVIDER=deepseek" >> "$GITHUB_ENV"
-          else
+          if [[ "$EVENT_NAME" == "workflow_dispatch" && "$MANUAL_PROVIDER" == "gemini" ]]; then
             cp data/config.github.json data/config.json
             echo "HORIZON_PROVIDER=gemini" >> "$GITHUB_ENV"
+          else
+            cp data/config.github.deepseek.json data/config.json
+            echo "HORIZON_PROVIDER=deepseek" >> "$GITHUB_ENV"
           fi
 
       - name: Run Horizon
@@ -93,18 +100,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "Using provider: $HORIZON_PROVIDER"
-          if uv run horizon --hours 24; then
-            exit 0
-          fi
-
-          if [[ "$HORIZON_PROVIDER" != "gemini" ]]; then
-            echo "DeepSeek run failed; no further provider is configured."
-            exit 1
-          fi
-
-          echo "Gemini failed; retrying once with DeepSeek."
-          cp data/config.github.deepseek.json data/config.json
-          echo "HORIZON_PROVIDER=deepseek" >> "$GITHUB_ENV"
           uv run horizon --hours 24
 
       - name: Deploy to GitHub Pages
@@ -114,6 +109,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
           keep_files: true
-          commit_message: "📝 Daily Summary: ${{ env.DATE }} (${{ env.HORIZON_PROVIDER }})"
+          commit_message: "📝 K12 AI 双路径日报: ${{ env.DATE }} (${{ env.HORIZON_PROVIDER }})"
           publish_branch: gh-pages
           enable_jekyll: true

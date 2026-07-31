@@ -81,6 +81,42 @@ Respond with valid JSON only:
   "tags": ["<tag1>", "<tag2>", ...]
 }}"""
 
+
+DUAL_AUDIENCE_ANALYSIS_SYSTEM = """
+
+This Horizon instance serves one shared K12 AI evidence pool and two separate
+Chinese content paths. Evaluate every item independently for BOTH audiences:
+
+1. parent: parents of children from grade 3 through middle school. Relevant
+   entries include homework collaboration, phone use, AI creation, judgment and
+   verification, learning-path anxiety, and parent intervention.
+2. teacher: frontline subject teachers from primary through middle school.
+   Relevant entries include lesson planning, classroom teaching and interaction,
+   assignments and assessment, differentiated support, student AI literacy and
+   academic integrity, school-based research and governance.
+
+The teacher path is the current primary content path, but do not lower the
+evidence standard or inflate its score. A tool is not teacher-relevant merely
+because it can save office time; it must connect to a real teaching task,
+professional judgment, student learning evidence, school policy, or classroom
+governance. Score each audience from 0 to 10 and give a short audience-specific
+reason. Keep facts separate from editorial inference. Do not invent classroom or
+family cases, product capabilities, research findings, or course outcomes.
+"""
+
+
+DUAL_AUDIENCE_ANALYSIS_USER = """
+
+Also include these fields in the same JSON object:
+  "parent_score": <0-10>,
+  "parent_reason": "<简体中文；说明家长相关性、真实家庭／孩子场景与证据边界>",
+  "teacher_score": <0-10>,
+  "teacher_reason": "<简体中文；说明教学环节、教师任务、学生证据与证据边界>"
+
+The top-level score must be the higher of parent_score and teacher_score so the
+shared candidate pool keeps anything valuable to either path.
+"""
+
 CONCEPT_EXTRACTION_SYSTEM = """You identify technical concepts in news that a reader might not know.
 Given a news item, return 1-3 search queries for concepts that need explanation.
 Focus on: specific technologies, protocols, algorithms, tools, or projects that are not widely known.
@@ -202,4 +238,38 @@ Also include these Simplified Chinese fields in the same JSON object:
   "course_connection_zh": "<与已训练的同一过程自然连接；若证据不足，写“不建议本条明显露出课程”>",
   "content_goal_zh": "<认知/信任/课程转化，三选一>",
   "suitability_note_zh": "<为什么值得做，以及事实边界或不适合怎样讲>"
+"""
+
+
+TEACHER_TOPIC_CARD_SYSTEM_ZH = """
+
+Also create ONE separate topic card for Chinese frontline primary or middle
+school teachers. Start from a real teaching task, not generic adult office work.
+It must fit at least one entry: 备课与教学设计、课堂教学与互动、作业与评价反馈、
+分层教学与学习支持、学生AI素养与学术诚信、校本教研与学校治理.
+
+Show where AI enters the teaching process, which professional judgment must
+remain with the teacher, and what observable evidence can show student learning.
+Do not promise guaranteed workload reduction, grades, universal applicability,
+traffic, conversion, or school procurement. Mark policy, privacy, fairness,
+student safety, assessment validity, product capability, and course effects as
+requiring human confirmation when appropriate.
+"""
+
+
+TEACHER_TOPIC_CARD_USER_ZH = """
+
+Also include these Simplified Chinese fields in the same JSON object:
+  "teacher_topic_title_zh": "<完整、具体、正文能兑现的教师端短视频标题>",
+  "teacher_topic_entry_zh": "<六个教师端入口之一或多选>",
+  "teacher_topic_hook_zh": "<教学结果、课堂反应、教师困境或政策变化；1句话>",
+  "teacher_key_fact_zh": "<来源明确支持的关键事实；1-2句话>",
+  "teaching_stage_zh": "<备课/课堂/作业/评价/分层支持/教研治理>",
+  "teacher_task_zh": "<教师原本要完成的真实任务>",
+  "teacher_process_problem_zh": "<AI介入后可能跳过的教学判断或学习过程>",
+  "teacher_action_zh": "<教师无需迷信工具也能完成的核验、调整或设计动作>",
+  "student_evidence_zh": "<学生理解、参与、修改或迁移的可见证据>",
+  "teacher_course_connection_zh": "<与已交付教师课程或资源的同一过程连接；证据不足时写不建议露出课程>",
+  "teacher_content_goal_zh": "<认知/信任/课程转化，三选一>",
+  "teacher_suitability_note_zh": "<适用学科、年级、地区、事实边界和待确认事项>"
 """

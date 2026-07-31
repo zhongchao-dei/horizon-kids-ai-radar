@@ -677,6 +677,8 @@ def _create_chained_client(config: AIConfig) -> ChainedAIClient:
             languages=config.languages,
             curation_profile=config.curation_profile,
             topic_cards_enabled=config.topic_cards_enabled,
+            dual_audience_enabled=config.dual_audience_enabled,
+            primary_audience=config.primary_audience,
             azure_endpoint_env=(
                 config.azure_endpoint_env or defaults.get("azure_endpoint_env")
                 if provider == AIProvider.AZURE

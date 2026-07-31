@@ -146,6 +146,8 @@ class AIConfig(BaseModel):
     languages: List[str] = Field(default_factory=lambda: ["en"])
     curation_profile: Optional[str] = None
     topic_cards_enabled: bool = False
+    dual_audience_enabled: bool = False
+    primary_audience: Literal["parent", "teacher"] = "parent"
     # Azure OpenAI specific; required when provider == AZURE
     azure_endpoint_env: Optional[str] = None
     api_version: Optional[str] = None

@@ -150,6 +150,18 @@ def test_save_daily_summary_defensively_rejects_path_escape(tmp_path):
     assert not (tmp_path / "outside.md").exists()
 
 
+def test_save_daily_artifact_uses_named_file_and_rejects_unsafe_names(tmp_path):
+    storage = StorageManager(data_dir=str(tmp_path / "data"))
+    destination = storage.save_daily_artifact(
+        "2026-08-01", "all-candidates", "candidate index", language="zh"
+    )
+
+    assert destination.name == "horizon-2026-08-01-all-candidates-zh.md"
+    assert destination.read_text(encoding="utf-8") == "candidate index"
+    with pytest.raises(ValueError, match="invalid daily artifact"):
+        storage.save_daily_artifact("2026-08-01", "../outside", "secret")
+
+
 def test_safe_output_path_rejects_escape_from_other_output_roots(tmp_path):
     with pytest.raises(ValueError, match="escapes intended root"):
         safe_output_path(tmp_path / "docs" / "_posts", "../../../outside.md")

@@ -121,6 +121,37 @@ def test_analyze_item_accepts_valid_result():
     assert item.ai_tags == ["ai", "research"]
 
 
+def test_analyze_item_stores_dual_audience_scores():
+    item = _make_item("rss:test:dual")
+
+    async def complete(**kwargs):  # type: ignore[no-untyped-def]
+        assert "parent_score" in kwargs["user"]
+        assert "teacher path is the current primary" in kwargs["system"]
+        return (
+            '{"score": 9.0, "reason": "shared", "summary": "summary", '
+            '"tags": ["K12"], "parent_score": 6.0, '
+            '"parent_reason": "家长场景较弱", "teacher_score": 9.0, '
+            '"teacher_reason": "直接影响课堂评价"}'
+        )
+
+    client = SimpleNamespace(
+        complete=complete,
+        config=SimpleNamespace(
+            curation_profile="shared profile",
+            dual_audience_enabled=True,
+        ),
+    )
+    asyncio.run(ContentAnalyzer(client)._analyze_item(item))
+
+    assert item.ai_score == 9.0
+    assert item.metadata["parent_score"] == 6.0
+    assert item.metadata["teacher_score"] == 9.0
+    assert item.metadata["teacher_reason"] == "直接影响课堂评价"
+    assert item.ai_reason == "shared"
+    assert item.ai_summary == "summary"
+    assert item.ai_tags == ["K12"]
+
+
 @pytest.mark.parametrize(
     "result",
     [

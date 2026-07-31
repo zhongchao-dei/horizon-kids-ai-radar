@@ -4,6 +4,7 @@ import asyncio
 from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 from typing import Dict, List, Literal, Optional
 from urllib.parse import unquote_plus, urlsplit
 import httpx
@@ -228,18 +229,59 @@ class HorizonOrchestrator:
             analyzed_items = await self._analyze_content(merged_items)
             self.console.print(f"🤖 Analyzed {len(analyzed_items)} items with AI\n")
 
-            # 5. Filter, deduplicate, and balance the digest
-            filtering_result = await self.filter_items(
-                analyzed_items,
-                apply_balance=False,
-            )
-            important_items = filtering_result.items
+            dual_audience = self.config.ai.dual_audience_enabled
+            parent_items: List[ContentItem] = []
+            teacher_items: List[ContentItem] = []
+            parent_selected_ids: set[str] = set()
+            teacher_selected_ids: set[str] = set()
 
-            # 5.5 Optional second-stage Twitter reply expansion + targeted re-analysis
-            await self._expand_twitter_discussion(important_items)
+            if dual_audience:
+                # Filter the same shared candidate pool through two independent
+                # audience lenses. Clones keep audience scores isolated.
+                parent_view = self._items_for_audience(analyzed_items, "parent")
+                teacher_view = self._items_for_audience(analyzed_items, "teacher")
+                parent_result = await self.filter_items(
+                    parent_view, apply_balance=False, log=False
+                )
+                teacher_result = await self.filter_items(
+                    teacher_view, apply_balance=False, log=False
+                )
+                parent_view_selected = self.apply_balanced_digest(
+                    parent_result.items, log=False
+                ).items
+                teacher_view_selected = self.apply_balanced_digest(
+                    teacher_result.items, log=False
+                ).items
 
-            # 5.6 Apply digest limits after any targeted re-analysis changes scores.
-            important_items = self.apply_balanced_digest(important_items).items
+                parent_selected_ids = {item.id for item in parent_view_selected}
+                teacher_selected_ids = {item.id for item in teacher_view_selected}
+                original_by_id = {item.id: item for item in analyzed_items}
+                parent_items = [original_by_id[item.id] for item in parent_view_selected]
+                teacher_items = [original_by_id[item.id] for item in teacher_view_selected]
+                union_ids = parent_selected_ids | teacher_selected_ids
+                important_items = sorted(
+                    [item for item in analyzed_items if item.id in union_ids],
+                    key=lambda item: item.ai_score or 0,
+                    reverse=True,
+                )
+                self.console.print(
+                    f"👪 Parent path selected {len(parent_items)} items; "
+                    f"🏫 teacher path selected {len(teacher_items)} items; "
+                    f"{len(important_items)} unique items will be enriched.\n"
+                )
+            else:
+                # Legacy single-audience behavior.
+                filtering_result = await self.filter_items(
+                    analyzed_items,
+                    apply_balance=False,
+                )
+                important_items = filtering_result.items
+
+                # Optional second-stage Twitter reply expansion + targeted re-analysis
+                await self._expand_twitter_discussion(important_items)
+
+                # Apply digest limits after any targeted re-analysis changes scores.
+                important_items = self.apply_balanced_digest(important_items).items
 
             # Show per-sub-source selection breakdown
             selected_counts: Dict[str, int] = defaultdict(int)
@@ -257,60 +299,90 @@ class HorizonOrchestrator:
             today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
             for lang in self.config.ai.languages:
                 summarizer = DailySummarizer()
-                summary = await summarizer.generate_summary(important_items, today, len(all_items), language=lang)
+                delivery_items = important_items
 
-                # Save to data/summaries/
-                summary_path = self.storage.save_daily_summary(today, summary, language=lang)
-                self.console.print(f"💾 Saved {lang.upper()} summary to: {summary_path}\n")
+                if dual_audience and lang == "zh":
+                    candidate_summary = summarizer.generate_candidate_index(
+                        analyzed_items,
+                        today,
+                        parent_selected_ids,
+                        teacher_selected_ids,
+                        language=lang,
+                    )
+                    parent_summary = await summarizer.generate_summary(
+                        parent_items,
+                        today,
+                        len(analyzed_items),
+                        language=lang,
+                        audience="parent",
+                    )
+                    teacher_summary = await summarizer.generate_summary(
+                        teacher_items,
+                        today,
+                        len(analyzed_items),
+                        language=lang,
+                        audience="teacher",
+                    )
+                    artifacts = (
+                        ("all-candidates", candidate_summary, "K12 AI 全部候选资讯"),
+                        ("parent-topics", parent_summary, "家长端 K12 AI 每日选题"),
+                        ("teacher-topics", teacher_summary, "教师端 K12 AI 每日选题"),
+                    )
+                    for slug, content, title in artifacts:
+                        path = self.storage.save_daily_artifact(
+                            today, slug, content, language=lang
+                        )
+                        self.console.print(
+                            f"💾 Saved {lang.upper()} {slug} to: {path}\n"
+                        )
+                        self._copy_summary_to_docs(
+                            content, today, lang, slug=slug, title=title
+                        )
 
-                # Copy to docs/ for GitHub Pages
-                try:
-                    from pathlib import Path
-
-                    post_filename = f"{today}-summary-{lang}.md"
-                    posts_dir = Path("docs/_posts")
-                    posts_dir.mkdir(parents=True, exist_ok=True)
-
-                    dest_path = safe_output_path(posts_dir, post_filename)
-
-                    # Add Jekyll front matter
-                    front_matter = (
-                        "---\n"
-                        "layout: default\n"
-                        f"title: \"Horizon Summary: {today} ({lang.upper()})\"\n"
-                        f"date: {today}\n"
-                        f"lang: {lang}\n"
-                        "---\n\n"
+                    # Keep the historic URL alive. Teacher is the main path.
+                    summary = teacher_summary
+                    delivery_items = teacher_items
+                    summary_path = self.storage.save_daily_summary(
+                        today, summary, language=lang
+                    )
+                    self._copy_summary_to_docs(
+                        summary,
+                        today,
+                        lang,
+                        slug="summary",
+                        title="教师端 K12 AI 每日选题",
+                    )
+                else:
+                    summary = await summarizer.generate_summary(
+                        important_items, today, len(all_items), language=lang
+                    )
+                    summary_path = self.storage.save_daily_summary(
+                        today, summary, language=lang
+                    )
+                    self.console.print(
+                        f"💾 Saved {lang.upper()} summary to: {summary_path}\n"
+                    )
+                    self._copy_summary_to_docs(
+                        summary,
+                        today,
+                        lang,
+                        slug="summary",
+                        title="Horizon Summary",
                     )
 
-                    # Strip leading H1 header to avoid duplication with Jekyll title
-                    summary_content = summary
-                    first_line = summary_content.strip().split("\n")[0]
-                    if first_line.startswith("# "):
-                        parts = summary_content.split("\n", 1)
-                        if len(parts) > 1:
-                            summary_content = parts[1].strip()
-
-                    with open(dest_path, "w", encoding="utf-8") as f:
-                        f.write(front_matter + summary_content)
-
-                    self.console.print(f"📄 Copied {lang.upper()} summary to GitHub Pages: {dest_path}\n")
-                except Exception as e:
-                    self.console.print(f"[yellow]⚠️  Failed to copy {lang.upper()} summary to docs/: {e}[/yellow]\n")
-
-                # Send email if configured
+                # Send email if configured. In dual mode this is the teacher summary.
                 if self.email_manager and self.config.email and self.config.email.enabled:
                     self.console.print(f"📧 Sending {lang.upper()} email summary...")
                     subscribers = self.storage.load_subscribers()
                     subject = f"Horizon Summary ({lang.upper()}) - {today}"
                     self.email_manager.send_daily_summary(summary, subject, subscribers)
 
-                # Send webhook notification if configured
+                # Send webhook notification if configured.
                 if self.webhook_notifier:
                     await self.webhook_notifier.send_daily_summary(
                         summary=summary,
-                        important_items=important_items,
-                        all_items_count=len(all_items),
+                        important_items=delivery_items,
+                        all_items_count=len(analyzed_items) if dual_audience else len(all_items),
                         date=today,
                         lang=lang,
                         summarizer=summarizer,
@@ -343,6 +415,66 @@ class HorizonOrchestrator:
                 )
 
             raise
+
+    @staticmethod
+    def _items_for_audience(
+        items: List[ContentItem],
+        audience: Literal["parent", "teacher"],
+    ) -> List[ContentItem]:
+        """Clone shared candidates and apply one audience's score for filtering."""
+        result: List[ContentItem] = []
+        for item in items:
+            clone = item.model_copy(deep=True)
+            score = clone.metadata.get(f"{audience}_score")
+            reason = clone.metadata.get(f"{audience}_reason")
+            if score is not None:
+                clone.ai_score = float(score)
+            if reason:
+                clone.ai_reason = str(reason)
+            result.append(clone)
+        return result
+
+    def _copy_summary_to_docs(
+        self,
+        summary: str,
+        date: str,
+        language: str,
+        *,
+        slug: str,
+        title: str,
+    ) -> None:
+        """Write one named summary to the GitHub Pages posts directory."""
+        try:
+            post_filename = f"{date}-{slug}-{language}.md"
+            posts_dir = Path("docs/_posts")
+            posts_dir.mkdir(parents=True, exist_ok=True)
+            dest_path = safe_output_path(posts_dir, post_filename)
+            safe_title = title.replace('"', "'")
+            front_matter = (
+                "---\n"
+                "layout: default\n"
+                f"title: \"{safe_title}: {date} ({language.upper()})\"\n"
+                f"date: {date}\n"
+                f"lang: {language}\n"
+                f"artifact: {slug}\n"
+                "---\n\n"
+            )
+            summary_content = summary
+            first_line = summary_content.strip().split("\n")[0]
+            if first_line.startswith("# "):
+                parts = summary_content.split("\n", 1)
+                if len(parts) > 1:
+                    summary_content = parts[1].strip()
+            with open(dest_path, "w", encoding="utf-8") as f:
+                f.write(front_matter + summary_content)
+            self.console.print(
+                f"📄 Copied {language.upper()} {slug} to GitHub Pages: {dest_path}\n"
+            )
+        except Exception as e:
+            self.console.print(
+                f"[yellow]⚠️  Failed to copy {language.upper()} {slug} "
+                f"to docs/: {e}[/yellow]\n"
+            )
 
     def _determine_time_window(self, force_hours: int = None) -> datetime:
         if force_hours:

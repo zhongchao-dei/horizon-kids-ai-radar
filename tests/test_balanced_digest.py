@@ -259,3 +259,46 @@ def test_run_balances_after_twitter_reanalysis(tmp_path, monkeypatch) -> None:
     asyncio.run(orchestrator.run())
 
     assert enriched_ids == ["second"]
+
+
+def test_run_dual_audience_selects_each_path_independently(tmp_path, monkeypatch) -> None:
+    config = Config(
+        ai=AIConfig(
+            provider="openai",
+            model="test",
+            api_key_env="TEST_API_KEY",
+            languages=[],
+            dual_audience_enabled=True,
+            primary_audience="teacher",
+        ),
+        sources=SourcesConfig(),
+        filtering=FilteringConfig(ai_score_threshold=7.0, max_items=1),
+    )
+    orchestrator = HorizonOrchestrator(config, SimpleNamespace())
+    parent_item = make_item("parent", 9.0, "ai")
+    parent_item.metadata.update({"parent_score": 9.0, "teacher_score": 5.0})
+    teacher_item = make_item("teacher", 9.0, "ai")
+    teacher_item.metadata.update({"parent_score": 5.0, "teacher_score": 9.0})
+    enriched_ids: list[str] = []
+
+    async def fetch_all_sources(since):  # type: ignore[no-untyped-def]
+        return [parent_item, teacher_item]
+
+    async def analyze_content(input_items):  # type: ignore[no-untyped-def]
+        return input_items
+
+    async def merge_topic_duplicates(input_items, *, log=True):  # type: ignore[no-untyped-def]
+        return input_items
+
+    async def enrich_important_items(input_items):  # type: ignore[no-untyped-def]
+        enriched_ids.extend(item.id for item in input_items)
+
+    monkeypatch.setattr(orchestrator, "fetch_all_sources", fetch_all_sources)
+    monkeypatch.setattr(orchestrator, "_analyze_content", analyze_content)
+    monkeypatch.setattr(orchestrator, "merge_topic_duplicates", merge_topic_duplicates)
+    monkeypatch.setattr(orchestrator, "_enrich_important_items", enrich_important_items)
+    monkeypatch.chdir(tmp_path)
+
+    asyncio.run(orchestrator.run())
+
+    assert enriched_ids == ["parent", "teacher"]
