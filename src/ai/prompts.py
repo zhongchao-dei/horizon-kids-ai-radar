@@ -232,6 +232,13 @@ matters. The title must name the concrete event before posing a question; do
 not use abstract or suspense-only wording. Use natural Chinese. Keep verified
 news facts separate from the proposed angle; never add an unverified number,
 made-up classroom scene, or verdict.
+Before writing the card, identify the article's PRIMARY EVENT or mechanism and
+its CAVEATS. The primary event must drive the context, title, hook, and key
+fact. A qualification such as “an em-dash alone is not proof of ChatGPT use”
+belongs in the evidence boundary; it must not replace the article's main
+method, action, or finding. When a teacher designs a task-level verification
+mechanism, explain that mechanism rather than collapsing it into “AI detection
+may be wrong.”
 """
 
 
@@ -278,6 +285,20 @@ scenario, what happened, and why it matters. The title must name the concrete
 event before posing a question; do not use abstract or suspense-only wording.
 Use natural Chinese. Keep verified news facts separate from the proposed angle;
 never add an unverified number, made-up classroom scene, or verdict.
+Before writing the card, identify the article's PRIMARY EVENT or mechanism and
+its CAVEATS. The primary event must drive the context, title, hook, and key
+fact. A qualification such as “an em-dash alone is not proof of ChatGPT use”
+belongs in the evidence boundary; it must not replace the article's main
+method, action, or finding. When a teacher designs a task-level verification
+mechanism, explain that mechanism rather than collapsing it into “AI detection
+may be wrong.”
+Before writing the card, identify the article's PRIMARY EVENT or mechanism and
+its CAVEATS. The primary event must drive the context, title, hook, and key
+fact. A qualification such as “an em-dash alone is not proof of ChatGPT use”
+belongs in the evidence boundary; it must not replace the article's main
+method, action, or finding. When a teacher designs a task-level verification
+mechanism, explain that mechanism rather than collapsing it into “AI detection
+may be wrong.”
 """
 
 
