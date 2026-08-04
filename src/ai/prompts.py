@@ -239,7 +239,14 @@ belongs in the evidence boundary; it must not replace the article's main
 method, action, or finding. When a teacher designs a task-level verification
 mechanism, explain that mechanism rather than collapsing it into “AI detection
 may be wrong.”
-"""
+Evidence gate: derive the event, mechanism, result, and numbers only from a
+full source body or a directly locatable original source. If the input is only a
+headline, aggregation snippet, category page, or otherwise incomplete source, do
+not infer the mechanism. Mark evidence maturity as 需补证据 or 暂缓, explicitly
+say 待原文核验 in the suitability note, and do not present it as a formal fact
+that can be used directly in a spoken script. Explicitly distinguish a proposed
+policy, product announcement, institution guidance, survey, case report, and
+commentary; retain its sample, location, time, and rollout/status boundaries."""
 
 
 TOPIC_CARD_USER_ZH = """
@@ -292,7 +299,14 @@ belongs in the evidence boundary; it must not replace the article's main
 method, action, or finding. When a teacher designs a task-level verification
 mechanism, explain that mechanism rather than collapsing it into “AI detection
 may be wrong.”
-"""
+Evidence gate: derive the event, mechanism, result, and numbers only from a
+full source body or a directly locatable original source. If the input is only a
+headline, aggregation snippet, category page, or otherwise incomplete source, do
+not infer the mechanism. Mark evidence maturity as 需补证据 or 暂缓, explicitly
+say 待原文核验 in the suitability note, and do not present it as a formal fact
+that can be used directly in a spoken script. Explicitly distinguish a proposed
+policy, product announcement, institution guidance, survey, case report, and
+commentary; retain its sample, location, time, and rollout/status boundaries."""
 
 
 TEACHER_TOPIC_CARD_USER_ZH = """
