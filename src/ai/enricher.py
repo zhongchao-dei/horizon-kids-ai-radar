@@ -245,6 +245,7 @@ class ContentEnricher:
                 item.metadata[f"community_discussion_{lang}"] = val.get("text") or str(val) if isinstance(val, dict) else str(val)
 
         topic_card_fields = (
+            "topic_context_zh",
             "topic_title_zh",
             "topic_entry_zh",
             "topic_hook_zh",
@@ -259,6 +260,7 @@ class ContentEnricher:
             "content_goal_zh",
             "parent_evidence_maturity_zh",
             "suitability_note_zh",
+            "teacher_topic_context_zh",
             "teacher_topic_title_zh",
             "teacher_topic_entry_zh",
             "teacher_topic_hook_zh",
