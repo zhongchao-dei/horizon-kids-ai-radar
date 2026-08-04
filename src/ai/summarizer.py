@@ -507,6 +507,7 @@ class DailySummarizer:
     ) -> tuple[tuple[str, str], ...]:
         if audience == "teacher":
             return (
+                ("这条新闻讲什么", "teacher_topic_context_zh"),
                 ("标题", "teacher_topic_title_zh"),
                 ("入口", "teacher_topic_entry_zh"),
                 ("钩子", "teacher_topic_hook_zh"),
@@ -523,6 +524,7 @@ class DailySummarizer:
                 ("适用边界", "teacher_suitability_note_zh"),
             )
         return (
+            ("这条新闻讲什么", "topic_context_zh"),
             ("标题", "topic_title_zh"),
             ("入口", "topic_entry_zh"),
             ("钩子", "topic_hook_zh"),
