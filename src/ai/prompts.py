@@ -226,12 +226,19 @@ product capability, or course result. Keep source facts separate from editorial
 inference. Avoid fearmongering and promises about grades, efficiency, future
 advantage, traffic, or conversion. If the news is weak as a topic, state the
 limitation in suitability_note_zh instead of exaggerating it.
+Chinese readability is a hard requirement: someone who does not open the news
+link must understand the card itself: who did what, what happened, and why it
+matters. The title must name the concrete event before posing a question; do
+not use abstract or suspense-only wording. Use natural Chinese. Keep verified
+news facts separate from the proposed angle; never add an unverified number,
+made-up classroom scene, or verdict.
 """
 
 
 TOPIC_CARD_USER_ZH = """
 
 Also include these Simplified Chinese fields in the same JSON object:
+  "topic_context_zh": "<一句白话交代：谁在什么场景做了什么、出现了什么结果；不看链接也理解新闻>",
   "topic_title_zh": "<一个完整、具体、正文能兑现的短视频选题标题>",
   "topic_entry_zh": "<作业协作/手机使用/AI 创作/判断与辨别/学习路径焦虑/家长介入，可多选>",
   "topic_hook_zh": "<反常结果、异常动作或作品缺口；1句话>",
@@ -265,12 +272,19 @@ Do not promise guaranteed workload reduction, grades, universal applicability,
 traffic, conversion, or school procurement. Mark policy, privacy, fairness,
 student safety, assessment validity, product capability, and course effects as
 requiring human confirmation when appropriate.
+Chinese readability is a hard requirement: a teacher who does not open the
+news link must understand the card itself: who did what in which teaching
+scenario, what happened, and why it matters. The title must name the concrete
+event before posing a question; do not use abstract or suspense-only wording.
+Use natural Chinese. Keep verified news facts separate from the proposed angle;
+never add an unverified number, made-up classroom scene, or verdict.
 """
 
 
 TEACHER_TOPIC_CARD_USER_ZH = """
 
 Also include these Simplified Chinese fields in the same JSON object:
+  "teacher_topic_context_zh": "<一句白话交代：谁在什么教学场景做了什么、出现了什么结果；不看链接也理解新闻>",
   "teacher_topic_title_zh": "<完整、具体、正文能兑现的教师端短视频标题>",
   "teacher_topic_entry_zh": "<六个教师端入口之一或多选>",
   "teacher_topic_hook_zh": "<教学结果、课堂反应、教师困境或政策变化；1句话>",
