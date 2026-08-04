@@ -292,13 +292,6 @@ belongs in the evidence boundary; it must not replace the article's main
 method, action, or finding. When a teacher designs a task-level verification
 mechanism, explain that mechanism rather than collapsing it into “AI detection
 may be wrong.”
-Before writing the card, identify the article's PRIMARY EVENT or mechanism and
-its CAVEATS. The primary event must drive the context, title, hook, and key
-fact. A qualification such as “an em-dash alone is not proof of ChatGPT use”
-belongs in the evidence boundary; it must not replace the article's main
-method, action, or finding. When a teacher designs a task-level verification
-mechanism, explain that mechanism rather than collapsing it into “AI detection
-may be wrong.”
 """
 
 
