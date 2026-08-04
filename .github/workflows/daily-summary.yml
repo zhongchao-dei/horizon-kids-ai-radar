@@ -2,20 +2,17 @@ name: Daily Horizon Summary
 
 on:
   schedule:
-    # Primary run at 09:30. Two later watchdog runs recover a delayed or
-    # dropped GitHub schedule; complete same-day output is detected and skipped.
-    - cron: '30 9 * * *'
-      timezone: 'Asia/Shanghai'
-    - cron: '30 10 * * *'
-      timezone: 'Asia/Shanghai'
-    - cron: '30 12 * * *'
-      timezone: 'Asia/Shanghai'
+    # GitHub Actions 的 cron 使用 UTC；以下分别是北京时间 09:30、10:30、12:30。
+    # 后两次仅作补偿：当天日报已完整发布时会自动跳过。
+    - cron: '30 1 * * *'
+    - cron: '30 2 * * *'
+    - cron: '30 4 * * *'
   workflow_dispatch:
     inputs:
       provider:
         description: '本次运行优先使用的 AI 服务'
         required: true
-        default: 'deepseek'
+        default: 'gemini'
         type: choice
         options:
           - gemini
@@ -84,12 +81,13 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           MANUAL_PROVIDER: ${{ inputs.provider }}
         run: |
-          if [[ "$EVENT_NAME" == "workflow_dispatch" && "$MANUAL_PROVIDER" == "gemini" ]]; then
-            cp data/config.github.json data/config.json
-            echo "HORIZON_PROVIDER=gemini" >> "$GITHUB_ENV"
-          else
+          # 默认（含定时任务）使用 Gemini；仅在手动选择 DeepSeek 时切换。
+          if [[ "$EVENT_NAME" == "workflow_dispatch" && "$MANUAL_PROVIDER" == "deepseek" ]]; then
             cp data/config.github.deepseek.json data/config.json
             echo "HORIZON_PROVIDER=deepseek" >> "$GITHUB_ENV"
+          else
+            cp data/config.github.json data/config.json
+            echo "HORIZON_PROVIDER=gemini" >> "$GITHUB_ENV"
           fi
 
       - name: Run Horizon
