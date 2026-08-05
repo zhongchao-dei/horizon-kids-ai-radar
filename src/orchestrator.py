@@ -246,15 +246,21 @@ class HorizonOrchestrator:
                 teacher_result = await self.filter_items(
                     teacher_view, apply_balance=False, log=False
                 )
-                parent_view_selected = self.apply_balanced_digest(
-                    parent_result.items, log=False
-                ).items
                 teacher_view_selected = self.apply_balanced_digest(
                     teacher_result.items, log=False
                 ).items
 
-                parent_selected_ids = {item.id for item in parent_view_selected}
+                # The two publishing paths must not turn the same source into
+                # two near-identical daily topics. Teacher is the primary path;
+                # the parent path is then filled from distinct evidence, with
+                # priority for the parent-growth learning lane.
                 teacher_selected_ids = {item.id for item in teacher_view_selected}
+                parent_view_selected = self._select_parent_digest(
+                    parent_result.items,
+                    excluded_ids=teacher_selected_ids,
+                )
+
+                parent_selected_ids = {item.id for item in parent_view_selected}
                 original_by_id = {item.id: item for item in analyzed_items}
                 parent_items = [original_by_id[item.id] for item in parent_view_selected]
                 teacher_items = [original_by_id[item.id] for item in teacher_view_selected]
@@ -442,6 +448,59 @@ class HorizonOrchestrator:
                 clone.ai_reason = str(reason)
             result.append(clone)
         return result
+
+    def _select_parent_digest(
+        self,
+        items: List[ContentItem],
+        *,
+        excluded_ids: set[str],
+    ) -> List[ContentItem]:
+        """Select a parent digest from evidence not already used by teachers.
+
+        The parent lane intentionally prioritizes child growth and learning
+        stories (Feynman-style explanation, first-principles thinking and
+        concrete family learning situations). It remains a *priority*, not a
+        quota that forces weak stories into the digest.
+        """
+        available = [item for item in items if item.id not in excluded_ids]
+        if not available:
+            return []
+
+        max_items = self.config.filtering.max_items
+        growth_items = [
+            item
+            for item in available
+            if item.metadata.get("category") == "parent-growth-learning"
+        ]
+        selected: List[ContentItem] = []
+
+        # Reserve the two permanent parent lanes when the day has enough
+        # evidence: up to two growth/learning stories plus one AI-literacy or
+        # AI-education story. This is a priority, never a reason to force weak
+        # candidates into the digest.
+        for item in self.apply_balanced_digest(growth_items, log=False).items[:2]:
+            selected.append(item)
+
+        parent_ai_items = [
+            item
+            for item in available
+            if item.metadata.get("category") == "parent-ai-education"
+        ]
+        selected_ids = {item.id for item in selected}
+        for item in self.apply_balanced_digest(parent_ai_items, log=False).items[:1]:
+            if item.id not in selected_ids:
+                selected.append(item)
+                selected_ids.add(item.id)
+
+        for item in self.apply_balanced_digest(available, log=False).items:
+            if item.id in selected_ids:
+                continue
+            selected.append(item)
+            selected_ids.add(item.id)
+            if max_items is not None and len(selected) >= max_items:
+                break
+
+        return selected
 
     def _copy_summary_to_docs(
         self,
