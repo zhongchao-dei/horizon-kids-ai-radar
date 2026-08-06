@@ -264,6 +264,36 @@ class HorizonOrchestrator:
                 original_by_id = {item.id: item for item in analyzed_items}
                 parent_items = [original_by_id[item.id] for item in parent_view_selected]
                 teacher_items = [original_by_id[item.id] for item in teacher_view_selected]
+
+                # Mandatory whole-digest quality gate. This deliberately checks
+                # the selected *set*, not whether an individual item is easy to
+                # turn into a script. If a set fails, return to the same day's
+                # pool and retain only independently strong evidence rather than
+                # padding the digest with weak or duplicated stories.
+                daily_quality_review = self._daily_quality_review(
+                    parent_items, teacher_items
+                )
+                if not daily_quality_review["passed"]:
+                    self.console.print(
+                        "[yellow]Daily quality gate did not pass; reselecting from strong, "
+                        "role-specific evidence.[/yellow]"
+                    )
+                    teacher_view_selected = self.apply_balanced_digest(
+                        [item for item in teacher_result.items if (item.ai_score or 0) >= 7],
+                        log=False,
+                    ).items
+                    teacher_selected_ids = {item.id for item in teacher_view_selected}
+                    parent_view_selected = self._select_parent_digest(
+                        [item for item in parent_result.items if (item.ai_score or 0) >= 7],
+                        excluded_ids=teacher_selected_ids,
+                    )
+                    parent_selected_ids = {item.id for item in parent_view_selected}
+                    parent_items = [original_by_id[item.id] for item in parent_view_selected]
+                    teacher_items = [original_by_id[item.id] for item in teacher_view_selected]
+                    daily_quality_review = self._daily_quality_review(
+                        parent_items, teacher_items, reselected=True
+                    )
+                self.console.print(daily_quality_review["console"])
                 union_ids = parent_selected_ids | teacher_selected_ids
                 important_items = sorted(
                     [item for item in analyzed_items if item.id in union_ids],
@@ -340,6 +370,7 @@ class HorizonOrchestrator:
                     artifacts = (
                         ("all-candidates", candidate_summary, "K12 AI 全部候选资讯"),
                         ("low-score-watchlist", low_score_watchlist, "K12 AI 低分待观察资讯"),
+                        ("daily-quality-review", daily_quality_review["markdown"], "K12 AI 每日选题自检"),
                         ("parent-topics", parent_summary, "家长端 K12 AI 每日选题"),
                         ("teacher-topics", teacher_summary, "教师端 K12 AI 每日选题"),
                     )
@@ -448,6 +479,69 @@ class HorizonOrchestrator:
                 clone.ai_reason = str(reason)
             result.append(clone)
         return result
+
+    def _daily_quality_review(
+        self,
+        parent_items: List[ContentItem],
+        teacher_items: List[ContentItem],
+        *,
+        reselected: bool = False,
+    ) -> dict[str, object]:
+        """Audit the day's two digests before publication.
+
+        This is intentionally conservative: a weak day can publish fewer
+        items, but it must not manufacture variety or repeat one event across
+        the two audiences merely to fill a quota.
+        """
+        def audience_score(items: List[ContentItem], key: str) -> float:
+            if not items:
+                return 0.0
+            values = [self._numeric_score(item.metadata.get(key)) for item in items]
+            return sum(values) / len(values)
+
+        def source_diversity(items: List[ContentItem]) -> float:
+            if not items:
+                return 0.0
+            unique_sources = len({self._sub_source_label(item) for item in items})
+            return min(10.0, 10.0 * unique_sources / len(items))
+
+        parent_fit = audience_score(parent_items, "parent_score")
+        teacher_fit = audience_score(teacher_items, "teacher_score")
+        parent_variety = source_diversity(parent_items)
+        teacher_variety = source_diversity(teacher_items)
+        shared_ids = {item.id for item in parent_items} & {item.id for item in teacher_items}
+        separation = 10.0 if not shared_ids else 0.0
+        parent_total = round((parent_fit * 0.7) + (parent_variety * 0.2) + (separation * 0.1), 1)
+        teacher_total = round((teacher_fit * 0.7) + (teacher_variety * 0.2) + (separation * 0.1), 1)
+        passed = parent_total >= 7.0 and teacher_total >= 7.0 and not shared_ids
+        issues = []
+        if shared_ids:
+            issues.append("双端出现重复来源／事件")
+        if parent_total < 7.0:
+            issues.append("家长端受众匹配或组内多样性不足")
+        if teacher_total < 7.0:
+            issues.append("教师端受众匹配或组内多样性不足")
+        issue_text = "；".join(issues) if issues else "未发现需要重选的关键问题"
+        reselected_text = "是" if reselected else "否"
+        markdown = (
+            "# K12 AI 每日选题自检\n\n"
+            f"- **家长端**：{parent_total}/10（受众匹配 {parent_fit:.1f}；来源多样性 {parent_variety:.1f}）\n"
+            f"- **教师端**：{teacher_total}/10（受众匹配 {teacher_fit:.1f}；来源多样性 {teacher_variety:.1f}）\n"
+            f"- **双端区分**：{separation:.1f}/10\n"
+            f"- **是否通过（≥7）**：{'通过' if passed else '未通过'}\n"
+            f"- **是否重选**：{reselected_text}\n"
+            f"- **主要不足**：{issue_text}\n\n"
+            "> 本自检只评估新闻与受众的匹配、当天组内多样性、双端去重和证据入口；不以口播钩子、课程植入或预设观点作为评分项。\n"
+        )
+        return {
+            "passed": passed,
+            "markdown": markdown,
+            "console": (
+                f"🧭 Daily quality review — parent {parent_total}/10, "
+                f"teacher {teacher_total}/10, role separation {separation:.1f}/10, "
+                f"{'passed' if passed else 'needs reselection'}"
+            ),
+        }
 
     def _select_parent_digest(
         self,
