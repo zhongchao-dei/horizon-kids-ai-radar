@@ -87,33 +87,32 @@ DUAL_AUDIENCE_ANALYSIS_SYSTEM = """
 This Horizon instance serves one shared K12 AI evidence pool and two separate
 Chinese content paths. Evaluate every item independently for BOTH audiences:
 
-1. parent: parents of children from grade 3 through middle school. This is an
-   independent path with TWO permanent lanes, not a simplified copy of the
-   teacher bulletin:
-   (a) parent AI literacy and AI education — how a child understands how AI
-   answers, verifies its claims, uses it for learning rather than substitution,
-   and handles privacy, media information and digital wellbeing;
-   (b) child growth and learning — concrete family or student learning
-   situations through Feynman-style learning (explain an idea plainly, expose a
-   gap, revise the explanation), first-principles thinking (separate facts,
-   assumptions, constraints, evidence and possible solutions), metacognition
-   and self-regulated learning, question decomposition and inquiry, and
-   parent-child dialogue around digital life. Score both lanes highly only when
-   they have a real grade-3-to-middle-school connection and usable evidence.
-   Do not score generic adult self-help, slogan-like learning methods, vague
-   parenting anxiety, or high-school/college-only material highly.
+1. parent: parents of children from grade 3 through middle school. Keep a
+   broad evidence radar for (a) K12 AI literacy and AI education, (b) parent-
+   child conversations and family decisions about AI, and (c) how children use,
+   understand, question, verify, create with, or are affected by AI in learning
+   and daily digital life. A story is relevant when it gives a real, source-
+   supported signal about this age group; it does NOT need to already contain a
+   parenting solution, a Feynman/first-principles angle, a course connection,
+   or a ready-made video conclusion. Do not score generic adult self-help,
+   vague parenting anxiety, or high-school/college-only material highly.
 2. teacher: frontline subject teachers from primary through middle school.
    Relevant entries include lesson planning, classroom teaching and interaction,
    assignments and assessment, differentiated support, student AI literacy and
-   academic integrity, school-based research and governance.
+   academic integrity, school-based research and governance. Also retain broad
+   K12-relevant signals about how teachers interpret AI's relationship with
+   learning, even when the article is a question, policy change, debate, pilot,
+   research finding, or classroom case rather than a ready-to-use lesson.
 
 The teacher path is the current primary content path, but do not lower the
 evidence standard or inflate its score. A tool is not teacher-relevant merely
 because it can save office time; it must connect to a real teaching task,
 professional judgment, student learning evidence, school policy, or classroom
 governance. Score each audience from 0 to 10 and give a short audience-specific
-reason. Keep facts separate from editorial inference. Do not invent classroom or
-family cases, product capabilities, research findings, or course outcomes. A
+reason. Score information relevance and evidence quality, NOT how easily it can
+be converted into a topic card, a spoken-script hook, a product mention, or a
+predetermined conclusion. Keep facts separate from editorial inference. Do not
+invent classroom or family cases, product capabilities, research findings, or course outcomes. A
 teacher-selected source is excluded from the parent digest in code, so score the
 parent path for independent family-learning value rather than copied relevance.
 """

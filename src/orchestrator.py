@@ -457,44 +457,19 @@ class HorizonOrchestrator:
     ) -> List[ContentItem]:
         """Select a parent digest from evidence not already used by teachers.
 
-        The parent lane intentionally prioritizes child growth and learning
-        stories (Feynman-style explanation, first-principles thinking and
-        concrete family learning situations). It remains a *priority*, not a
-        quota that forces weak stories into the digest.
+        The parent lane is a broad grade-3-to-middle-school AI evidence radar.
+        It must not reserve slots for a pre-decided learning theory, conclusion,
+        course connection, or spoken-script structure. Those are later editorial
+        choices, not collection criteria.
         """
         available = [item for item in items if item.id not in excluded_ids]
         if not available:
             return []
 
         max_items = self.config.filtering.max_items
-        growth_items = [
-            item
-            for item in available
-            if item.metadata.get("category") == "parent-growth-learning"
-        ]
         selected: List[ContentItem] = []
-
-        # Reserve the two permanent parent lanes when the day has enough
-        # evidence: up to two growth/learning stories plus one AI-literacy or
-        # AI-education story. This is a priority, never a reason to force weak
-        # candidates into the digest.
-        for item in self.apply_balanced_digest(growth_items, log=False).items[:2]:
-            selected.append(item)
-
-        parent_ai_items = [
-            item
-            for item in available
-            if item.metadata.get("category") == "parent-ai-education"
-        ]
-        selected_ids = {item.id for item in selected}
-        for item in self.apply_balanced_digest(parent_ai_items, log=False).items[:1]:
-            if item.id not in selected_ids:
-                selected.append(item)
-                selected_ids.add(item.id)
-
+        selected_ids: set[str] = set()
         for item in self.apply_balanced_digest(available, log=False).items:
-            if item.id in selected_ids:
-                continue
             selected.append(item)
             selected_ids.add(item.id)
             if max_items is not None and len(selected) >= max_items:
