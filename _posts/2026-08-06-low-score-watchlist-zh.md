@@ -6,42 +6,50 @@ lang: zh
 artifact: low-score-watchlist
 ---
 
-> 收录当天未进入家长端或教师端选题池，且两端评分均低于 6.0 分的 9 条资讯。
+> 收录当天未进入家长端或教师端选题池，且两端评分均低于 6.0 分的 11 条资讯。
 
 > 仅供回看方向，不进入长期知识页，也不代表内容错误或永远无价值。
 
-## 1. [Free Back-to-School Resources for Families and Homeschoolers](https://blog.khanacademy.org/free-back-to-school-resources-for-families-and-homeschoolers/)
+## 1. [Irvine schools receive $200K to integrate AI in classrooms - Irvine Standard](https://news.google.com/rss/articles/CBMimgFBVV95cUxQNzhXcGVLSElPR1VwRWFpZ0lhX3pWVllGRzVXUGI3blJSajhhWVF1Z1Ezb1Q3RzhTOHJRam4xenAzUzlKLTZZeVozMG9uQ0h2SDVKNE9Yenk3cF9MajV5WVJqZkN6aE9TX0ptQXBtQTY3WGt0aUp6UEcxS2dMZlhNZUZyVmhtaEhpVjF4RWpoM3JNUmJBc2s4WFB3?oc=5)
 
-- 简要概述：可汗学院发布面向家庭和居家学习者的免费开学季学习资源汇总。
+- 简要概述：Irvine schools receive $200,000 to integrate AI into classrooms, as reported by the Irvine Standard.
 
-## 2. [AI training sessions prepare schools for digital transformation - SGGP English Edition](https://news.google.com/rss/articles/CBMipAFBVV95cUxOdnBuWDdkSzZBajBHR3pSc0xFMmJJWnFaZTR4QTZfTXQ4QkV1TVdKQ0JpYU1SRXREUUVMYmIyNHczTjFHSXV1R2w4Y0lYNEFRYUlZLUNCSlo3MDZkdWlZcTB2X3FXRVJvX0FlWUJ1MkU1cUNuUXQxbE5sLWNxSmZqbzVMQy04UU8yQXAwd3FFOVVPME5LTmdyMTRFNEhPTWZ3YU05Xw?oc=5)
+## 2. [Teachers in Jackson County hone skills for upcoming school year, from AI to new literacy strategies - WILX](https://news.google.com/rss/articles/CBMivwFBVV95cUxONXNCamVGZFVlQ2c2bFR5NlFvZnowdzhOajVubUF3bWEzSnItQlMtQXJvU29NZ3hSNWVPR3J0MFNLYlNJbDlmVlBENWgyVi1PRHFuY0JMQUZoQVNTbnVEekFobG1vek1BTmRHU3pDNndWSUl5M2xiZVBFYVNPWHlZa2pnLUVoa0JBb1NTS0FPLVRnVnFCOG1ZcDRac2d5NjJTU3FQb1Zib21MUV9jMlNwSDFMaURZWVU5ZnNsSFJRMA?oc=5)
 
-- 简要概述：报道提及学校开展 AI 培训以推进数字化转型，但缺乏具体教学落地与实践案例细节。
+- 简要概述：Teachers in Jackson County are undergoing training that includes AI and new literacy strategies for the upcoming school year.
 
-## 3. [一次培养多种出路，猿编程重塑AI时代信奥育人路径 - 手机新浪网](https://news.google.com/rss/articles/CBMifEFVX3lxTE53Y2FYbjdPX0UyVDJCaG5BVUoySnNyc3RWOXZXNERmRjdSNDNfMzhhbHdtaVJwV1NrNkEyUG4wTGc0TV9nOGV4blNzWE1Md1JFYzZjTlZvRjFjUHBkN0wwd0JDY2tPTE1EX1pZdHFSTlJiQ2g3dTVDT0h1SXE?oc=5)
+## 3. [Tips for Using AI, From Grad Students and Professors - gse.harvard.edu](https://news.google.com/rss/articles/CBMioAFBVV95cUxPazFYQ05wUERQNkxzVEEtdzNyVVFEZXZkTFhaazZBRS1XRndIb2xCS1RyQlEwak5RUFNDVnY3NE1FZV9wSS1uZjNrdTFTTjRWVVN2WUdxRjVueWQ0QUFJS2dRdjlndUREelpmMHRod002V051STZvTWU4WkphZjl0b1NwWDh6MmFGYVJwWXpDODlZV3MxeHpjYUpuUkhaOG5T?oc=5)
 
-- 简要概述：文章介绍了商业机构猿编程在AI时代针对信息学奥林匹克竞赛所推出的多元培养与育人路径。
+- 简要概述：An article from Harvard Graduate School of Education compiling AI usage tips shared by graduate students and professors.
 
-## 4. [Strengthening Foundational Skills in the AI Era: Three Law Schools Reform Teaching and Exam Formats - Singapore Law Wat…](https://news.google.com/rss/articles/CBMi2AFBVV95cUxPSG9EZk1Uby1vMFVLbTdyOTFwNm1oQXY1RS1EbklyekZKX3R5Qm10ay11OWRuSzlqNVZPUzU4UFpRVDhIVk04MzVaS0ZpY3otenNrdldiNUNGWHBGWEJYM3ZCR25vUTVFekN6TVR3aXJZYWg1YzMwSW5qdVROZVdrbUpVVzZoVXQ1N0pBOXJvWDAxYUo2YmkzVGJaNHQzTm5ENTIyZC1fblJJdWxPa1hwY0FGcUR6VDFCMlZVdGRyVWNWTUNLV3I1eGsyb18xeEVYT000cDNlUjc?oc=5)
+## 4. [Free Back-to-School Resources for Families and Homeschoolers](https://blog.khanacademy.org/free-back-to-school-resources-for-families-and-homeschoolers/)
 
-- 简要概述：新加坡三所法学院通过调整教学与考试形式，旨在生成式 AI 普及背景下强化法学学生的专业基础技能与评估真实能力。
+- 简要概述：Khan Academy presents free back-to-school resources for families and homeschoolers.
 
-## 5. [Commitment to prepare nation for the age of AI reaffirmed - Borneo Bulletin](https://news.google.com/rss/articles/CBMikgFBVV95cUxQU1AwdENhcXUtblZXZ25XdXJIck53X1p3VmJsZmNoOExGRjJhZjhBWHM3eUktb29TV0pkOHllQ3ZPdzBFVFd3c01uaVl6akV5cG1CanBSMjJQTWhqYVBLVkc3R293dlpMWkRtOXRpRnZUSWZzazVPbi0xUFVxSmNDS2NGbndyMHN2dGwwZnhhbXl1dw?oc=5)
+## 5. [Penn professors discuss artificial intelligence classroom policies, University initiatives - The Daily Pennsylvanian](https://news.google.com/rss/articles/CBMipgFBVV95cUxOUmlWQXFzU092bkNaY2FXcFUyam01cnRyeVFVNmlnck5ZUFVzem1ma1ppR2xhaGNPTmNoN01KZzV4aVBNSDh3dHdfOU5HckRsZVk1UTV1c294cGduMjJVSkhGYWpYV2ppSGIyRUdpM0o4MTcybmZsaVVnQzFQQkNEQjZJV0N4OWtOUHNYclVzS2FBNldsbm1EWUNraS1KN3VKMmxMQXJB?oc=5)
 
-- 简要概述：汶莱重申准备迎接人工智能时代的国家承诺，强调提升全民 AI 素养与国家应对能力。
+- 简要概述：Penn professors discuss AI classroom policies and related university initiatives, though the article content is not detailed.
 
-## 6. [UP Law restricts AI, digital devices in first-year courses - Newsbytes.PH](https://news.google.com/rss/articles/CBMilAFBVV95cUxQYm9UVWV5SFA0cGk3YUg3ZGRJVEFLcjBsZ0hhUzJNVlYzcDVuMnp5WEI4TTcxdEkxRXIzcEF5RFpmbnZVQ19IbHdHU3BxQkp1SnpwaWlGdkNTUTFkTWhJQlRWR3FJWnU4UUphb2hPRE5FR1BSNGZxdTVoWm9pbWFaRW50YXFBN2pXSzkxLTJyMGtfbmhz?oc=5)
+## 6. [AI in the classroom: Tools, training, and the future of education - Virginia Tech News](https://news.google.com/rss/articles/CBMitgFBVV95cUxPRlRJcDhjcnNWOEs4THJCU0J2OHhsNnQ2a0VkR2V4WTRJcXRxcTVHTWt3a2V5RWNsQmFXQ0E5cjR3cm41ajdKQXdqTHBoSTBZQkZNSlBJUVZOb1J0M0dMYjdhRkxEQ0ZMRzRoQ3JSQWh5R1pneUNPd1VwY09uS19rOW05bVl4djFpQlkxRG1OOW1nN3lSYlRheml2dlNObnkwYjRYMmxMVjFFVGpsR1FSVTdtT2xhUQ?oc=5)
 
-- 简要概述：菲律宾大学法学院出台新规，在一年级课程中限制使用人工智能及数字设备。
+- 简要概述：弗吉尼亚理工大学新闻报道了AI在课堂中的工具、培训与教育未来。
 
-## 7. [The Do’s and Don’ts of Using AI at University in 2026 - Insider Guides](https://news.google.com/rss/articles/CBMiiAFBVV95cUxQdmZObnVGSHAzM0JRc0ZaS0prS0dqd2tkTk5pckRGM3pQY05uR1JESjlSZmRyWlZrdDdwMExPTG9tZWpKcGJXX0pnSTNxZmtXbjh6aFBUNE1pTEpSOFpHLVVfaEN3cEZhZTRxRGE3MENDT3Y2c2h1aU10OUlWeGEtOWlZdWIxaFdQ?oc=5)
+## 7. [一次培养多种出路，猿编程重塑AI时代信奥育人路径 - 手机新浪网](https://news.google.com/rss/articles/CBMifEFVX3lxTE53Y2FYbjdPX0UyVDJCaG5BVUoySnNyc3RWOXZXNERmRjdSNDNfMzhhbHdtaVJwV1NrNkEyUG4wTGc0TV9nOGV4blNzWE1Md1JFYzZjTlZvRjFjUHBkN0wwd0JDY2tPTE1EX1pZdHFSTlJiQ2g3dTVDT0h1SXE?oc=5)
 
-- 简要概述：一篇面向大学生的不具名AI使用注意事项指南，内容未涵盖K12教学或家庭场景。
+- 简要概述：该文宣传了猿编程在AI时代针对少儿信息学奥林匹克（信奥）的培养路径与多出路教育方案。
 
-## 8. [AI Curriculum Coming To Every Miami University Major - balleralert.com](https://news.google.com/rss/articles/CBMifEFVX3lxTE45a3FBSFJwcXJ4dzlMNkZVSjFPeTNidG93RmRVb2pjYzlSczRwTGxabVdRRzNWLXR4dngwRDlac3dMaUt0MTI0SGFQbEQ4cFZ6SlFmWURJMzhhQ2I4SDM2LUdYU3JidW1FdVROekNIVi1EaDhDRlE4X291V2c?oc=5)
+## 8. [Impact of generative AI interaction and output quality on university students’ learning outcomes: a technology-mediated…](https://news.google.com/rss/articles/CBMiX0FVX3lxTE9jWWE2akVWVUVVdHEtcVotR2lmbzFwcFdhdUo4WVBGSHJoSTZpMkYzaEhSalYyRkZRcGlpcEJnZEhHc3NUdlV3ZE5QUHpPYXpZWmdHOGFBMW1EMWRZNnUw?oc=5)
 
-- 简要概述：据balleralert.com报道，迈阿密大学计划将AI课程纳入所有专业，但消息缺乏具体细节。
+- 简要概述：A Nature study examines how generative AI interaction and output quality affect university students' learning outcomes via technology-mediated and motivational pathways.
 
-## 9. [SV University Launches Workshop on Research Ethics - Deccan Chronicle](https://news.google.com/rss/articles/CBMivgFBVV95cUxQUXVGei1CNXVScl93RkFZVGVHSHNsRERCdXZEV25fTklIWGVjWks3WXJVMlFnTEwyajVRa2JqQ3pUdGFFUzJpWVJORHVCZDRxdVIxemc0QzVWcWRPU1BKSUltcVNndUJiWGt2R2tRWnlvWDFDa2ZLVUREVlRWLTZCVmhUTjdWVExqSk5jOWI3YUhRS1pPYUQxNjNlVTVmMVh2SHp0RVFhdnF4cnlyY0RzT3BHM1UzUUxDX3Y5ak1n0gHDAUFVX3lxTFBlaUFlNHc5VjVwUFpHaERvZUhNcUpVcHg2aE9McXZJSkVkdi04NS1neXlDdUVXTVZ0MVBGbUMwbjJIVnhULXN5SldTWGlBcUxjSWxBeHNkajFCYXhoYVlFYklGSUg4QmszUV9Hc3ZvUmFjVGQzVXFEcnlCS2g0cXh1MzB0cmpxb1lIZ3NpOXc5b0RoYlhvMW5jWmJjMkRSQjBYM1EyTTdZWWNTVFFpZE9yVGJTMmtDZU9EQWVxR3VQZFZKdw?oc=5)
+## 9. [Education Initiative To Strengthen Students’ AI Literacy, Training - The University of Texas at Dallas](https://news.google.com/rss/articles/CBMigAFBVV95cUxQSGxHUnZVbzZlLU9VZHVhcFF2bllwWVpNZGl6ZDJyRmxxTjh6bU5jQl9YOE5TV2c5cU12U2ZMbTdDM3pnWFMyRldTdjAxUzRmUExDbm1fT0lNeXQ3ck1HemhXUGhIazRXay02bktHUXZqWU9kN1pCSUg4NENGdXpuSA?oc=5)
 
-- 简要概述：斯里文卡特斯瓦拉大学（SV University）举办研讨会，重点探讨高等教育领域的学术研究伦理问题。
+- 简要概述：The University of Texas at Dallas announces an education initiative to strengthen students' AI literacy and training.
+
+## 10. [Development and influencing factors of artificial intelligence literacy and computational thinking in Chinese universit…](https://news.google.com/rss/articles/CBMiX0FVX3lxTE9uMmpKV1dQZk4zelhUQi1UWDY3R3ZDTHVkQi1XMkFVc0hKR2tORE8zS3lvQkxRcU5GaDJ0RUZ1NXJ2V1J0TEdEeXc3VjdsOGtzX0xJa3VwczZBaG1ZYVpB?oc=5)
+
+- 简要概述：一项关于中国大学生人工智能素养与计算思维发展及影响因素的研究报道。
+
+## 11. [RETRACTED ARTICLE: The effect of ChatGPT on students’ learning performance, learning perception, and higher-order think…](https://news.google.com/rss/articles/CBMiX0FVX3lxTE1JQmZwNDRDVlRZQ3BHTFFvNDRCWDlnMm5KckpPMnZUYk14UkcwQlRSQWZKaG9fWmhWdkpZZ1k0TEdRWVJ2WFpZcUxhbXpYaHF6S3hpZkMwWHdMMXJxbHJj?oc=5)
+
+- 简要概述：A meta-analysis on ChatGPT's effect on student learning was retracted by the journal, invalidating its conclusions.
