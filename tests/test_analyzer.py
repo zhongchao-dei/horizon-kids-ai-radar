@@ -126,7 +126,7 @@ def test_analyze_item_stores_dual_audience_scores():
 
     async def complete(**kwargs):  # type: ignore[no-untyped-def]
         assert "parent_score" in kwargs["user"]
-        assert "teacher path is the current primary" in kwargs["system"]
+        assert "Neither path is subordinate" in kwargs["system"]
         return (
             '{"score": 9.0, "reason": "shared", "summary": "summary", '
             '"tags": ["K12"], "parent_score": 6.0, '

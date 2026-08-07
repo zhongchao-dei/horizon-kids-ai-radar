@@ -246,20 +246,39 @@ class HorizonOrchestrator:
                 teacher_result = await self.filter_items(
                     teacher_view, apply_balance=False, log=False
                 )
+                # Select both roles against their own standards first. Shared
+                # events are then assigned to the audience for which the item
+                # has stronger evidence, not mechanically to the teacher path.
                 teacher_view_selected = self.apply_balanced_digest(
                     teacher_result.items, log=False
                 ).items
-
-                # The two publishing paths must not turn the same source into
-                # two near-identical daily topics. Teacher is the primary path;
-                # the parent path is then filled from distinct evidence, with
-                # priority for the parent-growth learning lane.
-                teacher_selected_ids = {item.id for item in teacher_view_selected}
                 parent_view_selected = self._select_parent_digest(
-                    parent_result.items,
-                    excluded_ids=teacher_selected_ids,
+                    parent_result.items, excluded_ids=set()
                 )
-
+                teacher_by_id = {item.id: item for item in teacher_view_selected}
+                parent_by_id = {item.id: item for item in parent_view_selected}
+                for item_id in set(teacher_by_id) & set(parent_by_id):
+                    teacher_score = self._numeric_score(
+                        teacher_by_id[item_id].metadata.get("teacher_score")
+                    )
+                    parent_score = self._numeric_score(
+                        parent_by_id[item_id].metadata.get("parent_score")
+                    )
+                    if parent_score > teacher_score:
+                        teacher_by_id.pop(item_id)
+                    else:
+                        parent_by_id.pop(item_id)
+                teacher_view_selected = self._fill_unique_digest(
+                    teacher_result.items,
+                    list(teacher_by_id.values()),
+                    excluded_ids=set(parent_by_id),
+                )
+                parent_view_selected = self._fill_unique_digest(
+                    parent_result.items,
+                    list(parent_by_id.values()),
+                    excluded_ids={item.id for item in teacher_view_selected},
+                )
+                teacher_selected_ids = {item.id for item in teacher_view_selected}
                 parent_selected_ids = {item.id for item in parent_view_selected}
                 original_by_id = {item.id: item for item in analyzed_items}
                 parent_items = [original_by_id[item.id] for item in parent_view_selected]
@@ -278,15 +297,32 @@ class HorizonOrchestrator:
                         "[yellow]Daily quality gate did not pass; reselecting from strong, "
                         "role-specific evidence.[/yellow]"
                     )
+                    strong_teacher = [
+                        item for item in teacher_result.items if (item.ai_score or 0) >= 7
+                    ]
+                    strong_parent = [
+                        item for item in parent_result.items if (item.ai_score or 0) >= 7
+                    ]
                     teacher_view_selected = self.apply_balanced_digest(
-                        [item for item in teacher_result.items if (item.ai_score or 0) >= 7],
-                        log=False,
+                        strong_teacher, log=False
                     ).items
-                    teacher_selected_ids = {item.id for item in teacher_view_selected}
                     parent_view_selected = self._select_parent_digest(
-                        [item for item in parent_result.items if (item.ai_score or 0) >= 7],
-                        excluded_ids=teacher_selected_ids,
+                        strong_parent, excluded_ids=set()
                     )
+                    teacher_by_id = {item.id: item for item in teacher_view_selected}
+                    parent_by_id = {item.id: item for item in parent_view_selected}
+                    for item_id in set(teacher_by_id) & set(parent_by_id):
+                        if self._numeric_score(parent_by_id[item_id].metadata.get("parent_score")) > self._numeric_score(teacher_by_id[item_id].metadata.get("teacher_score")):
+                            teacher_by_id.pop(item_id)
+                        else:
+                            parent_by_id.pop(item_id)
+                    teacher_view_selected = self._fill_unique_digest(
+                        strong_teacher, list(teacher_by_id.values()), excluded_ids=set(parent_by_id)
+                    )
+                    parent_view_selected = self._fill_unique_digest(
+                        strong_parent, list(parent_by_id.values()), excluded_ids={item.id for item in teacher_view_selected}
+                    )
+                    teacher_selected_ids = {item.id for item in teacher_view_selected}
                     parent_selected_ids = {item.id for item in parent_view_selected}
                     parent_items = [original_by_id[item.id] for item in parent_view_selected]
                     teacher_items = [original_by_id[item.id] for item in teacher_view_selected]
@@ -543,6 +579,14 @@ class HorizonOrchestrator:
             ),
         }
 
+    @staticmethod
+    def _numeric_score(value: object) -> float:
+        """Safely read a score stored by an AI analysis response."""
+        try:
+            return float(value)
+        except (TypeError, ValueError):
+            return 0.0
+
     def _select_parent_digest(
         self,
         items: List[ContentItem],
@@ -570,6 +614,26 @@ class HorizonOrchestrator:
                 break
 
         return selected
+
+    def _fill_unique_digest(
+        self,
+        candidates: List[ContentItem],
+        selected: List[ContentItem],
+        *,
+        excluded_ids: set[str],
+    ) -> List[ContentItem]:
+        """Fill a role digest without reintroducing a cross-role duplicate."""
+        max_items = self.config.filtering.max_items
+        result = list(selected)
+        selected_ids = {item.id for item in result}
+        for item in self.apply_balanced_digest(candidates, log=False).items:
+            if item.id in excluded_ids or item.id in selected_ids:
+                continue
+            result.append(item)
+            selected_ids.add(item.id)
+            if max_items is not None and len(result) >= max_items:
+                break
+        return result
 
     def _copy_summary_to_docs(
         self,

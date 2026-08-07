@@ -104,8 +104,9 @@ Chinese content paths. Evaluate every item independently for BOTH audiences:
    learning, even when the article is a question, policy change, debate, pilot,
    research finding, or classroom case rather than a ready-to-use lesson.
 
-The teacher path is the current primary content path, but do not lower the
-evidence standard or inflate its score. A tool is not teacher-relevant merely
+Neither path is subordinate to the other: evaluate each against its own
+audience standard, then keep one role-specific use for a shared event. Do not
+lower the evidence standard or inflate its score. A tool is not teacher-relevant merely
 because it can save office time; it must connect to a real teaching task,
 professional judgment, student learning evidence, school policy, or classroom
 governance. Score each audience from 0 to 10 and give a short audience-specific
