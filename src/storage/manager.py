@@ -4,6 +4,7 @@ import json
 import os
 import re
 import shutil
+from datetime import date, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -67,6 +68,7 @@ class StorageManager:
         self.data_dir = Path(data_dir)
         self.config_path = self.data_dir / "config.json"
         self.summaries_dir = self.data_dir / "summaries"
+        self.selection_history_path = self.data_dir / "selection_history.json"
 
         self.data_dir.mkdir(parents=True, exist_ok=True)
         self.summaries_dir.mkdir(parents=True, exist_ok=True)
@@ -141,6 +143,56 @@ class StorageManager:
         filepath = safe_output_path(self.summaries_dir, filename)
         _atomic_write_text(filepath, markdown)
         return filepath
+
+    def load_recent_selected_ids(self, run_date: str, cooldown_days: int) -> set[str]:
+        """Return item IDs already used in a recent formal daily digest.
+
+        The history is intentionally a small, local ledger: it prevents the
+        same source item from being presented as a new daily topic on
+        consecutive runs without treating old research as deleted evidence.
+        """
+        if not self.selection_history_path.exists():
+            return set()
+        try:
+            payload = json.loads(self.selection_history_path.read_text(encoding="utf-8"))
+            if not isinstance(payload, dict):
+                return set()
+            today = date.fromisoformat(run_date)
+        except (json.JSONDecodeError, ValueError):
+            return set()
+
+        cutoff = today - timedelta(days=cooldown_days)
+        recent_ids: set[str] = set()
+        for item_id, selected_on in payload.items():
+            if not isinstance(item_id, str) or not isinstance(selected_on, str):
+                continue
+            try:
+                if date.fromisoformat(selected_on) >= cutoff:
+                    recent_ids.add(item_id)
+            except ValueError:
+                continue
+        return recent_ids
+
+    def record_selected_ids(self, run_date: str, item_ids: set[str]) -> None:
+        """Record only items that actually survived the final publication gate."""
+        history: dict[str, str] = {}
+        if self.selection_history_path.exists():
+            try:
+                loaded = json.loads(self.selection_history_path.read_text(encoding="utf-8"))
+                if isinstance(loaded, dict):
+                    history = {
+                        item_id: selected_on
+                        for item_id, selected_on in loaded.items()
+                        if isinstance(item_id, str) and isinstance(selected_on, str)
+                    }
+            except json.JSONDecodeError:
+                pass
+        for item_id in item_ids:
+            history[item_id] = run_date
+        _atomic_write_text(
+            self.selection_history_path,
+            f"{json.dumps(history, ensure_ascii=False, indent=2, sort_keys=True)}\n",
+        )
 
     def load_subscribers(self) -> list:
         """Loads the list of email subscribers."""

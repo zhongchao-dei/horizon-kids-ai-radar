@@ -89,13 +89,16 @@ Chinese content paths. Evaluate every item independently for BOTH audiences:
 
 1. parent: parents of children from grade 3 through middle school. Keep a
    broad evidence radar for (a) K12 AI literacy and AI education, (b) parent-
-   child conversations and family decisions about AI, and (c) how children use,
+   child conversations and family decisions about AI, (c) how children use,
    understand, question, verify, create with, or are affected by AI in learning
-   and daily digital life. A story is relevant when it gives a real, source-
-   supported signal about this age group; it does NOT need to already contain a
-   parenting solution, a Feynman/first-principles angle, a course connection,
-   or a ready-made video conclusion. Do not score generic adult self-help,
-   vague parenting anxiety, or high-school/college-only material highly.
+   and daily digital life, and (d) concrete child-learning or family-education
+   signals that can later inform AI-era education (for example explanation,
+   questioning, verification, inquiry, independent learning, or parent-child
+   communication). A story is relevant when it gives a real, source-supported
+   signal about this age group; it does NOT need to already contain a parenting
+   solution, a Feynman/first-principles angle, a course connection, or a ready-
+   made video conclusion. Do not score generic adult self-help, vague parenting
+   anxiety, or high-school/college-only material highly.
 2. teacher: frontline subject teachers from primary through middle school.
    Relevant entries include lesson planning, classroom teaching and interaction,
    assignments and assessment, differentiated support, student AI literacy and
@@ -124,9 +127,16 @@ DUAL_AUDIENCE_ANALYSIS_USER = """
 Also include these fields in the same JSON object:
   "parent_score": <0-10>,
   "parent_reason": "<简体中文；说明家长相关性、真实家庭／孩子场景与证据边界>",
+  "parent_editorial_status": "<include/watch/skip；include 表示值得进入当天家长日报，watch 表示值得保留但不应占当天正式条目，skip 表示当前不匹配>",
+  "parent_why_now": "<简体中文；今天新增的事实、证据、场景或问题；若只是旧材料重现，明确写“无新增触发”>",
   "teacher_score": <0-10>,
-  "teacher_reason": "<简体中文；说明教学环节、教师任务、学生证据与证据边界>"
+  "teacher_reason": "<简体中文；说明教学环节、教师任务、学生证据与证据边界>",
+  "teacher_editorial_status": "<include/watch/skip；include 表示值得进入当天教师日报，watch 表示值得保留但不应占当天正式条目，skip 表示当前不匹配>",
+  "teacher_why_now": "<简体中文；今天新增的事实、证据、场景或问题；若只是旧材料重现，明确写“无新增触发”>"
 
+Use the scores only as a rough ranking signal. The editorial status and “why now”
+statement decide whether a story should occupy a formal daily slot: a useful but
+non-new item should be marked watch rather than inflated into a new daily topic.
 The top-level score must be the higher of parent_score and teacher_score so the
 shared candidate pool keeps anything valuable to either path.
 """
@@ -220,6 +230,34 @@ Respond with valid JSON only. Each _en field must be in English; each _zh field 
   "community_discussion_zh": "<用中文写1-3句话，或空字符串>",
   "sources": ["<url from search results>", "..."]
 }}"""
+
+
+FORMAL_TOPIC_GATE_ZH = """
+
+Formal-topic hard gate: this system keeps two layers separate.
+1. A **research lead** may be a headline, commentary, old report, or source
+   that needs original-text verification. It may remain in the candidate index,
+   but it MUST NOT appear in a formal daily topic card.
+2. A **directly developable topic** must meet every condition below:
+   - the source body or a directly locatable original source was actually read;
+   - it identifies a concrete, timely event, action, finding, case, product
+     change, or policy, rather than only a broad opinion;
+   - the card can state at least one source-supported specific detail (for
+     example a named actor, implementation detail, date, location, sample,
+     result, or rule);
+   - the source itself supports the event. Do not turn a generic report title
+     into a child homework scene or a classroom recommendation.
+
+Set evidence maturity to **可开发** only when all four conditions are met.
+Otherwise use **需补证据** or **暂缓**. Never use 可开发 merely because the subject
+matches K12 AI or because it is easy to attach a familiar conclusion about
+independent thinking. If no item passes, publish no formal topic for that
+audience; an honest empty day is better than repetitive pseudo-news.
+
+Novelty rule: do not use the same event, report, policy, product launch, or
+research finding twice in consecutive daily formal topic cards. A new angle is
+not a new event. Keep it in the candidate index or research lead list instead.
+"""
 
 
 TOPIC_CARD_SYSTEM_ZH = """

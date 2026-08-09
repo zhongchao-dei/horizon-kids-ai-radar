@@ -3,7 +3,7 @@
 import asyncio
 import json
 import re
-from typing import List, Optional
+from typing import List, Literal, Optional
 from pydantic import BaseModel, Field, ValidationError
 from tenacity import retry, stop_after_attempt, wait_exponential
 from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn, MofNCompleteColumn
@@ -32,6 +32,10 @@ class AnalysisResult(BaseModel):
     parent_reason: Optional[str] = None
     teacher_score: Optional[float] = Field(default=None, ge=0, le=10, allow_inf_nan=False)
     teacher_reason: Optional[str] = None
+    parent_editorial_status: Optional[Literal["include", "watch", "skip"]] = None
+    parent_why_now: Optional[str] = None
+    teacher_editorial_status: Optional[Literal["include", "watch", "skip"]] = None
+    teacher_why_now: Optional[str] = None
 
 
 class ContentAnalyzer:
@@ -206,6 +210,14 @@ class ContentAnalyzer:
             item.metadata["parent_reason"] = result.parent_reason or result.reason
             item.metadata["teacher_score"] = teacher_score
             item.metadata["teacher_reason"] = result.teacher_reason or result.reason
+            if result.parent_editorial_status:
+                item.metadata["parent_editorial_status"] = result.parent_editorial_status
+            if result.parent_why_now:
+                item.metadata["parent_why_now"] = result.parent_why_now
+            if result.teacher_editorial_status:
+                item.metadata["teacher_editorial_status"] = result.teacher_editorial_status
+            if result.teacher_why_now:
+                item.metadata["teacher_why_now"] = result.teacher_why_now
             item.ai_score = max(parent_score, teacher_score)
             item.ai_reason = result.reason
         else:

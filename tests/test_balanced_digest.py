@@ -302,3 +302,38 @@ def test_run_dual_audience_selects_each_path_independently(tmp_path, monkeypatch
     asyncio.run(orchestrator.run())
 
     assert enriched_ids == ["parent", "teacher"]
+
+
+def test_formal_topic_gate_keeps_only_complete_developable_cards() -> None:
+    orchestrator = make_orchestrator(FilteringConfig())
+    ready = make_item("ready", 9.0, "ai")
+    ready.metadata.update(
+        {
+            "parent_evidence_maturity_zh": "可开发",
+            "topic_context_zh": "某机构发布了可核验的新项目。",
+            "topic_title_zh": "机构发布新项目",
+            "key_fact_zh": "项目面向 11 至 14 岁学生。",
+        }
+    )
+    incomplete = make_item("incomplete", 9.0, "ai")
+    incomplete.metadata.update(
+        {
+            "parent_evidence_maturity_zh": "可开发",
+            "topic_title_zh": "没有事实支撑的卡片",
+        }
+    )
+    research_lead = make_item("research", 9.0, "ai")
+    research_lead.metadata.update(
+        {
+            "parent_evidence_maturity_zh": "需补证据",
+            "topic_context_zh": "仅有标题的报告。",
+            "topic_title_zh": "报告发布",
+            "key_fact_zh": "具体内容待核验。",
+        }
+    )
+
+    selected = orchestrator._keep_formal_topic_items(
+        [ready, incomplete, research_lead], "parent"
+    )
+
+    assert [item.id for item in selected] == ["ready"]

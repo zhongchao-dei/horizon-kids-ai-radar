@@ -493,6 +493,7 @@ class FilteringConfig(BaseModel):
     category_groups: Dict[str, CategoryGroupConfig] = Field(default_factory=dict)
     default_group: str = "other"
     default_group_limit: Optional[int] = Field(default=None, gt=0)
+    repeat_cooldown_days: int = Field(default=7, ge=1)
 
 
 class Config(BaseModel):

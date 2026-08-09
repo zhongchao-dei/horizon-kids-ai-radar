@@ -178,3 +178,22 @@ def test_max_results_cap() -> None:
     items = asyncio.run(scraper.fetch(_now() - timedelta(days=365)))
 
     assert len(items) == 2
+
+
+def test_fetch_filters_old_and_future_entries_even_when_google_returns_them() -> None:
+    now = _now().replace(microsecond=0)
+    old = (now - timedelta(days=2)).strftime("%a, %d %b %Y %H:%M:%S GMT")
+    recent = (now - timedelta(hours=1)).strftime("%a, %d %b %Y %H:%M:%S GMT")
+    future = (now + timedelta(days=1)).strftime("%a, %d %b %Y %H:%M:%S GMT")
+    client = _mock_client(
+        _feed(
+            _item("Old", "https://example.com/old", old)
+            + _item("Recent", "https://example.com/recent", recent)
+            + _item("Future", "https://example.com/future", future)
+        )
+    )
+    scraper = GoogleNewsScraper(GoogleNewsConfig(enabled=True, query="ai"), client)
+
+    items = asyncio.run(scraper.fetch(now - timedelta(hours=24)))
+
+    assert [item.title for item in items] == ["Recent"]

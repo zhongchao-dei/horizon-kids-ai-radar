@@ -21,6 +21,7 @@ from .prompts import (
     CONTENT_ENRICHMENT_SYSTEM, CONTENT_ENRICHMENT_USER,
     TOPIC_CARD_SYSTEM_ZH, TOPIC_CARD_USER_ZH,
     TEACHER_TOPIC_CARD_SYSTEM_ZH, TEACHER_TOPIC_CARD_USER_ZH,
+    FORMAL_TOPIC_GATE_ZH,
 )
 from .utils import parse_json_response
 from ..models import ContentItem
@@ -50,7 +51,7 @@ class ContentEnricher:
                 f"{profile}"
             )
         if getattr(config, "topic_cards_enabled", False):
-            prompt += TOPIC_CARD_SYSTEM_ZH
+            prompt += TOPIC_CARD_SYSTEM_ZH + FORMAL_TOPIC_GATE_ZH
             if getattr(config, "dual_audience_enabled", False):
                 prompt += TEACHER_TOPIC_CARD_SYSTEM_ZH
         return prompt

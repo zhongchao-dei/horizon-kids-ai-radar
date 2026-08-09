@@ -90,6 +90,27 @@ jobs:
             echo "HORIZON_PROVIDER=gemini" >> "$GITHUB_ENV"
           fi
 
+      # The runner is fresh every day. Restore the small publication ledger
+      # from GitHub Pages so a report cannot return tomorrow under a new
+      # headline and occupy another formal daily topic slot.
+      - name: Load recent formal-topic ledger
+        if: env.SKIP_RUN != 'true'
+        uses: actions/checkout@v6
+        with:
+          ref: gh-pages
+          path: .published-radar-state
+
+      - name: Restore recent formal-topic ledger
+        if: env.SKIP_RUN != 'true'
+        run: |
+          mkdir -p data
+          if [[ -f .published-radar-state/.radar-state/selection_history.json ]]; then
+            cp .published-radar-state/.radar-state/selection_history.json data/selection_history.json
+            echo "Restored recent formal-topic ledger."
+          else
+            echo "No prior formal-topic ledger yet; starting a new one."
+          fi
+
       - name: Run Horizon
         if: env.SKIP_RUN != 'true'
         env:
@@ -99,6 +120,14 @@ jobs:
         run: |
           echo "Using provider: $HORIZON_PROVIDER"
           uv run horizon --hours 24
+
+      - name: Save recent formal-topic ledger for the next run
+        if: env.SKIP_RUN != 'true'
+        run: |
+          mkdir -p docs/.radar-state
+          if [[ -f data/selection_history.json ]]; then
+            cp data/selection_history.json docs/.radar-state/selection_history.json
+          fi
 
       - name: Deploy to GitHub Pages
         if: env.SKIP_RUN != 'true'

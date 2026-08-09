@@ -509,6 +509,7 @@ class DailySummarizer:
             return (
                 ("这条新闻讲什么", "teacher_topic_context_zh"),
                 ("标题", "teacher_topic_title_zh"),
+                ("今天的新意", "teacher_why_now"),
                 ("入口", "teacher_topic_entry_zh"),
                 ("钩子", "teacher_topic_hook_zh"),
                 ("关键事实", "teacher_key_fact_zh"),
@@ -526,6 +527,7 @@ class DailySummarizer:
         return (
             ("这条新闻讲什么", "topic_context_zh"),
             ("标题", "topic_title_zh"),
+            ("今天的新意", "parent_why_now"),
             ("入口", "topic_entry_zh"),
             ("钩子", "topic_hook_zh"),
             ("关键事实", "key_fact_zh"),

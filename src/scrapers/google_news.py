@@ -99,8 +99,25 @@ class GoogleNewsScraper(BaseScraper):
                 if len(items) >= self.gn_config.max_results:
                     break
                 item = self._entry_to_item(entry)
-                if item is not None:
-                    items.append(item)
+                if item is None:
+                    continue
+
+                # ``when:24h`` is only a search hint. Google News can still
+                # return older, indexed stories (or malformed future dates).
+                # The daily radar must be based on the article's actual
+                # publication time, otherwise the same old report keeps
+                # returning as a "new" daily topic.
+                now_utc = datetime.now(timezone.utc)
+                published_at = self._ensure_utc(item.published_at)
+                if published_at < self._ensure_utc(since):
+                    continue
+                if published_at > now_utc:
+                    logger.warning(
+                        "Skipping Google News item with future publication time: %s",
+                        item.title,
+                    )
+                    continue
+                items.append(item)
             return items
 
         except httpx.HTTPError as exc:

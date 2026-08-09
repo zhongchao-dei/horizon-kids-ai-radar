@@ -234,17 +234,35 @@ class HorizonOrchestrator:
             teacher_items: List[ContentItem] = []
             parent_selected_ids: set[str] = set()
             teacher_selected_ids: set[str] = set()
+            run_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+            recent_selected_ids = self._recent_selected_ids(run_date)
+            recently_repeated_ids: set[str] = set()
 
             if dual_audience:
                 # Filter the same shared candidate pool through two independent
                 # audience lenses. Clones keep audience scores isolated.
                 parent_view = self._items_for_audience(analyzed_items, "parent")
                 teacher_view = self._items_for_audience(analyzed_items, "teacher")
+                parent_view, parent_repeats = self._exclude_recent_selected_items(
+                    parent_view, recent_selected_ids
+                )
+                teacher_view, teacher_repeats = self._exclude_recent_selected_items(
+                    teacher_view, recent_selected_ids
+                )
+                recently_repeated_ids = {
+                    item.id for item in parent_repeats + teacher_repeats
+                }
                 parent_result = await self.filter_items(
-                    parent_view, apply_balance=False, log=False
+                    parent_view,
+                    apply_balance=False,
+                    log=False,
+                    editorial_status_key="parent_editorial_status",
                 )
                 teacher_result = await self.filter_items(
-                    teacher_view, apply_balance=False, log=False
+                    teacher_view,
+                    apply_balance=False,
+                    log=False,
+                    editorial_status_key="teacher_editorial_status",
                 )
                 # Select both roles against their own standards first. Shared
                 # events are then assigned to the audience for which the item
@@ -284,52 +302,9 @@ class HorizonOrchestrator:
                 parent_items = [original_by_id[item.id] for item in parent_view_selected]
                 teacher_items = [original_by_id[item.id] for item in teacher_view_selected]
 
-                # Mandatory whole-digest quality gate. This deliberately checks
-                # the selected *set*, not whether an individual item is easy to
-                # turn into a script. If a set fails, return to the same day's
-                # pool and retain only independently strong evidence rather than
-                # padding the digest with weak or duplicated stories.
-                daily_quality_review = self._daily_quality_review(
-                    parent_items, teacher_items
-                )
-                if not daily_quality_review["passed"]:
-                    self.console.print(
-                        "[yellow]Daily quality gate did not pass; reselecting from strong, "
-                        "role-specific evidence.[/yellow]"
-                    )
-                    strong_teacher = [
-                        item for item in teacher_result.items if (item.ai_score or 0) >= 7
-                    ]
-                    strong_parent = [
-                        item for item in parent_result.items if (item.ai_score or 0) >= 7
-                    ]
-                    teacher_view_selected = self.apply_balanced_digest(
-                        strong_teacher, log=False
-                    ).items
-                    parent_view_selected = self._select_parent_digest(
-                        strong_parent, excluded_ids=set()
-                    )
-                    teacher_by_id = {item.id: item for item in teacher_view_selected}
-                    parent_by_id = {item.id: item for item in parent_view_selected}
-                    for item_id in set(teacher_by_id) & set(parent_by_id):
-                        if self._numeric_score(parent_by_id[item_id].metadata.get("parent_score")) > self._numeric_score(teacher_by_id[item_id].metadata.get("teacher_score")):
-                            teacher_by_id.pop(item_id)
-                        else:
-                            parent_by_id.pop(item_id)
-                    teacher_view_selected = self._fill_unique_digest(
-                        strong_teacher, list(teacher_by_id.values()), excluded_ids=set(parent_by_id)
-                    )
-                    parent_view_selected = self._fill_unique_digest(
-                        strong_parent, list(parent_by_id.values()), excluded_ids={item.id for item in teacher_view_selected}
-                    )
-                    teacher_selected_ids = {item.id for item in teacher_view_selected}
-                    parent_selected_ids = {item.id for item in parent_view_selected}
-                    parent_items = [original_by_id[item.id] for item in parent_view_selected]
-                    teacher_items = [original_by_id[item.id] for item in teacher_view_selected]
-                    daily_quality_review = self._daily_quality_review(
-                        parent_items, teacher_items, reselected=True
-                    )
-                self.console.print(daily_quality_review["console"])
+                # Broad relevance is selected before enrichment. Whether an item
+                # is concrete and verified enough for a formal daily topic is
+                # decided after original-source enrichment below.
                 union_ids = parent_selected_ids | teacher_selected_ids
                 important_items = sorted(
                     [item for item in analyzed_items if item.id in union_ids],
@@ -367,8 +342,30 @@ class HorizonOrchestrator:
             # 6. Search related stories + enrich with background knowledge (2nd AI pass)
             await self._enrich_important_items(important_items)
 
+            if dual_audience and self.config.ai.topic_cards_enabled:
+                # A broad signal is not automatically a usable script topic.
+                # Only evidence-complete cards become formal daily selections;
+                # the rest remain visible in the candidate index as research
+                # leads rather than repeating old headline-level stories.
+                parent_research_count = len(parent_items)
+                teacher_research_count = len(teacher_items)
+                parent_items = self._keep_formal_topic_items(parent_items, "parent")
+                teacher_items = self._keep_formal_topic_items(teacher_items, "teacher")
+                parent_selected_ids = {item.id for item in parent_items}
+                teacher_selected_ids = {item.id for item in teacher_items}
+                daily_quality_review = self._daily_quality_review(
+                    parent_items,
+                    teacher_items,
+                    parent_research_count=parent_research_count,
+                    teacher_research_count=teacher_research_count,
+                    recently_repeated_count=len(recently_repeated_ids),
+                )
+                self.console.print(daily_quality_review["console"])
+            elif dual_audience:
+                daily_quality_review = self._daily_quality_review(parent_items, teacher_items)
+
             # 7. Generate and save daily summaries for each configured language
-            today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+            today = run_date
             for lang in self.config.ai.languages:
                 summarizer = DailySummarizer()
                 delivery_items = important_items
@@ -470,6 +467,11 @@ class HorizonOrchestrator:
                         summarizer=summarizer,
                     )
 
+            if dual_audience:
+                self._record_selected_ids(
+                    run_date, parent_selected_ids | teacher_selected_ids
+                )
+
             self.console.print("[bold green]✅ Horizon completed successfully![/bold green]")
             usage = get_usage_snapshot()
             if usage.total_tokens > 0:
@@ -516,12 +518,77 @@ class HorizonOrchestrator:
             result.append(clone)
         return result
 
+    def _recent_selected_ids(self, run_date: str) -> set[str]:
+        """Read the short-lived publication ledger when storage supports it."""
+        loader = getattr(self.storage, "load_recent_selected_ids", None)
+        if not callable(loader):
+            return set()
+        return loader(run_date, self.config.filtering.repeat_cooldown_days)
+
+    @staticmethod
+    def _exclude_recent_selected_items(
+        items: List[ContentItem], recent_ids: set[str]
+    ) -> tuple[List[ContentItem], List[ContentItem]]:
+        """Keep a recently published source as a research lead, not daily news."""
+        fresh = [item for item in items if item.id not in recent_ids]
+        repeated = [item for item in items if item.id in recent_ids]
+        return fresh, repeated
+
+    def _record_selected_ids(self, run_date: str, item_ids: set[str]) -> None:
+        recorder = getattr(self.storage, "record_selected_ids", None)
+        if callable(recorder):
+            recorder(run_date, item_ids)
+
+    def _keep_formal_topic_items(
+        self,
+        items: List[ContentItem],
+        audience: Literal["parent", "teacher"],
+    ) -> List[ContentItem]:
+        """Keep only evidence-complete cards for the formal daily topic list."""
+        maturity_key = (
+            "parent_evidence_maturity_zh"
+            if audience == "parent"
+            else "teacher_evidence_maturity_zh"
+        )
+        required_keys = (
+            (
+                "topic_context_zh",
+                "topic_title_zh",
+                "key_fact_zh",
+                "parent_why_now",
+            )
+            if audience == "parent"
+            else (
+                "teacher_topic_context_zh",
+                "teacher_topic_title_zh",
+                "teacher_key_fact_zh",
+                "teacher_why_now",
+            )
+        )
+        selected: List[ContentItem] = []
+        for item in items:
+            maturity = str(item.metadata.get(maturity_key, "")).strip()
+            has_complete_card = all(
+                str(item.metadata.get(key, "")).strip() for key in required_keys
+            )
+            if maturity == "可开发" and has_complete_card:
+                selected.append(item)
+            else:
+                self.console.print(
+                    f"[dim]Research lead only ({audience}): {item.title} "
+                    f"[{maturity or '未标证据成熟度'}][/dim]"
+                )
+        return selected
+
     def _daily_quality_review(
         self,
         parent_items: List[ContentItem],
         teacher_items: List[ContentItem],
         *,
         reselected: bool = False,
+        parent_research_count: int | None = None,
+        teacher_research_count: int | None = None,
+        recently_repeated_count: int = 0,
     ) -> dict[str, object]:
         """Audit the day's two digests before publication.
 
@@ -529,52 +596,56 @@ class HorizonOrchestrator:
         items, but it must not manufacture variety or repeat one event across
         the two audiences merely to fill a quota.
         """
-        def audience_score(items: List[ContentItem], key: str) -> float:
-            if not items:
-                return 0.0
-            values = [self._numeric_score(item.metadata.get(key)) for item in items]
-            return sum(values) / len(values)
-
-        def source_diversity(items: List[ContentItem]) -> float:
-            if not items:
-                return 0.0
-            unique_sources = len({self._sub_source_label(item) for item in items})
-            return min(10.0, 10.0 * unique_sources / len(items))
-
-        parent_fit = audience_score(parent_items, "parent_score")
-        teacher_fit = audience_score(teacher_items, "teacher_score")
-        parent_variety = source_diversity(parent_items)
-        teacher_variety = source_diversity(teacher_items)
         shared_ids = {item.id for item in parent_items} & {item.id for item in teacher_items}
-        separation = 10.0 if not shared_ids else 0.0
-        parent_total = round((parent_fit * 0.7) + (parent_variety * 0.2) + (separation * 0.1), 1)
-        teacher_total = round((teacher_fit * 0.7) + (teacher_variety * 0.2) + (separation * 0.1), 1)
-        passed = parent_total >= 7.0 and teacher_total >= 7.0 and not shared_ids
+        # A quiet day is valid when there are no evidence-complete new stories.
+        # Passing means every *published* formal card cleared the hard evidence
+        # gate and the two roles do not duplicate one event.
+        passed = not shared_ids
         issues = []
         if shared_ids:
             issues.append("双端出现重复来源／事件")
-        if parent_total < 7.0:
-            issues.append("家长端受众匹配或组内多样性不足")
-        if teacher_total < 7.0:
-            issues.append("教师端受众匹配或组内多样性不足")
+        if recently_repeated_count:
+            issues.append(
+                f"近 {self.config.filtering.repeat_cooldown_days} 日重复资讯 "
+                f"{recently_repeated_count} 条，已只保留为研究线索"
+            )
+        if parent_research_count is not None and not parent_items:
+            issues.append("家长端没有通过“可直接改写”硬门槛的资讯，已只保留研究线索")
+        if teacher_research_count is not None and not teacher_items:
+            issues.append("教师端没有通过“可直接改写”硬门槛的资讯，已只保留研究线索")
         issue_text = "；".join(issues) if issues else "未发现需要重选的关键问题"
         reselected_text = "是" if reselected else "否"
         markdown = (
             "# K12 AI 每日选题自检\n\n"
-            f"- **家长端**：{parent_total}/10（受众匹配 {parent_fit:.1f}；来源多样性 {parent_variety:.1f}）\n"
-            f"- **教师端**：{teacher_total}/10（受众匹配 {teacher_fit:.1f}；来源多样性 {teacher_variety:.1f}）\n"
-            f"- **双端区分**：{separation:.1f}/10\n"
-            f"- **是否通过（≥7）**：{'通过' if passed else '未通过'}\n"
+            + (
+                f"- **家长端初筛研究线索**：{parent_research_count} 条；"
+                f"**通过硬门槛、可直接改写**：{len(parent_items)} 条\n"
+                if parent_research_count is not None else ""
+            )
+            + (
+                f"- **教师端初筛研究线索**：{teacher_research_count} 条；"
+                f"**通过硬门槛、可直接改写**：{len(teacher_items)} 条\n"
+                if teacher_research_count is not None else ""
+            )
+            + (
+                f"- **近期重复已排除**：{recently_repeated_count} 条"
+                f"（冷却期 {self.config.filtering.repeat_cooldown_days} 天）\n"
+                if recently_repeated_count else ""
+            )
+            + f"- **家长端角色适配**：{'通过' if parent_items else '本日无可直接改写条目'}\n"
+            f"- **教师端角色适配**：{'通过' if teacher_items else '本日无可直接改写条目'}\n"
+            f"- **双端区分**：{'通过' if not shared_ids else '未通过'}\n"
+            f"- **正式选题硬门槛**：{'通过' if passed else '未通过'}\n"
             f"- **是否重选**：{reselected_text}\n"
             f"- **主要不足**：{issue_text}\n\n"
-            "> 本自检只评估新闻与受众的匹配、当天组内多样性、双端去重和证据入口；不以口播钩子、课程植入或预设观点作为评分项。\n"
+            "> 正式日报不再以加权总分决定交付。分数只用于候选排序；每条正式资讯必须有可审计的“为什么今天值得讲”、通过近日报冷却期，并满足原文／完整卡片硬门槛。\n"
         )
         return {
             "passed": passed,
             "markdown": markdown,
             "console": (
-                f"🧭 Daily quality review — parent {parent_total}/10, "
-                f"teacher {teacher_total}/10, role separation {separation:.1f}/10, "
+                f"🧭 Daily quality review — parent {len(parent_items)} formal items, "
+                f"teacher {len(teacher_items)} formal items, "
                 f"{'passed' if passed else 'needs reselection'}"
             ),
         }
@@ -973,8 +1044,15 @@ class HorizonOrchestrator:
         topic_dedup: bool = True,
         apply_balance: bool = True,
         log: bool = True,
+        editorial_status_key: Optional[str] = None,
     ) -> FilteringPipelineResult:
-        """Apply score thresholding, optional topic dedup, and digest balancing."""
+        """Apply editorial admission, optional topic dedup, and digest balancing.
+
+        When a dual-audience editorial status is present, ``include`` is the
+        admission decision and the numeric score only ranks admitted items.
+        Older analysis responses remain compatible by falling back to the
+        configured score threshold when no editorial status was returned.
+        """
         effective_threshold = (
             threshold
             if threshold is not None
@@ -986,19 +1064,37 @@ class HorizonOrchestrator:
             if item.ai_score is not None
         ]
         scored_items.sort(key=lambda item: item.ai_score or 0, reverse=True)
+
+        def admitted(item: ContentItem) -> bool:
+            if editorial_status_key:
+                status = str(item.metadata.get(editorial_status_key, "")).strip()
+                if status:
+                    return status == "include"
+            return (item.ai_score or 0) >= effective_threshold
+
         threshold_items = [
-            item for item in scored_items if (item.ai_score or 0) >= effective_threshold
+            item for item in scored_items if admitted(item)
         ]
 
         if log:
-            self.console.print(
-                f"⭐️ {len(threshold_items)} items scored ≥ {effective_threshold}\n"
-            )
+            if editorial_status_key:
+                self.console.print(
+                    f"🧭 {len(threshold_items)} items admitted by editorial decision\n"
+                )
+            else:
+                self.console.print(
+                    f"⭐️ {len(threshold_items)} items scored ≥ {effective_threshold}\n"
+                )
 
         minimum = self.config.filtering.min_items
         floor = self.config.filtering.fallback_score_floor
         eligible_items = threshold_items
-        if minimum and floor is not None and len(threshold_items) < minimum:
+        if (
+            not editorial_status_key
+            and minimum
+            and floor is not None
+            and len(threshold_items) < minimum
+        ):
             eligible_items = [
                 item for item in scored_items if (item.ai_score or 0) >= floor
             ]
@@ -1012,9 +1108,14 @@ class HorizonOrchestrator:
         deduped_items = [
             item
             for item in deduped_eligible
-            if (item.ai_score or 0) >= effective_threshold
+            if admitted(item)
         ]
-        if minimum and floor is not None and len(deduped_items) < minimum:
+        if (
+            not editorial_status_key
+            and minimum
+            and floor is not None
+            and len(deduped_items) < minimum
+        ):
             lower_ranked = [
                 item
                 for item in deduped_eligible
