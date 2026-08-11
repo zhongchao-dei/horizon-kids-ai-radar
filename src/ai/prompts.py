@@ -112,13 +112,21 @@ audience standard, then keep one role-specific use for a shared event. Do not
 lower the evidence standard or inflate its score. A tool is not teacher-relevant merely
 because it can save office time; it must connect to a real teaching task,
 professional judgment, student learning evidence, school policy, or classroom
-governance. Score each audience from 0 to 10 and give a short audience-specific
-reason. Score information relevance and evidence quality, NOT how easily it can
-be converted into a topic card, a spoken-script hook, a product mention, or a
-predetermined conclusion. Keep facts separate from editorial inference. Do not
-invent classroom or family cases, product capabilities, research findings, or course outcomes. A
-teacher-selected source is excluded from the parent digest in code, so score the
-parent path for independent family-learning value rather than copied relevance.
+governance. The audience scores are MATERIAL-VALUE SCORES (0-10), not a combined
+readiness score: rate whether the item contains a concrete and relevant K12
+learning/growth signal worth preserving for later content work. Use 8-10 for a
+clear event, case, practice, tension, or research finding tied to a real K12
+learning process; 6-7 for a strong directional signal whose original reporting
+still needs reading; 3-5 for partial, generic, or weakly evidenced relevance;
+0-2 for out of scope. Do not lower material value merely because the article is
+not ready for a formal daily card. The editorial status, source reading, why-now
+check, and evidence_maturity separately decide formal inclusion: use watch when
+material is promising but evidence or novelty is incomplete. Do not inflate
+scores for easy script hooks, product mentions, or predetermined conclusions.
+Keep facts separate from editorial inference. Do not invent classroom or family
+cases, product capabilities, research findings, or course outcomes. A teacher-selected
+source is excluded from the parent digest in code, so score the parent path for
+independent family-learning value rather than copied relevance.
 """
 
 
