@@ -13,7 +13,7 @@
     "analysis_concurrency": 1,
     "enrichment_concurrency": 1,
     "topic_cards_enabled": true,
-    "curation_profile": "本实例服务于中国三年级至初中阶段孩子的 AI 启蒙与学习成长内容。它是“每日信息雷达”，不是自动生成口播结论的机器。\n\n双端独立筛选：\n- 家长端：关注孩子如何在学习、家庭互动和数字生活中接触、理解、提问、核对、创造或受 AI 影响；也保留与儿童学习和成长直接相关的具体信号，例如解释、提问、验证、自主学习、亲子沟通和探究活动。不能因容易套入费曼学习法、第一性原理、课程连接或“独立思考”结论而入选。\n- 教师端：关注一线小学至初中教师在教学设计、课堂互动、作业评价、分层支持、学生 AI 素养、学术诚信和学校治理中的具体变化。\n\n正式每日选题必须是新近、具体、可核验的事件、案例、研究发现、产品更新或政策动作；只有标题、摘要、评论或未读原文的报告只能作为“研究线索”，不得占正式选题名额。家长端与教师端不要重复同一事件；同一事件不得连续两天以换标题的方式重复出现。宁可当天没有正式选题，也不要用旧新闻、泛评论或熟悉结论凑数。\n\n评分优先看：K12 年龄匹配、事实完整度、事件具体性、当日新鲜度和与近期选题的差异。不得编造家庭/课堂案例、研究结果、产品能力或课程效果。",
+    "curation_profile": "This instance is a K12 learning-and-growth evidence radar for Chinese families and frontline teachers. AI literacy is one important context, not a mandatory topic label. Collect factual events, cases, research, policy changes, and real education settings; do not manufacture a ready-made spoken-script conclusion.\n\nIndependent selection:\n- Parent path prioritizes concrete signals about children in grades 3-9: learning routines; homework, reading, questioning, explanation, reflection, inquiry and independent learning; parent-child interactions around learning, screens, tools and feedback; and actual changes caused by digital tools or AI. A child-learning story may enter the parent pool even when AI is absent, if it helps explain how children should learn in an AI-rich world.\n- Teacher path prioritizes concrete K12 changes in classroom learning, homework and assessment, reading and inquiry, differentiated support, student agency, digital/AI literacy, academic integrity and school governance. Keep only material that connects to student learning evidence or a teacher's professional judgement; adult office productivity, product PR and generic trend pieces do not qualify.\n\nThe daily output is a material radar, not a machine for producing one fixed AI conclusion. Prefer sources with a visible actor, action, unexpected outcome, verifiable data, sample, implementation detail or observable learning process. Do not select an item merely because it can be attached to Feynman learning, first principles, a course mention or a generic independent-thinking conclusion.\n\nA formal daily topic must still be recent, specific, verifiable, and based on a read source or direct primary material. Headlines, commentary and unverified reports remain research leads. The two paths must not reuse the same event or repeat it by changing the headline. A quiet day is acceptable; do not fill slots with stale news or broad opinion.\n\nScore age fit (grades 3-9), factual completeness, visibility of the learning process, specificity, freshness and difference from recent material. Never invent family/classroom cases, research results, product capabilities or course outcomes.",
     "provider_chain": "gemini,deepseek",
     "dual_audience_enabled": true
   },
@@ -53,13 +53,13 @@
       {
         "name": "OpenAI News",
         "url": "https://openai.com/news/rss.xml",
-        "enabled": true,
+        "enabled": false,
         "category": "ai-products"
       },
       {
         "name": "Google AI Blog",
         "url": "https://blog.google/technology/ai/rss/",
-        "enabled": true,
+        "enabled": false,
         "category": "ai-products"
       },
       {
@@ -91,6 +91,24 @@
         "url": "https://news.google.com/rss/search?q=%28%22%E5%84%BF%E7%AB%A5%E6%95%99%E8%82%B2%22+OR+%22%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2%22+OR+%22%E5%B0%8F%E5%AD%A6%E7%94%9F%22+OR+%22%E5%88%9D%E4%B8%AD%E7%94%9F%22%29+%28%22%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%22+OR+%22%E8%87%AA%E4%B8%BB%E5%AD%A6%E4%B9%A0%22+OR+%22%E6%8F%90%E9%97%AE%22+OR+%22%E8%A7%A3%E9%87%8A%22+OR+%22%E6%8E%A2%E7%A9%B6%22+OR+%22%E9%98%85%E8%AF%BB%22+OR+%22%E7%A7%91%E5%AD%A6%E6%95%99%E8%82%B2%22%29&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
         "enabled": true,
         "category": "child-growth"
+      },
+      {
+        "name": "Google News: K12 learning and family practice",
+        "url": "https://news.google.com/rss/search?q=(K-12+OR+%22middle+school%22+OR+%22elementary+school%22+OR+children+OR+students)+(learning+OR+homework+OR+reading+OR+%22student+agency%22+OR+inquiry+OR+assessment)+(parent+OR+family+OR+teacher+OR+classroom)&hl=en-US&gl=US&ceid=US:en",
+        "enabled": true,
+        "category": "k12-learning-growth"
+      },
+      {
+        "name": "Google News: K12 learning methods and classroom practice",
+        "url": "https://news.google.com/rss/search?q=(K-12+OR+school+OR+classroom)+(learning+method+OR+%22learning+science%22+OR+%22retrieval+practice%22+OR+metacognition+OR+inquiry+OR+reading)+(teacher+OR+student+OR+parent)&hl=en-US&gl=US&ceid=US:en",
+        "enabled": true,
+        "category": "teacher-learning-practice"
+      },
+      {
+        "name": "Google News: children and digital learning life",
+        "url": "https://news.google.com/rss/search?q=(children+OR+teens+OR+students)+(digital+life+OR+screen+time+OR+chatbot+OR+AI)+(learning+OR+family+OR+wellbeing+OR+homework)&hl=en-US&gl=US&ceid=US:en",
+        "enabled": true,
+        "category": "family-learning-growth"
       }
     ],
     "reddit": {
@@ -134,19 +152,19 @@
     },
     "google_news": {
       "enabled": true,
-      "query": "((\"artificial intelligence\" OR \"generative AI\" OR \"AI literacy\") (K-12 OR \"middle school\" OR \"elementary school\" OR students OR children OR parents OR teachers OR classroom OR school) (learning OR education OR homework OR assessment OR family OR policy OR curriculum))",
+      "query": "((\"AI literacy\" OR \"generative AI\" OR \"artificial intelligence\") (K-12 OR \"middle school\" OR \"elementary school\" OR students OR teachers) (learning OR classroom OR homework OR assessment OR family OR policy))",
       "language": "en",
       "country": "US",
       "ceid": "US:en",
-      "max_results": 30,
-      "category": "child-safety-policy"
+      "max_results": 20,
+      "category": "k12-ai-practice"
     }
   },
   "filtering": {
     "ai_score_threshold": 7,
     "min_items": 3,
     "fallback_score_floor": 6,
-    "time_window_hours": 24,
+    "time_window_hours": 48,
     "max_items": 5,
     "category_groups": {
       "china_k12": {
@@ -196,6 +214,39 @@
         "limit": 3,
         "categories": [
           "child-growth"
+        ]
+      },
+      "family_learning_growth": {
+        "name": "Family learning and child growth",
+        "limit": 5,
+        "categories": [
+          "family-learning-growth",
+          "child-growth"
+        ]
+      },
+      "teacher_learning_practice": {
+        "name": "K12 classroom and learning practice",
+        "limit": 5,
+        "categories": [
+          "teacher-learning-practice",
+          "teacher-k12-ai",
+          "k12-practice"
+        ]
+      },
+      "k12_learning_growth": {
+        "name": "K12 learning and growth cases",
+        "limit": 4,
+        "categories": [
+          "k12-learning-growth"
+        ]
+      },
+      "k12_ai_practice": {
+        "name": "K12 AI practice and policy",
+        "limit": 4,
+        "categories": [
+          "k12-ai-practice",
+          "china-k12",
+          "family-k12-ai"
         ]
       }
     },
