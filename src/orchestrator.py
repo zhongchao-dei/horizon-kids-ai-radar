@@ -252,27 +252,24 @@ class HorizonOrchestrator:
                 recently_repeated_ids = {
                     item.id for item in parent_repeats + teacher_repeats
                 }
-                parent_result = await self.filter_items(
-                    parent_view,
-                    apply_balance=False,
-                    log=False,
-                    editorial_status_key="parent_editorial_status",
+                # A title/RSS pass can assess whether a story is a promising
+                # research lead, but it cannot responsibly decide whether the
+                # original reporting is complete enough to publish.  Do NOT
+                # require a pre-enrichment ``include`` decision here: doing so
+                # creates a deadlock where a story needs source reading to be
+                # included, but only included stories receive source reading.
+                #
+                # First select role-specific high-value research leads.  The
+                # enrichment pass below reads/grounds them; only then does the
+                # formal topic gate decide whether they enter the daily cards.
+                parent_view_selected = self._material_research_candidates(
+                    parent_view, "parent"
                 )
-                teacher_result = await self.filter_items(
-                    teacher_view,
-                    apply_balance=False,
-                    log=False,
-                    editorial_status_key="teacher_editorial_status",
+                teacher_view_selected = self._material_research_candidates(
+                    teacher_view, "teacher"
                 )
-                # Select both roles against their own standards first. Shared
-                # events are then assigned to the audience for which the item
-                # has stronger evidence, not mechanically to the teacher path.
-                teacher_view_selected = self.apply_balanced_digest(
-                    teacher_result.items, log=False
-                ).items
-                parent_view_selected = self._select_parent_digest(
-                    parent_result.items, excluded_ids=set()
-                )
+                # Shared events are assigned to the audience for which the
+                # material is stronger, so an item cannot fill both digests.
                 teacher_by_id = {item.id: item for item in teacher_view_selected}
                 parent_by_id = {item.id: item for item in parent_view_selected}
                 for item_id in set(teacher_by_id) & set(parent_by_id):
@@ -286,16 +283,8 @@ class HorizonOrchestrator:
                         teacher_by_id.pop(item_id)
                     else:
                         parent_by_id.pop(item_id)
-                teacher_view_selected = self._fill_unique_digest(
-                    teacher_result.items,
-                    list(teacher_by_id.values()),
-                    excluded_ids=set(parent_by_id),
-                )
-                parent_view_selected = self._fill_unique_digest(
-                    parent_result.items,
-                    list(parent_by_id.values()),
-                    excluded_ids={item.id for item in teacher_view_selected},
-                )
+                teacher_view_selected = list(teacher_by_id.values())
+                parent_view_selected = list(parent_by_id.values())
                 teacher_selected_ids = {item.id for item in teacher_view_selected}
                 parent_selected_ids = {item.id for item in parent_view_selected}
                 original_by_id = {item.id: item for item in analyzed_items}
@@ -538,6 +527,35 @@ class HorizonOrchestrator:
         recorder = getattr(self.storage, "record_selected_ids", None)
         if callable(recorder):
             recorder(run_date, item_ids)
+
+    def _material_research_candidates(
+        self,
+        items: List[ContentItem],
+        audience: Literal["parent", "teacher"],
+    ) -> List[ContentItem]:
+        """Choose high-value leads *before* original-source enrichment.
+
+        ``watch`` means "needs verification", not "discard".  It therefore
+        remains eligible for this research stage.  ``skip`` is the only
+        editorial state excluded at this point.  Formal publication still
+        requires the separate evidence-complete gate after enrichment.
+        """
+        score_key = f"{audience}_score"
+        status_key = f"{audience}_editorial_status"
+        floor = max(7.0, float(self.config.filtering.ai_score_threshold))
+        candidates = [
+            item
+            for item in items
+            if self._numeric_score(item.metadata.get(score_key, item.ai_score)) >= floor
+            and str(item.metadata.get(status_key, "")).strip() != "skip"
+        ]
+        candidates.sort(
+            key=lambda item: self._numeric_score(
+                item.metadata.get(score_key, item.ai_score)
+            ),
+            reverse=True,
+        )
+        return candidates[: self.config.filtering.max_items]
 
     def _keep_formal_topic_items(
         self,
