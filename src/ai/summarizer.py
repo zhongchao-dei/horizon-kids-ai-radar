@@ -147,6 +147,46 @@ class DailySummarizer:
 
         return header + toc + "".join(parts)
 
+    def generate_research_leads(
+        self,
+        items: List[ContentItem],
+        date: str,
+        *,
+        language: str = "zh",
+        audience: Optional[Literal["parent", "teacher"]] = None,
+    ) -> str:
+        """Render enriched high-value leads that did not clear formal publication.
+
+        A quiet formal-news day must not look like a broken radar.  These cards
+        are usable as cases, background, or source-reading tasks, but their
+        evidence boundary remains visible and they are never labelled formal
+        daily topics.
+        """
+        if not items:
+            return ""
+        labels = LABELS.get(language, LABELS["en"])
+        heading = (
+            "## 今日可开发素材（待补核）\n\n"
+            "> 以下内容已通过素材价值初筛并完成补读，但尚未达到正式资讯卡的证据门槛。"
+            "可作为案例、观点支撑或后续核读入口，不应直接当作已证实结论。\n\n"
+            if language == "zh"
+            else "## Developable research leads\n\n> These are enriched leads, not formal daily topics.\n\n"
+        )
+        parts = [
+            self._format_item(
+                item,
+                labels,
+                language,
+                i + 1,
+                audience=audience,
+                card_heading_override=(
+                    "可开发素材卡（待补核）" if language == "zh" else "Research lead"
+                ),
+            )
+            for i, item in enumerate(items)
+        ]
+        return heading + "".join(parts)
+
     def generate_candidate_index(
         self,
         items: List[ContentItem],
@@ -363,6 +403,7 @@ class DailySummarizer:
         language: str,
         index: int,
         audience: Optional[Literal["parent", "teacher"]] = None,
+        card_heading_override: Optional[str] = None,
     ) -> str:
         """Format a single ContentItem into Markdown."""
         _title = item.metadata.get(f"title_{language}") or item.title
@@ -435,7 +476,7 @@ class DailySummarizer:
         topic_fields = self._topic_fields(audience)
         topic_title_field = topic_fields[0][1] if topic_fields else None
         if language == "zh" and topic_title_field and meta.get(topic_title_field):
-            card_heading = (
+            card_heading = card_heading_override or (
                 "教师端正式选题卡"
                 if audience == "teacher"
                 else "家长端正式选题卡"
