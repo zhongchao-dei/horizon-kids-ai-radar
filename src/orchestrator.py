@@ -338,6 +338,8 @@ class HorizonOrchestrator:
                 # leads rather than repeating old headline-level stories.
                 parent_research_count = len(parent_items)
                 teacher_research_count = len(teacher_items)
+                parent_research_items = list(parent_items)
+                teacher_research_items = list(teacher_items)
                 parent_items = self._keep_formal_topic_items(parent_items, "parent")
                 teacher_items = self._keep_formal_topic_items(teacher_items, "teacher")
                 parent_selected_ids = {item.id for item in parent_items}
@@ -382,12 +384,26 @@ class HorizonOrchestrator:
                         language=lang,
                         audience="parent",
                     )
+                    parent_leads = [
+                        item for item in parent_research_items
+                        if item.id not in parent_selected_ids
+                    ]
+                    parent_summary += summarizer.generate_research_leads(
+                        parent_leads, today, language=lang, audience="parent"
+                    )
                     teacher_summary = await summarizer.generate_summary(
                         teacher_items,
                         today,
                         len(analyzed_items),
                         language=lang,
                         audience="teacher",
+                    )
+                    teacher_leads = [
+                        item for item in teacher_research_items
+                        if item.id not in teacher_selected_ids
+                    ]
+                    teacher_summary += summarizer.generate_research_leads(
+                        teacher_leads, today, language=lang, audience="teacher"
                     )
                     artifacts = (
                         ("all-candidates", candidate_summary, "K12 AI 全部候选资讯"),
