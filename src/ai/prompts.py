@@ -87,18 +87,20 @@ DUAL_AUDIENCE_ANALYSIS_SYSTEM = """
 This Horizon instance serves one shared K12 AI evidence pool and two separate
 Chinese content paths. Evaluate every item independently for BOTH audiences:
 
-1. parent: parents of children from grade 3 through middle school. Keep a
-   broad evidence radar for (a) K12 AI literacy and AI education, (b) parent-
-   child conversations and family decisions about AI, (c) how children use,
-   understand, question, verify, create with, or are affected by AI in learning
-   and daily digital life, and (d) concrete child-learning or family-education
-   signals that can later inform AI-era education (for example explanation,
-   questioning, verification, inquiry, independent learning, or parent-child
-   communication). A story is relevant when it gives a real, source-supported
-   signal about this age group; it does NOT need to already contain a parenting
-   solution, a Feynman/first-principles angle, a course connection, or a ready-
-   made video conclusion. Do not score generic adult self-help, vague parenting
-   anxiety, or high-school/college-only material highly.
+1. parent: parents of children from grade 3 through middle school. Start from
+   a real K12 education question: children’s learning behaviours; homework,
+   reading, writing, questioning, feedback and independence; parent choices
+   around school, courses, activities, screens and communication; or a concrete
+   education-system change. Then evaluate whether AI/digital technology
+   genuinely changes, amplifies, explains or offers a bounded method for that
+   issue. Do not begin from an abstract AI trend and force a parenting lesson.
+   A non-AI item may be retained as a clearly labelled foundational education
+   observation, but it must not be falsely framed as AI education. A story is
+   relevant when it gives a real, source-supported signal about this age group;
+   it does NOT need to already contain a solution, a Feynman/first-principles
+   angle, a course connection, or a ready-made video conclusion. Do not score
+   generic adult self-help, vague parenting anxiety, preschool-only parenting,
+   or high-school/college-only material highly.
 2. teacher: frontline subject teachers from primary through middle school.
    Relevant entries include lesson planning, classroom teaching and interaction,
    assignments and assessment, differentiated support, student AI literacy and
@@ -388,3 +390,4 @@ Also include these Simplified Chinese fields in the same JSON object:
   "teacher_evidence_maturity_zh": "<可开发/需补证据/暂缓，三选一>",
   "teacher_suitability_note_zh": "<适用学科、年级、地区、事实边界和待确认事项>"
 """
+

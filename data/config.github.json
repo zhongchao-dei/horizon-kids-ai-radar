@@ -13,7 +13,7 @@
     "analysis_concurrency": 1,
     "enrichment_concurrency": 1,
     "topic_cards_enabled": true,
-    "curation_profile": "This instance is a K12 learning-and-growth evidence radar for Chinese families and frontline teachers. AI literacy is one important context, not a mandatory topic label. Collect factual events, cases, research, policy changes, and real education settings; do not manufacture a ready-made spoken-script conclusion.\n\nIndependent selection:\n- Parent path prioritizes concrete signals about children in grades 3-9: learning routines; homework, reading, questioning, explanation, reflection, inquiry and independent learning; parent-child interactions around learning, screens, tools and feedback; and actual changes caused by digital tools or AI. A child-learning story may enter the parent pool even when AI is absent, if it helps explain how children should learn in an AI-rich world.\n- Teacher path prioritizes concrete K12 changes in classroom learning, homework and assessment, reading and inquiry, differentiated support, student agency, digital/AI literacy, academic integrity and school governance. Keep only material that connects to student learning evidence or a teacher's professional judgement; adult office productivity, product PR and generic trend pieces do not qualify.\n\nThe daily output is a material radar, not a machine for producing one fixed AI conclusion. Prefer sources with a visible actor, action, unexpected outcome, verifiable data, sample, implementation detail or observable learning process. Do not select an item merely because it can be attached to Feynman learning, first principles, a course mention or a generic independent-thinking conclusion.\n\nA formal daily topic must still be recent, specific, verifiable, and based on a read source or direct primary material. Headlines, commentary and unverified reports remain research leads. The two paths must not reuse the same event or repeat it by changing the headline. A quiet day is acceptable; do not fill slots with stale news or broad opinion.\n\nScore age fit (grades 3-9), factual completeness, visibility of the learning process, specificity, freshness and difference from recent material. Never invent family/classroom cases, research results, product capabilities or course outcomes.",
+    "curation_profile": "This instance is a K12 family-education and learning-growth evidence radar for Chinese families and frontline teachers. It serves children in grades 3-9; parents are the primary public audience and decision makers. AI literacy is a downstream lens and source of change, not the default topic label.\n\nCORE EDITORIAL ORDER: Start with a real education question, observable child-learning behavior, parent decision, classroom tension, or school/society change. Then assess whether AI genuinely changes, amplifies, explains, or offers a bounded method for that issue. Do not start from an abstract AI trend and force an education lesson onto it. A non-AI education item may remain as a labelled foundational education observation, but it must never be falsely framed as an AI story.\n\nParent path prioritizes factual signals about grades 3-9: learning routines, homework, reading, writing, questioning, explanation, reflection, inquiry and independence; parent choices around school, courses, activities, screens, reading, feedback and communication; and real changes caused by AI/digital tools in these contexts. Teacher path prioritizes classroom learning, assignments, assessment, student agency, school governance, family-school communication, digital/AI literacy and academic integrity. Adult office productivity, product PR, generic self-help, preschool-only parenting and high-school/college-only content do not qualify unless the source clearly transfers to grades 3-9.\n\nA formal daily topic must expose five things: the education question first; visible facts; the actual AI connection or an explicit statement that it is non-AI foundational material; why the parent/teacher should care; and the evidence boundary. Prefer sources with a visible actor, action, unexpected outcome, verifiable data, sample, implementation detail or observable learning process. Do not manufacture a ready-made spoken-script conclusion.\n\nScore age fit, factual completeness, visibility of the education process, specificity, freshness and difference from recent material. parent_score and teacher_score are material-value scores, not publication readiness. Use 8-10 for clear event/case/practice/tension/research; 6-7 for promising signals needing original reading; 3-5 for partial/generic relevance; 0-2 for out of scope. Editorial status separately controls formal inclusion. High-value but incomplete items belong in the clearly labelled developable-research-lead section, never in an empty-looking daily report and never as an asserted fact.\n\nDo not select an item merely because it can attach to Feynman learning, first principles, a course mention or a generic independent-thinking conclusion. Keep facts separate from editorial inference. Never invent family/classroom cases, research results, product capabilities or course outcomes. The parent and teacher paths must not duplicate the same event merely by changing the headline.",
     "provider_chain": "gemini,deepseek",
     "dual_audience_enabled": true
   },
@@ -109,6 +109,18 @@
         "url": "https://news.google.com/rss/search?q=(children+OR+teens+OR+students)+(digital+life+OR+screen+time+OR+chatbot+OR+AI)+(learning+OR+family+OR+wellbeing+OR+homework)&hl=en-US&gl=US&ceid=US:en",
         "enabled": true,
         "category": "family-learning-growth"
+      },
+      {
+        "name": "Google News 中文：中小学家庭教育与学习选择",
+        "url": "https://news.google.com/rss/search?q=(%22%E5%B0%8F%E5%AD%A6%E7%94%9F%22+OR+%22%E5%88%9D%E4%B8%AD%E7%94%9F%22+OR+%22%E5%AE%B6%E9%95%BF%22)+(%22%E5%AD%A6%E4%B9%A0%22+OR+%22%E9%98%85%E8%AF%BB%22+OR+%22%E4%BD%9C%E4%B8%9A%22+OR+%22%E6%95%99%E8%82%B2%E9%80%89%E6%8B%A9%22+OR+%22%E4%BA%B2%E5%AD%90%E6%B2%9F%E9%80%9A%22+OR+%22%E5%B1%8F%E5%B9%95%22)+(%22%E6%95%99%E8%82%B2%22+OR+%22%E6%88%90%E9%95%BF%22)&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "enabled": true,
+        "category": "family-education-decision"
+      },
+      {
+        "name": "Google News：K12教育变化与家长选择",
+        "url": "https://news.google.com/rss/search?q=(K-12+OR+%22middle+school%22+OR+%22elementary+school%22)+(parent+OR+family+OR+student)+(education+OR+learning+OR+school+choice+OR+homework+OR+reading+OR+wellbeing)+(%22AI%22+OR+technology+OR+digital+OR+policy)&hl=en-US&gl=US&ceid=US:en",
+        "enabled": true,
+        "category": "education-change-k12"
       }
     ],
     "reddit": {
@@ -152,7 +164,7 @@
     },
     "google_news": {
       "enabled": true,
-      "query": "((\"AI literacy\" OR \"generative AI\" OR \"artificial intelligence\") (K-12 OR \"middle school\" OR \"elementary school\" OR students OR teachers) (learning OR classroom OR homework OR assessment OR family OR policy))",
+      "query": "((K-12 OR \"middle school\" OR \"elementary school\" OR students OR parents) (education OR learning OR homework OR reading OR classroom OR school) (AI OR technology OR digital OR policy))",
       "language": "en",
       "country": "US",
       "ceid": "US:en",
@@ -247,6 +259,24 @@
           "k12-ai-practice",
           "china-k12",
           "family-k12-ai"
+        ]
+      },
+      "family_education_decision": {
+        "name": "K12家庭教育与学习选择",
+        "limit": 5,
+        "categories": [
+          "family-education-decision",
+          "family-learning-growth",
+          "child-growth"
+        ]
+      },
+      "education_change_k12": {
+        "name": "K12教育变化与AI连接",
+        "limit": 5,
+        "categories": [
+          "education-change-k12",
+          "k12-ai-practice",
+          "teacher-k12-ai"
         ]
       }
     },
