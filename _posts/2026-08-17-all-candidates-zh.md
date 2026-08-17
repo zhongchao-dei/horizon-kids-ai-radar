@@ -1,0 +1,21 @@
+---
+layout: default
+title: "K12 AI 全部候选资讯: 2026-08-17 (ZH)"
+date: 2026-08-17
+lang: zh
+artifact: all-candidates
+---
+
+> 保存当天去重后进入 AI 评分阶段的 7 条候选。家长端入选 0 条，教师端入选 0 条。
+
+> 未入选不等于无价值；本表用于回看筛选方向。原始标题和链接会保留，候选不会仅因未进入前 3—5 条而消失。
+
+| 候选 ID | 原标题与链接 | 来源 | 发布时间 | 分类 | 家长素材价值 | 教师素材价值 | 未入选／待观察原因 |
+|---|---|---|---|---|---|---|---|
+| CAND-275ecf2fc1 | [AI成为未成年人“聊天搭子”，如何引导（解码·关注暑期生活） - 人民网](https://news.google.com/rss/articles/CBMiakFVX3lxTE96cnpyZnkyY3Y1UHo3aC1yU0RNV1J1SWpzY2I5cTVIMDVsanZjUW9mWUZsUjR4U3IxcU1XeUU2MFFkSEpzY2NBMVRlWnljb1dvbTltQVd4c0s2NnlKd1BGUXl6RGxBMERwbHc?oc=5) | Google News 中文：儿童 AI 教育 | 2026-08-17 00:46 | china-k12 | 待观察 8.0 | 待观察 6.0 | 家长：文章紧扣中小学生暑期生活中的真实现象——将AI作为‘聊天搭子’进行情感倾诉或社交替代。探讨了家长在面对孩子与AI过…；教师：反映了学生在课外及暑期的AI使用习惯与数字素养状况，对教师了解学生课外心理诉求与AI素养有参考意义，但缺乏课堂教学… |
+| CAND-cbe16162e7 | [How AI is splitting Australia&\#x27;s education system - ABC News &amp; Headlines – Australian Broadcasting C…](https://news.google.com/rss/articles/CBMisgFBVV95cUxQZmxqNHg2OTFlanp2NVBKaF9QLUFURF8tYjFmTlI1ZGNyRkx3LTlwYUxYTng3TVVYUEZPQ0xiSzZvdjFOajF2d3hMSXlNMzBGbzlFNXZwUE82SUpaMTRGT2pfLVhydTVXeVNtbDNhLTVmX2owSVIwWnpVTE9yNUFTd3ZsWDFWeTJhMjlCNWl5OHliWmxmcnBtQlFQVVhGcTNmYWZJd1RTcS12SkxTbjAtVldn?oc=5) | Google News English: K12 families a… | 2026-08-16 19:55 | family-k12-ai | 待观察 7.0 | 待观察 8.0 | 家长：反映了AI工具进入K12阶段后带来的教育资源与学校政策分化，有助于家长理解不同学校对AI的态度和数字鸿沟问题，但需…；教师：揭示了AI对学校治理、教学评估与教育公平带来的系统性冲击，属于前线教师与管理者密切关注的学校政策与诚信治理议题。 |
+| CAND-095d0e35f1 | [UT Austin brings ALIGN AI literacy resources online for US schools - EdTech Innovation Hub](https://news.google.com/rss/articles/CBMiqwFBVV95cUxOTHJxc0lHUE4tSGRnTk9adEtLUDJKVi1NVkFYb3pQRGZYUndYMnlsYUd5NV9HaEtfSXJVRlJEaTN4TmZLMFBTeFgzWGg0QlJlejVvbW5rTmdURmlqdkswb3gxNklyS3dSSXhZN2Nta0JlSFFSdm84QlFkQUdrOV96Uk1WUjFTVUcyTXJ2ZlREZ1dtMzN5WlhDYTM0NVlnbFFsUUQ0ek9sS04xc3c?oc=5) | Google News English: K12 families a… | 2026-08-16 23:36 | family-k12-ai | 待观察 5.0 | 待观察 7.0 | 家长：提及面向 K12 学校的 ALIGN AI 素养教育资源上线，对家长了解学校 AI 教育趋势有参考价值，但缺乏具体…；教师：UT Austin 面向 K12 学校上线 ALIGN AI 素养教学资源，直接切中中小学教师的 AI 素养课程设… |
+| CAND-83c9903607 | [AI成为未成年人“聊天搭子”，如何引导​ - edu.hangzhou.com.cn](https://news.google.com/rss/articles/CBMie0FVX3lxTE9mdGE2MlRqYm5hUE9xVnRLbmRiMDRzMjFQQ0EyMFNDWmJTX29EbWRaT250MUpYRlVPNk9kV3M2blZVbWxDRVMwLXFhMTBXUjE5U2FNZEw4dTBpbkYzTzFJZ1dwZjZuTUt3WTJRLU8xTmsxdFU2Y0pjSTJrNA?oc=5) | Google News 中文：家长、孩子与 AI 学习 | 2026-08-17 01:00 | family-k12-ai | 待观察 6.0 | 待观察 5.0 | 家长：探讨未成年人将AI作为‘聊天搭子’的现象，直接切中3-9年级家长对孩子屏幕使用、情感依赖与社交能力的担忧，但目前仅…；教师：涉及学生课外AI使用习惯及心理健康，对教师理解学生数字生活有参考价值，但缺乏具体的教学环节、作业或学校治理措施。 |
+| CAND-c59b59432d | [Video \| This Rajasthan School&\#x27;s &\#x27;Airplane&\#x27; Classroom Is Taking Learning To New Heights - NDTV](https://news.google.com/rss/articles/CBMisAFBVV95cUxPakVRcFc3d3dMZkEzTnBzSlpqN0gtY3R5MnYyWVA2aWZkYm96bXRjQVM2Q28wMS1VdEFlYWRxRmVaa211OHp2RGtqaF9mY2tsZjFZdnFlOGRkekVadVJoMFJNMjRHV181R0xucEJzVkRreTdhRWlMRGNXYnREREpzUEx2dHZpcEtpTVZ2dHBRZG54aE9xM05VbW9FeDUwVmswVDJuSzhOdWlIaVhxWUdJTQ?oc=5) | Google News: K12 learning and famil… | 2026-08-16 14:16 | k12-learning-growth | 待观察 5.0 | 待观察 6.0 | 家长：该报道展示了一所学校的创意教室设计，家长可能觉得有趣，但未涉及具体家庭学习行为、家长决策或可验证的学习效果，证据边…；教师：教室环境创新与课堂参与相关，可能对教学设计有启发；但缺乏具体教学环节、学生证据或实施细节，仅为方向性信号。 |
+| CAND-0378e77686 | [【一周连连看】美团前高管创办AI教育公司；三星推出儿童AI机器人 - 多知网](https://news.google.com/rss/articles/CBMiakFVX3lxTE1YU3FvWk5PRmxST0JVeFBPc0pHVGliUWIzV1hNVGJFNWctU09KYUxHeGNYYnpkV2twQWU3X2cxcW9GalBjWll2UTdBd2hZSmpkdF9uRS1fMTRVbDN1RUh6WTJaS3VvTE1TSFE?oc=5) | Google News 中文：家长、孩子与 AI 学习 | 2026-08-16 05:20 | family-k12-ai | 待观察 4.0 | 待观察 2.0 | 家长：提及三星推出儿童AI机器人等行业动态，对家长了解儿童AI硬件市场有一定信息参考，但缺乏具体的儿童学习行为观察、真实…；教师：主要属于商业教育科技新闻与硬件发布，未涉及具体学科教学、课堂互动、作业评价或学校治理环节。 |
+| CAND-e1c79e9f9e | [Learning, confidence and friendship blossoms - Cobram Courier](https://news.google.com/rss/articles/CBMiigFBVV95cUxOLVdkZGpJT2NxMlJyY2c4X1FERnMtQzFpa3drcWJORXRzUWR0SXNYVEdHc1U2bEI0OG5ORG5MYVh3emdVdURRX3VVSU45Yk1MdVVMQTFEOXFhVnJES3NPSU9IRUE3RFZBcTVGeWR4OHJpa2pvOWtlNndwX29DUnFpM3lxbjdfYXNJeEE?oc=5) | Google News: K12 learning and famil… | 2026-08-16 22:43 | k12-learning-growth | 待观察 1.0 | 待观察 1.0 | 家长：仅有一个新闻标题，缺乏具体的家庭教育场景、学习行为数据或可验证的事实证据。；教师：仅包含标题和链接，缺乏具体的教学实践、课堂观察或政策研究信息。 |
