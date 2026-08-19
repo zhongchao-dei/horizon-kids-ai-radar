@@ -52,6 +52,18 @@
         "category": "k12-practice"
       },
       {
+        "name": "UK Department for Education (official)",
+        "url": "https://www.gov.uk/government/organisations/department-for-education.atom",
+        "enabled": true,
+        "category": "official-policy"
+      },
+      {
+        "name": "U.S. Department of Education (official)",
+        "url": "https://www.ed.gov/feed",
+        "enabled": true,
+        "category": "official-policy"
+      },
+      {
         "name": "OpenAI News",
         "url": "https://openai.com/news/rss.xml",
         "enabled": false,
@@ -78,7 +90,7 @@
       {
         "name": "Google News English: K12 families and learning",
         "url": "https://news.google.com/rss/search?q=%28K-12+OR+%22middle+school%22+OR+%22elementary+school%22+OR+children+OR+students%29+%28%22AI+literacy%22+OR+%22AI+education%22+OR+%22generative+AI%22%29+%28parent+OR+family+OR+learning+OR+school+OR+classroom%29&hl=en-US&gl=US&ceid=US:en",
-        "enabled": true,
+        "enabled": false,
         "category": "family-k12-ai"
       },
       {
@@ -96,13 +108,13 @@
       {
         "name": "Google News: K12 learning and family practice",
         "url": "https://news.google.com/rss/search?q=(K-12+OR+%22middle+school%22+OR+%22elementary+school%22+OR+children+OR+students)+(learning+OR+homework+OR+reading+OR+%22student+agency%22+OR+inquiry+OR+assessment)+(parent+OR+family+OR+teacher+OR+classroom)&hl=en-US&gl=US&ceid=US:en",
-        "enabled": true,
+        "enabled": false,
         "category": "k12-learning-growth"
       },
       {
         "name": "Google News: K12 learning methods and classroom practice",
         "url": "https://news.google.com/rss/search?q=(K-12+OR+school+OR+classroom)+(learning+method+OR+%22learning+science%22+OR+%22retrieval+practice%22+OR+metacognition+OR+inquiry+OR+reading)+(teacher+OR+student+OR+parent)&hl=en-US&gl=US&ceid=US:en",
-        "enabled": true,
+        "enabled": false,
         "category": "teacher-learning-practice"
       },
       {
@@ -120,8 +132,26 @@
       {
         "name": "Google News：K12教育变化与家长选择",
         "url": "https://news.google.com/rss/search?q=(K-12+OR+%22middle+school%22+OR+%22elementary+school%22)+(parent+OR+family+OR+student)+(education+OR+learning+OR+school+choice+OR+homework+OR+reading+OR+wellbeing)+(%22AI%22+OR+technology+OR+digital+OR+policy)&hl=en-US&gl=US&ceid=US:en",
-        "enabled": true,
+        "enabled": false,
         "category": "education-change-k12"
+      },
+      {
+        "name": "Google News：教育部与学校 AI 政策（中国一手线索）",
+        "url": "https://news.google.com/rss/search?q=%28site%3Amoe.gov.cn+OR+site%3Agov.cn%29+%28%22%E4%B8%AD%E5%B0%8F%E5%AD%A6%22+OR+%22%E5%AD%A6%E7%94%9F%22+OR+%22%E6%95%99%E5%B8%88%22%29+%28AI+OR+%22%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%22+OR+%22%E6%95%B0%E5%AD%97%E6%95%99%E8%82%B2%22%29&hl=zh-CN&gl=CN&ceid=CN%3Azh-Hans",
+        "enabled": true,
+        "category": "official-policy"
+      },
+      {
+        "name": "Google News：儿童在线安全监管（一手线索）",
+        "url": "https://news.google.com/rss/search?q=%28site%3Aofcom.org.uk+OR+site%3Aunicef.org+OR+site%3Aunesco.org%29+%28children+OR+students+OR+teens%29+%28AI+OR+chatbot+OR+%22online+safety%22+OR+digital%29&hl=en-US&gl=US&ceid=US%3Aen",
+        "enabled": true,
+        "category": "child-safety-policy"
+      },
+      {
+        "name": "Google News：教育研究与证据（一手线索）",
+        "url": "https://news.google.com/rss/search?q=%28site%3Aoecd.org+OR+site%3Aies.ed.gov+OR+site%3Aeducationendowmentfoundation.org.uk%29+%28school+OR+students+OR+learning%29+%28AI+OR+digital+OR+reading+OR+homework+OR+assessment%29&hl=en-US&gl=US&ceid=US%3Aen",
+        "enabled": true,
+        "category": "research-evidence"
       }
     ],
     "reddit": {
@@ -174,11 +204,10 @@
     }
   },
   "filtering": {
-    "ai_score_threshold": 7,
-    "min_items": 3,
-    "fallback_score_floor": 6,
+    "ai_score_threshold": 0,
+    "fallback_score_floor": 4,
     "time_window_hours": 48,
-    "max_items": 5,
+    "max_items": 8,
     "category_groups": {
       "china_k12": {
         "name": "中国儿童与中小学 AI 教育",

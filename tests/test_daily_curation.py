@@ -54,6 +54,18 @@ def test_editorial_decision_can_admit_useful_low_scored_item() -> None:
     ]
 
 
+def test_research_queue_keeps_watch_item_below_old_score_cutoff() -> None:
+    orchestrator = make_orchestrator()
+    items = [
+        make_item("watch-low-score", 4.0, "watch"),
+        make_item("skip-high-score", 9.0, "skip"),
+    ]
+
+    selected = orchestrator._material_research_candidates(items, "teacher")
+
+    assert [item.id for item in selected] == ["watch-low-score"]
+
+
 def test_recent_selected_source_is_kept_out_of_formal_selection() -> None:
     fresh, repeated = HorizonOrchestrator._exclude_recent_selected_items(
         [make_item("old", 9.0), make_item("new", 6.0)], {"old"}

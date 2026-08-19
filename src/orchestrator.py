@@ -230,6 +230,23 @@ class HorizonOrchestrator:
             self.console.print(f"🤖 Analyzed {len(analyzed_items)} items with AI\n")
 
             dual_audience = self.config.ai.dual_audience_enabled
+            if dual_audience:
+                # URL-level merging above cannot catch several outlets repeating
+                # the same school policy, report or platform update.  Cluster
+                # those event-level duplicates before either audience sees them,
+                # so a different headline cannot occupy several research slots.
+                topic_dedup_input = sorted(
+                    analyzed_items,
+                    key=lambda item: item.ai_score or 0,
+                    reverse=True,
+                )
+                deduped_topics = await self.merge_topic_duplicates(topic_dedup_input)
+                if len(deduped_topics) < len(analyzed_items):
+                    self.console.print(
+                        f"🧹 Merged {len(analyzed_items) - len(deduped_topics)} "
+                        "same-event candidates before research selection\n"
+                    )
+                analyzed_items = deduped_topics
             parent_items: List[ContentItem] = []
             teacher_items: List[ContentItem] = []
             parent_selected_ids: set[str] = set()
@@ -558,18 +575,26 @@ class HorizonOrchestrator:
         """
         score_key = f"{audience}_score"
         status_key = f"{audience}_editorial_status"
-        floor = max(7.0, float(self.config.filtering.ai_score_threshold))
-        candidates = [
-            item
-            for item in items
-            if self._numeric_score(item.metadata.get(score_key, item.ai_score)) >= floor
-            and str(item.metadata.get(status_key, "")).strip() != "skip"
-        ]
+        # A score is a sorting hint, never an admission gate for the research
+        # queue.  A concrete school policy or a first-party child-safety update
+        # can be worth reading even when a single scoring prompt underestimates
+        # its relevance.  The model's explicit editorial state limits the queue;
+        # the evidence-complete gate below still decides formal publication.
+        status_rank = {"include": 0, "watch": 1, "": 2}
+        candidates = []
+        for item in items:
+            status = str(item.metadata.get(status_key, "")).strip()
+            if status == "skip":
+                continue
+            candidates.append(item)
         candidates.sort(
-            key=lambda item: self._numeric_score(
-                item.metadata.get(score_key, item.ai_score)
+            key=lambda item: (
+                status_rank.get(
+                    str(item.metadata.get(status_key, "")).strip(),
+                    2,
+                ),
+                -self._numeric_score(item.metadata.get(score_key, item.ai_score)),
             ),
-            reverse=True,
         )
         return candidates[: self.config.filtering.max_items]
 
@@ -1056,6 +1081,16 @@ class HorizonOrchestrator:
                 if dup_idx == primary_idx:
                     continue
                 dup = items[dup_idx]
+                supplements = primary.metadata.setdefault("supplementary_sources", [])
+                if isinstance(supplements, list):
+                    supplements.append(
+                        {
+                            "title": dup.title,
+                            "url": str(dup.url),
+                            "source_type": dup.source_type.value,
+                        }
+                    )
+                primary.metadata["event_clustered"] = True
                 # Merge comments/content from the duplicate into the primary
                 if dup.content:
                     if not primary.content or dup.content not in primary.content:
