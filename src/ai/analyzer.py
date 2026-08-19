@@ -28,6 +28,8 @@ class AnalysisResult(BaseModel):
     reason: str
     summary: str
     tags: list[str]
+    title_zh: Optional[str] = None
+    summary_zh: Optional[str] = None
     parent_score: Optional[float] = Field(default=None, ge=0, le=10, allow_inf_nan=False)
     parent_reason: Optional[str] = None
     teacher_score: Optional[float] = Field(default=None, ge=0, le=10, allow_inf_nan=False)
@@ -225,3 +227,7 @@ class ContentAnalyzer:
             item.ai_reason = result.reason
         item.ai_summary = result.summary
         item.ai_tags = result.tags
+        if result.title_zh:
+            item.metadata["title_zh"] = result.title_zh
+        if result.summary_zh:
+            item.metadata["summary_zh"] = result.summary_zh

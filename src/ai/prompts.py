@@ -135,6 +135,8 @@ independent family-learning value rather than copied relevance.
 DUAL_AUDIENCE_ANALYSIS_USER = """
 
 Also include these fields in the same JSON object:
+  "title_zh": "<简体中文标题；忠实表达原文，不写成夸张选题>",
+  "summary_zh": "<简体中文 1—2 句概述；只写来源支持的信息与明确边界>",
   "parent_score": <0-10>,
   "parent_reason": "<简体中文；说明家长相关性、真实家庭／孩子场景与证据边界>",
   "parent_editorial_status": "<include/watch/skip；include 表示值得进入当天家长日报，watch 表示值得保留但不应占当天正式条目，skip 表示当前不匹配>",

@@ -216,17 +216,19 @@ class DailySummarizer:
                 f"家长端入选 {len(parent_selected_ids)} 条，教师端入选 {len(teacher_selected_ids)} 条。"
             ),
             "",
-            "> 未入选不等于无价值；本表用于回看筛选方向。原始标题和链接会保留，候选不会仅因未进入前 3—5 条而消失。",
+            "> 未入选不等于无价值；本表用于回看筛选方向。标题和概述均为中文，链接仍指向原始来源；候选不会仅因未进入前 3—5 条而消失。",
             "",
-            "| 候选 ID | 原标题与链接 | 来源 | 发布时间 | 分类 | 家长素材价值 | 教师素材价值 | 未入选／待观察原因 |",
+            "| 候选 ID | 中文标题与概述（原文链接） | 来源 | 发布时间 | 分类 | 家长素材价值 | 教师素材价值 | 未入选／待观察原因 |",
             "|---|---|---|---|---|---|---|---|",
         ]
 
         for item in sorted_items:
             candidate_id = self._candidate_id(item)
-            title = self._table_text(item.title, limit=100)
+            title = self._table_text(self._zh_title(item), limit=100)
             url = _safe_url(item.url)
             title_link = f"[{title}]({url})" if url else title
+            overview = self._table_text(self._zh_summary(item), limit=160)
+            title_and_overview = f"{title_link}<br>{overview}"
             meta = item.metadata
             source = meta.get("feed_name") or item.author or item.source_type.value
             source_text = self._table_text(source, limit=36)
@@ -266,7 +268,7 @@ class DailySummarizer:
                 + " | ".join(
                     [
                         candidate_id,
-                        title_link,
+                        title_and_overview,
                         source_text,
                         published,
                         category,
@@ -329,11 +331,11 @@ class DailySummarizer:
             return "\n".join(lines) + "\n"
 
         for index, item in enumerate(low_items, start=1):
-            title = self._table_text(item.title, limit=120)
+            title = self._table_text(self._zh_title(item), limit=120)
             url = _safe_url(item.url)
             title_link = f"[{title}]({url})" if url else title
             overview = self._plain_text(
-                item.ai_summary or item.metadata.get("summary_zh") or item.ai_reason or item.title,
+                self._zh_summary(item),
                 limit=180,
             )
             lines.extend(
@@ -406,7 +408,11 @@ class DailySummarizer:
         card_heading_override: Optional[str] = None,
     ) -> str:
         """Format a single ContentItem into Markdown."""
-        _title = item.metadata.get(f"title_{language}") or item.title
+        _title = (
+            self._zh_title(item)
+            if language == "zh"
+            else item.metadata.get(f"title_{language}") or item.title
+        )
         title = _escape_markdown(_title)
         raw_url = str(item.url)
         url = _safe_url(raw_url)
@@ -414,7 +420,9 @@ class DailySummarizer:
         meta = item.metadata
 
         summary = (
-            meta.get(f"detailed_summary_{language}")
+            self._zh_summary(item)
+            if language == "zh"
+            else meta.get(f"detailed_summary_{language}")
             or meta.get("detailed_summary")
             or item.ai_summary
             or ""
@@ -599,6 +607,18 @@ class DailySummarizer:
     @classmethod
     def _table_text(cls, value: object, limit: int) -> str:
         return _escape_markdown(cls._plain_text(value, limit))
+
+    @staticmethod
+    def _zh_title(item: ContentItem) -> str:
+        return str(item.metadata.get("title_zh") or "中文标题待补译")
+
+    @staticmethod
+    def _zh_summary(item: ContentItem) -> str:
+        return str(
+            item.metadata.get("detailed_summary_zh")
+            or item.metadata.get("summary_zh")
+            or "中文概述待补译，请查看原文链接。"
+        )
 
     @classmethod
     def _selection_status(cls, score: object, selected: bool) -> str:

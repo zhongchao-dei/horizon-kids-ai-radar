@@ -212,6 +212,8 @@ def test_generate_candidate_index_keeps_unselected_titles_and_links():
     selected = _make_item(1)
     selected.metadata.update(
         {
+            "title_zh": "重要事项一",
+            "summary_zh": "这是第一条中文概述。",
             "parent_score": 8.0,
             "parent_reason": "适合家庭作业场景。",
             "teacher_score": 9.0,
@@ -222,6 +224,8 @@ def test_generate_candidate_index_keeps_unselected_titles_and_links():
     unselected = _make_item(2)
     unselected.metadata.update(
         {
+            "title_zh": "重要事项二",
+            "summary_zh": "这是第二条中文概述。",
             "parent_score": 4.0,
             "parent_reason": "缺少家庭场景。",
             "teacher_score": 5.0,
@@ -239,7 +243,9 @@ def test_generate_candidate_index_keeps_unselected_titles_and_links():
 
     assert "进入 AI 评分阶段的 2 条候选" in result
     assert "家长端入选 1 条，教师端入选 1 条" in result
-    assert "[Important Item 2](https://example.com/items/2)" in result
+    assert "[重要事项二](https://example.com/items/2)" in result
+    assert "这是第二条中文概述。" in result
+    assert "Important Item 2" not in result
     assert "家长：缺少家庭场景" in result
     assert "教师：只有通用办公功能" in result
     assert result.count("CAND-") == 2
