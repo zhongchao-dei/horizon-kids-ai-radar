@@ -263,8 +263,13 @@ Formal-topic hard gate: this system keeps two layers separate.
 Set evidence maturity to **可开发** only when all four conditions are met.
 Otherwise use **需补证据** or **暂缓**. Never use 可开发 merely because the subject
 matches K12 AI or because it is easy to attach a familiar conclusion about
-independent thinking. If no item passes, publish no formal topic for that
-audience; an honest empty day is better than repetitive pseudo-news.
+independent thinking. If no item passes, keep the formal topic list empty, but do NOT hide a high-value
+research lead. Any item with a parent_score or teacher_score of 7 or above must
+remain in the clearly labelled "high-value research lead" section with its known
+facts, unknowns, verification URL, and a safe provisional angle. This section is
+not a formal publication slot and must never be written as a confirmed fact.
+Only when both formal topics and high-value research leads are absent may the
+daily report say that there is no qualified material.
 
 Novelty rule: do not use the same event, report, policy, product launch, or
 research finding twice in consecutive daily formal topic cards. A new angle is

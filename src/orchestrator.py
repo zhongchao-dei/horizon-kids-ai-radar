@@ -357,6 +357,18 @@ class HorizonOrchestrator:
                 teacher_research_count = len(teacher_items)
                 parent_research_items = list(parent_items)
                 teacher_research_items = list(teacher_items)
+                parent_high_value_count = sum(
+                    self._numeric_score(
+                        item.metadata.get("parent_score", item.ai_score)
+                    ) >= 7
+                    for item in parent_research_items
+                )
+                teacher_high_value_count = sum(
+                    self._numeric_score(
+                        item.metadata.get("teacher_score", item.ai_score)
+                    ) >= 7
+                    for item in teacher_research_items
+                )
                 parent_items = self._keep_formal_topic_items(parent_items, "parent")
                 teacher_items = self._keep_formal_topic_items(teacher_items, "teacher")
                 parent_selected_ids = {item.id for item in parent_items}
@@ -366,6 +378,8 @@ class HorizonOrchestrator:
                     teacher_items,
                     parent_research_count=parent_research_count,
                     teacher_research_count=teacher_research_count,
+                    parent_high_value_count=parent_high_value_count,
+                    teacher_high_value_count=teacher_high_value_count,
                     recently_repeated_count=len(recently_repeated_ids),
                 )
                 self.console.print(daily_quality_review["console"])
@@ -404,6 +418,9 @@ class HorizonOrchestrator:
                     parent_leads = [
                         item for item in parent_research_items
                         if item.id not in parent_selected_ids
+                        and self._numeric_score(
+                            item.metadata.get("parent_score", item.ai_score)
+                        ) >= 7
                     ]
                     parent_summary += summarizer.generate_research_leads(
                         parent_leads, today, language=lang, audience="parent"
@@ -418,6 +435,9 @@ class HorizonOrchestrator:
                     teacher_leads = [
                         item for item in teacher_research_items
                         if item.id not in teacher_selected_ids
+                        and self._numeric_score(
+                            item.metadata.get("teacher_score", item.ai_score)
+                        ) >= 7
                     ]
                     teacher_summary += summarizer.generate_research_leads(
                         teacher_leads, today, language=lang, audience="teacher"
@@ -647,6 +667,8 @@ class HorizonOrchestrator:
         reselected: bool = False,
         parent_research_count: int | None = None,
         teacher_research_count: int | None = None,
+        parent_high_value_count: int | None = None,
+        teacher_high_value_count: int | None = None,
         recently_repeated_count: int = 0,
     ) -> dict[str, object]:
         """Audit the day's two digests before publication.
@@ -668,22 +690,32 @@ class HorizonOrchestrator:
                 f"近 {self.config.filtering.repeat_cooldown_days} 日重复资讯 "
                 f"{recently_repeated_count} 条，已只保留为研究线索"
             )
-        if parent_research_count is not None and not parent_items:
-            issues.append("家长端没有通过“可直接改写”硬门槛的资讯，已只保留研究线索")
-        if teacher_research_count is not None and not teacher_items:
-            issues.append("教师端没有通过“可直接改写”硬门槛的资讯，已只保留研究线索")
+        if (
+            parent_research_count is not None
+            and not parent_items
+            and not (parent_high_value_count or 0)
+        ):
+            issues.append("家长端正式选题和高价值待核均为空")
+        if (
+            teacher_research_count is not None
+            and not teacher_items
+            and not (teacher_high_value_count or 0)
+        ):
+            issues.append("教师端正式选题和高价值待核均为空")
         issue_text = "；".join(issues) if issues else "未发现需要重选的关键问题"
         reselected_text = "是" if reselected else "否"
         markdown = (
             "# K12 AI 每日选题自检\n\n"
             + (
                 f"- **家长端初筛研究线索**：{parent_research_count} 条；"
-                f"**通过硬门槛、可直接改写**：{len(parent_items)} 条\n"
+                f"**高价值待核**：{parent_high_value_count or 0} 条；"
+                f"**正式选题**：{len(parent_items)} 条\n"
                 if parent_research_count is not None else ""
             )
             + (
                 f"- **教师端初筛研究线索**：{teacher_research_count} 条；"
-                f"**通过硬门槛、可直接改写**：{len(teacher_items)} 条\n"
+                f"**高价值待核**：{teacher_high_value_count or 0} 条；"
+                f"**正式选题**：{len(teacher_items)} 条\n"
                 if teacher_research_count is not None else ""
             )
             + (

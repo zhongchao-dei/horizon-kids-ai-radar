@@ -121,7 +121,23 @@ class DailySummarizer:
         labels = LABELS.get(language, LABELS["en"])
 
         if not items:
-            return self._generate_empty_summary(date, total_fetched, labels)
+            # A formal list can be empty while the same day's research queue
+            # still contains high-value leads. Do not blame a score threshold
+            # or tell the user to change configuration; the lead section is
+            # appended by the orchestrator immediately after this header.
+            if language == "zh":
+                return (
+                    f"# Horizon 每日速递 - {date}\n\n"
+                    f"> 已分析 {total_fetched} 条内容；本日暂无已核验的正式选题。\n\n"
+                    "> 请继续查看下方“高价值待核（重点追踪）”，不要把证据状态误读成选题价值。\n\n"
+                    "---\n\n"
+                )
+            return (
+                f"# Horizon Daily - {date}\n\n"
+                f"> Analyzed {total_fetched} items; no evidence-complete formal topic today.\n\n"
+                "> See the high-value research leads below; evidence status is not a value judgment.\n\n"
+                "---\n\n"
+            )
 
         header = (
             f"# {labels['header']} - {date}\n\n"
@@ -166,9 +182,9 @@ class DailySummarizer:
             return ""
         labels = LABELS.get(language, LABELS["en"])
         heading = (
-            "## 今日可开发素材（待补核）\n\n"
-            "> 以下内容已通过素材价值初筛并完成补读，但尚未达到正式资讯卡的证据门槛。"
-            "可作为案例、观点支撑或后续核读入口，不应直接当作已证实结论。\n\n"
+            "## 高价值待核（重点追踪）\n\n"
+            "> 以下内容的素材价值达到 7 分及以上，但原文、关键条款、实施细节或当天新增事实仍需确认。"
+            "它们不是正式选题，不能直接当作已证实结论。\n\n"
             if language == "zh"
             else "## Developable research leads\n\n> These are enriched leads, not formal daily topics.\n\n"
         )
@@ -180,7 +196,7 @@ class DailySummarizer:
                 i + 1,
                 audience=audience,
                 card_heading_override=(
-                    "可开发素材卡（待补核）" if language == "zh" else "Research lead"
+                    "高价值待核卡（重点追踪）" if language == "zh" else "High-value research lead"
                 ),
             )
             for i, item in enumerate(items)
@@ -621,11 +637,16 @@ class DailySummarizer:
         )
 
     @classmethod
+    @classmethod
     def _selection_status(cls, score: object, selected: bool) -> str:
         numeric = cls._numeric_score(score)
-        label = "入选" if selected else "待观察"
+        if selected:
+            label = "\u5165\u9009"
+        elif numeric >= 7:
+            label = "\u9ad8\u4ef7\u503c\u5f85\u6838"
+        else:
+            label = "\u5f85\u89c2\u5bdf"
         return f"{label} {numeric:.1f}"
-
     def _generate_empty_summary(self, date: str, total_fetched: int, labels: dict) -> str:
         """Generate summary when no high-scoring items were found."""
         return (
