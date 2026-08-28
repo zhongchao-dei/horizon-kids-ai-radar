@@ -1,0 +1,24 @@
+---
+layout: default
+title: "K12 AI 全部候选资讯: 2026-08-28 (ZH)"
+date: 2026-08-28
+lang: zh
+artifact: all-candidates
+---
+
+> 保存当天去重后进入 AI 评分阶段的 10 条候选。家长端入选 0 条，教师端入选 0 条。
+
+> 未入选不等于无价值；本表用于回看筛选方向。标题和概述均为中文，链接仍指向原始来源；候选不会仅因未进入前 3—5 条而消失。
+
+| 候选 ID | 中文标题与概述（原文链接） | 来源 | 发布时间 | 分类 | 家长素材价值 | 教师素材价值 | 未入选／待观察原因 |
+|---|---|---|---|---|---|---|---|
+| CAND-e743d1afbe | [可汗学院推出Khanmigo新功能：提供交互式图表与精准针对性练习](https://blog.khanacademy.org/new-ai-tools-bring-interactive-diagrams-and-targeted-practice-thanks-to-khan-academys-partnership-with-google-org/)<br>可汗学院宣布为其AI助教Khanmigo推出由Google.org支持的新功能，旨在帮助学生通过交互式图表直观理解复杂概念，同时协助教师快速生成针对性的巩固练习。这些新功能旨在提升概念可视化效果与个性化教学效率。 通过整合动态可视化与个性化练习生成，Khanmigo正在从纯文本对话式AI助教向多模态教学工具演进。这一… | Khan Academy Blog | 2026-08-27 16:00 | k12-practice | 高价值待核 7.0 | 高价值待核 8.0 | 家长：文章涉及 3-9 年级学生如何利用 AI 互动图表将抽象学科概念可视化，并进行针对性练习，对家庭自主学习与作业辅导…；教师：更新直接面向中小学教师的日常备课与练习布置环节，提供了利用 AI 辅助生成差异化精准练习和教学可视化的具体工具应用… |
+| CAND-53ca85bb04 | [AI为初中阅读开新方：规模化个性化教学](https://edsurge.com/news/ai-can-help-one-of-k-12s-biggest-challenges-middle-school-reading)<br>EdSurge 发表文章提出，人工智能可以通过大规模提供个性化阅读教学，帮助缩小初中阶段的读写能力差距。该文属于宏观观点阐述，并没有报道具体的工具、学校或试点数据。 初中是学生从“学会阅读”转向“通过阅读学习”的关键期，读写差距会拖累所有学科。如果AI驱动的自适应阅读支持真能实现规模化个性化，可能为资源有限的学校和家… | EdSurge | 2026-08-28 00:00 | k12-practice | 高价值待核 7.0 | 高价值待核 7.0 | 家长：文章切中3-9年级（特别是初中阶段）学生常见的阅读理解停滞与阅读能力分化问题，探讨了AI个性化辅导的可行性；但目前…；教师：直接对应初中语文/英语等学科教师在阅读教学中面临的分层辅导与规模化因材施教难题，具有明确的教学场景价值，但需要进一… |
+| CAND-055a033303 | [英国教育部发布学校出勤数据收集隐私声明](https://www.gov.uk/government/publications/privacy-notice-school-attendance-data-collection)<br>英国教育部更新并发布了一份隐私声明，详细说明在收集与汇总学校出勤数据过程中涉及的个人信息类别及数据处理规则。 | UK Department for Education \(offici… | 2026-08-28 10:49 | official-policy | 待观察 1.0 | 待观察 2.0 | 家长：该内容为英国教育部门的行政合规隐私告知，不涉及 3-9 年级家庭教育、孩子学习行为、育儿决策或 AI 学习场景。；教师：仅为英国教育行政机构针对考勤数据收集的法律隐私条文，缺乏对一线教学、作业评估、学生管理或课堂实践的有效指导价值。 |
+| CAND-5e2d1fa0e0 | [英国教育部发布 16-19 岁进一步教育拨款计算技术规范](https://www.gov.uk/government/publications/technical-specification-further-education-for-young-people)<br>英国教育部发布的针对 16 至 19 岁进一步教育（Further Education）资金预算与拨款计算的官方技术指南文档。 | UK Department for Education \(offici… | 2026-08-28 11:20 | official-policy | 待观察 1.0 | 待观察 1.0 | 家长：该文件涉及英国 16-19 岁（后中等教育/高中阶段）的政府拨款技术细节，超出 3-9 年级（小学至初中）适用年龄…；教师：该文档为英国教育部门的行政财政资金计算标准，与 3-9 年级一线学科教学、课堂管理或 AI 教育应用完全无关。 |
+| CAND-07300130fc | [英国教育部发布早期教育强化学术基地透明度数据](https://www.gov.uk/government/publications/early-years-stronger-practice-hubs)<br>英国教育部更新了针对学前及早期教育从业者的强化学术基地（Stronger Practice Hubs）相关透明度信息。 | UK Department for Education \(offici… | 2026-08-28 11:12 | official-policy | 待观察 1.0 | 待观察 1.0 | 家长：该材料仅针对学前/早期教育（Early Years），不符合三至九年级（G3-G9）家庭教育与学习发展的定位要求。；教师：内容面向学前教育从业人员，不涉及中小学（G3-G9）一线教师的课堂教学、作业评估或教学管理。 |
+| CAND-6dc27a84ea | [英国教育部发布 2026 年 4 月至 6 月支出控制透明度数据](https://www.gov.uk/government/publications/dfe-spend-control-data-april-to-june-2026)<br>英国教育部公开了 2026 年 4 月至 6 月期间中央批准的新增支出数据，涵盖房产、广告、咨询、技术和招聘等领域。 | UK Department for Education \(offici… | 2026-08-27 15:00 | official-policy | 待观察 1.0 | 待观察 1.0 | 家长：属于英国教育部例行的中央支出审批透明度数据，不涉及具体的 K12 学习过程、家庭教育决策或孩子学习行为。；教师：属于政府部门内部行政与咨询支出数据，缺乏面向中小学一线教学、课堂评估或学校治理的具体实践指导。 |
+| CAND-bc652fb001 | [在风险变得明显之前让安全价值可见](https://www.microsoft.com/en-us/education/blog/2026/08/make-security-value-visible-before-risk-makes-it-obvious/)<br>微软教育博客发文，建议教育领域 IT 团队利用已拥有的 Microsoft 365 安全工具来改善网络安全。内容为产品推广性概述，无具体学校案例或学习成效数据。 | Microsoft Education Blog | 2026-08-27 16:00 | k12-practice | 待观察 0.0 | 待观察 0.0 | 家长：纯 IT 安全产品推广，不涉及 3-9 年级孩子的学习过程、家长决策或可观察行为。无家庭场景或证据，直接跳过。；教师：内容面向 IT 部门而非一线教师，不涉及课堂教学、作业、评估、学生 AI 素养或学校治理中的教师任务。 |
+| CAND-d349b7e992 | [英国教育部发布国家职业服务课程目录透明度数据](https://www.gov.uk/government/publications/national-careers-service-course-directory)<br>英国教育部更新了国家职业服务课程目录，包含英格兰地区获得公共资金资助的课程与培训机构信息。 | UK Department for Education \(offici… | 2026-08-28 11:24 | official-policy | 待观察 0.0 | 待观察 0.0 | 家长：该内容为英国成人及后16岁职业教育课程目录，完全不涉及3-9年级中小学生的家庭教育或学习成长场景。；教师：该数据集面向英国职业培训与成人教育，与K12中小学学科教学、课堂管理及教师专业发展无关。 |
+| CAND-9146cecf2f | [英国教育部发布 2026 至 2027 财年人员管理与成本透明度数据](https://www.gov.uk/government/publications/dfe-monthly-workforce-management-information-2026-to-2027)<br>英国教育部公开了 2026 至 2027 财年部门内部工作人员数量及相关成本的月度例行透明度数据。 | UK Department for Education \(offici… | 2026-08-27 15:30 | official-policy | 待观察 0.0 | 待观察 0.0 | 家长：该内容为英国教育部内部机关公务员编制与行政支出数据，与中小学生的家庭学习、课业辅导或成长决策无任何关联。；教师：该数据仅反映英国教育部机关自身的行政人员规模与开支，不涉及中小学学校教师编制、教学实务、课堂评估或学生学习行为。 |
+| CAND-54b24c5803 | [英国教育部透明度数据：2026至2027财年超过500英镑的电子采购卡支出](https://www.gov.uk/government/publications/dfe-and-executive-agency-epcs-spend-over-500-2026-to-2027)<br>英国教育部发布了其下属机构在2026至2027财年单笔超过500英镑的电子采购卡（ePCS）例行支出公开数据。 | UK Department for Education \(offici… | 2026-08-27 15:00 | official-policy | 待观察 0.0 | 待观察 0.0 | 家长：属于英国教育部例行的政府电子采购卡支出公开账目数据，与3-9年级家庭教育、孩子学习行为或家长决策完全无关。；教师：属于行政财务公开报表，不包含任何教学实践、课程设计、课堂评估或教育技术应用相关信息。 |
