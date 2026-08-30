@@ -1,0 +1,55 @@
+---
+layout: default
+title: "K12 AI 低分待观察资讯: 2026-08-30 (ZH)"
+date: 2026-08-30
+lang: zh
+artifact: low-score-watchlist
+---
+
+> 收录当天未进入家长端或教师端选题池，且两端评分均低于 4.0 分的 11 条资讯。
+
+> 仅供回看方向，不进入长期知识页，也不代表内容错误或永远无价值。
+
+## 1. [新生报到第一天，校长添加全校100名新生微信建立直接联系](https://news.google.com/rss/articles/CBMicEFVX3lxTE0wQkM5SGstZ1NEQUlLMkVUZjdzcW0zYTA1ZXY4WFhIVkZ5WHZqTWZfVXBiMzV1eFVIZkRvcWM5cGNlR3ItdjZQTHVveFJELTlxQkZIUFlCNVhMZ1lGV2h3TU5JTG1wOHpNR0RHRDI0UUs?oc=5)
+
+- 简要概述：武汉某学校校长在新生报到首日与100名新生逐一添加微信，计划通过主动沟通关注每位学生的成长。
+
+## 2. [成都智库舆情：AI时代下职业技术学校提升社会认可度实施路径](https://news.google.com/rss/articles/CBMifEFVX3lxTE5NaE1yN1dpUDJ0TDFNVkZsT2VVODZOcVV2Njl1SkJPV3p2N2dYQ1NKZ1VzQVNkallHLW5VWlVITHdBRkpvVDAxNkxxRXpRTTYxTWh1cnBWNThFX2g1REhDQ3lZMV9nV1F3X01lSVJEVTZDeV9CdkFySVFUMkc?oc=5)
+
+- 简要概述：该文章讨论了在 AI 时代背景下，职业技术学校如何通过舆情引导与路径规划提升社会认可度。
+
+## 3. [北京发行集团四大书城联动启幕2026秋季开学季主题活动](https://news.google.com/rss/articles/CBMif0FVX3lxTE5pRnhvNmh1bjBVRk5LUi1PdDV3NzM1R2pIekZic3YxNXlub19fSXpodWthVTF4Yzh3Q29SUE1PZ3ZnazF3SFZTc1piRzR2LWFVX3pYZDYycUVCeWgwd09LTllLTlI1SE90VmNlbHYyZlpPTTl1a2VsTlVXU2ZDanM?oc=5)
+
+- 简要概述：北京发行集团旗下四大书城联动举办2026年秋季开学季主题活动，开展图书展销与阅读宣介活动。
+
+## 4. [首批4所疏解高校雄安校区2027年9月开学](https://news.google.com/rss/articles/CBMif0FVX3lxTE01ZXIxNEMtUWRFdnY4X21WLVplVTUzZ1dNSU5pVVpNOXBYQ255M1NHbF90ZEhwU2Z5b1RvamVZV2gxeE4zbENHR1c3WFlmWHdfSEFYeHhXVi1PSFlfeWp5SDdybVZ0Wm4xU2RtbWZsNzhramozYWtGS0lHVmZSZGc?oc=5)
+
+- 简要概述：北京首批4所疏解高校雄安校区预计于2027年9月正式开学，未来将实现北京与雄安两校区的协同发展。
+
+## 5. [数博会上，遇见书的N种可能](https://news.google.com/rss/articles/CBMibkFVX3lxTE5BQVV4YjNpZC1vUFVtS0dIU0lqX2tDVEdQelB2NWNnejVHQWljS2hlSDdELUVaQXU2QTE4U1hZTFZDRWM4NGs0X3VzSFMxbUljdVBURExPaGY4OTNFQWEwSDZSNXA5MUZ0NHpDTVNR?oc=5)
+
+- 简要概述：文章提及在数字出版博览会上展现的数字阅读与出版形态变化，未提供具体的K12教育或教学落地细节。
+
+## 6. [多彩暑假，江苏中小学生融入社会大课堂](https://news.google.com/rss/articles/CBMicEFVX3lxTE82dGdfOEtGNnBBMmtxZXd6UWxIZFlZRVdRVHh4a1BsdW5rSHJILXhaenRTVF95VFJpR2oxdk43dlY0dVI3d1ZwS21NS1U0V2JkaVMzZmlQbm9vUTBIM0hjbjY3bkRJSXJ2bWs3UWUxTjY?oc=5)
+
+- 简要概述：报道江苏省中小学生在暑期参加社会实践活动的相关新闻，缺乏具体教学案例或家庭学习细节。
+
+## 7. [武汉AI“庄周”助力10万海外青年学中文](https://news.google.com/rss/articles/CBMic0FVX3lxTE1mRDU4bFRFS19mRmNWQXFRM0FhazVzcG5lekxhNHgtaGM2T2NfU2x0TlM4cmpLUXBjNUR2SUVaRzkxZU1TNmo2MGtoZlhNZGhrWGFyeUFWNjY2cnBVQUdNZHBsalRsSUdvaVpRU3BNLTJjTXM?oc=5)
+
+- 简要概述：报道介绍了武汉研发的AI语言工具“庄周”帮助10万海外青年学习中文，侧重于海外成年人职业能力提升。
+
+## 8. [内布拉斯加州将就限制 K-12 及高校按生理性别参加体育赛事的宪法修正案进行投票](https://news.google.com/rss/articles/CBMi0gFBVV95cUxPMk9RMU9OQ1p4U0Y0SDFZN1plM1R5VWlMQVRqdllYYW02WU1yMjZ2TXM5Y1djSUpILW5MSVpkaUhaZ0d1cHpTb09TQzZ4ZjVoOWFtYV82M241NUhlTHlhdDh1X0FUWFZxYmVpWFYtZTNwWHhIbUUzdk1aT2tqOXAzNDVRU2tuelB3UDNzZEJCa1VfaVhUc0lSN0Riemo0MFpJSUJWdEw3a0FxYWJ1VHJkV183YzN1UnVjSVVsS0stNzZBU0dJZUUzX3FpQTc0VzFxd2fSAdIBQVVfeXFMTzJPUTFPTkNaeFNGNEgxWTdaZTNUeVVpTEFUanZZWGFtNllNcjI2dk1zOWNXY0lKSC1uTElaZGlIWmdHdXB6U29PU0M2eGY1aDlhbWFfNjNuNTVIZUx5YXQ4dV9BVFhWcWJlaVhWLWUzcFh4SG1FM3ZNWk9rajlwMzQ1UVNrbnpQd1Azc2RCQmtVX2lYVHNJUjdEYnpqNDBaSUlCVnRMN2tBcWFidVRyZFdfN2MzdVJ1Y0lVbEtLLTc2QVNHSWVFM19xaUE3NFcxcXdn?oc=5)
+
+- 简要概述：美国内布拉斯加州一项旨在限制 K-12 学校和高校根据生理性别参与体育运动的宪法修正案已获得公投资格。
+
+## 9. [娱乐类 AI 搞笑特效短视频分享](https://news.google.com/rss/articles/CBMigAFBVV95cUxOWnpmYmhVU09aRnJfa0YxSXNzY2lVZnpLT09NbnlGeGZLUDZHUUJOMTZQb2NzZVdaWEZVYmxrZVhxTlkyX1cxclhOUUlxSVJoODdtdnlFOFB0TlNBWnZVNVlGVGJLcnRJRmRBYl9Ub3dQNW52UXlQeUtjRVJKVUtxTA?oc=5)
+
+- 简要概述：该链接仅为社交媒体上展示娱乐性 AI 视觉特效的短视频，缺乏具体的学习与教育实证内容。
+
+## 10. [知行砺成长 实践绘芳华](https://news.google.com/rss/articles/CBMiaEFVX3lxTFBQX0RkRkgtYUs1cnJ2bXNVUG1NdFJxOGdGWTVQcGdvNHgxeElTQXRsZVpaNk5tQlpCa3hjSm1Mc2NVVktucHAwNXhJM09RWHFyTW1mU1c1MzBDMVJJeFQ5M05MYXpNTXFG?oc=5)
+
+- 简要概述：该条目仅有一句新闻标题，缺乏具体教学事实、实践细节或AI相关信息。
+
+## 11. [联合国儿童基金会欢迎海地肯斯科夫被扣妇女儿童获释并呼吁加强保护](https://news.google.com/rss/articles/CBMivgFBVV95cUxPZnFUTDlpdTF4Q0JoSmJmTVNkd05KWDVRZjYyMTA3MDNhcV9EeFd2SWlGbi1yTmV0U24tYXdfdTFZNm5DaUJRUThzay1weUVzZVdpeTVFOGI3MGFhbjBvLTg0VWRIOTM2a2hDNVRiOXRFZUwycENSN1JjTUZtb0xiSFVLVm5NcUJ0aGw3N3RiZDkwcXYyRlVOaUdLMVRDNF92dU9WeVdGMUdEdFVtOGFOR1pCcWk3OVEtMmh3ek9R?oc=5)
+
+- 简要概述：联合国儿童基金会针对海地肯斯科夫妇女和儿童获释发表声明，呼吁在武装冲突与危机地区加强对儿童的保护。
