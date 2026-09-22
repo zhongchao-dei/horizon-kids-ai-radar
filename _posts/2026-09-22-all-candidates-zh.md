@@ -1,0 +1,30 @@
+---
+layout: default
+title: "K12 AI 全部候选资讯: 2026-09-22 (ZH)"
+date: 2026-09-22
+lang: zh
+artifact: all-candidates
+---
+
+> 保存当天去重后进入 AI 评分阶段的 16 条候选。家长端入选 0 条，教师端入选 0 条。
+
+> 未入选不等于无价值；本表用于回看筛选方向。标题和概述均为中文，链接仍指向原始来源；候选不会仅因未进入前 3—5 条而消失。
+
+| 候选 ID | 中文标题与概述（原文链接） | 来源 | 发布时间 | 分类 | 家长素材价值 | 教师素材价值 | 未入选／待观察原因 |
+|---|---|---|---|---|---|---|---|
+| CAND-52bd70c370 | [英国教育部发布：批准的职业技术与高等技术资格指南](https://www.gov.uk/government/publications/approved-technical-and-higher-technical-qualifications)<br>英国教育部发布的官方指南，列出了符合其审批标准的高等技术资格（HTQ）及职业技术资格清单。 | UK Department for Education \(offici… | 2026-09-21 15:02 | official-policy | 待观察 1.0 | 待观察 1.0 | 家长：该指南针对英国高等教育及高中毕业后的职业技术认证（18岁以上），与 3-9 年级中小学生的日常学习、家庭教育与升学…；教师：内容涉及后二次教育（Post-16/Higher Education）的职业标准与课程认证，不属于中小学教师的教学… |
+| CAND-4eecfb7dd7 | [可汗学院总结学校领导提升 SAT 备考效果的五项关键举措](https://blog.khanacademy.org/five-things-school-leaders-do-that-make-sat-practice-actually-work/)<br>可汗学院发布客座博客文章，介绍了学校领导者可采取的五项具体举措，以提升学生 SAT 练习的实际效果。 校长和学校管理者的策略制定对于确保数字化学习平台及备考工具转化为学生切实的学术进步至关重要。 该文章由可汗学院高级合作经理丹妮尔·苏利文（Danielle Sullivan）撰写，属于探讨学校层面实施策略的两篇系列文… | Khan Academy Blog | 2026-09-21 17:44 | k12-practice | 待观察 0.0 | 待观察 0.0 | 家长：Analysis failed；教师：Analysis failed |
+| CAND-afade55852 | [中文标题待补译](https://blog.google/products-and-platforms/products/education/digital-promise/)<br>中文概述待补译，请查看原文链接。 | Google for Education | 2026-09-21 16:00 | k12-practice | 待观察 0.0 | 待观察 0.0 | 家长：Analysis failed；教师：Analysis failed |
+| CAND-ea15683840 | [中文标题待补译](https://www.gov.uk/government/publications/funding-for-books-and-reading-materials-for-secondary-schools)<br>中文概述待补译，请查看原文链接。 | UK Department for Education \(offici… | 2026-09-21 13:13 | official-policy | 待观察 0.0 | 待观察 0.0 | 家长：Analysis failed；教师：Analysis failed |
+| CAND-5117a165a6 | [中文标题待补译](https://www.gov.uk/government/organisations/department-for-education/about/research)<br>中文概述待补译，请查看原文链接。 | UK Department for Education \(offici… | 2026-09-21 11:13 | official-policy | 待观察 0.0 | 待观察 0.0 | 家长：Analysis failed；教师：Analysis failed |
+| CAND-8a4b1f94b8 | [中文标题待补译](https://www.gov.uk/government/publications/period-products-in-schools-and-colleges)<br>中文概述待补译，请查看原文链接。 | UK Department for Education \(offici… | 2026-09-21 08:30 | official-policy | 待观察 0.0 | 待观察 0.0 | 家长：Analysis failed；教师：Analysis failed |
+| CAND-6e6dcd6ed6 | [中文标题待补译](https://news.google.com/rss/articles/CBMickFVX3lxTE85eFc3SEpVRExqTGVmT3NGWWR4VXItLW9NX2JCSm0xYkNZUnFSSjdmUmZZSUNteWVQMHZWSkliX2FId25zTjdGZVhKNy1LanhBeXY3d2d6elNjQTRFZlBGbG90Snp1eFJXdUpRQmExdHVlQQ?oc=5)<br>中文概述待补译，请查看原文链接。 | Google News 中文：儿童 AI 教育 | 2026-09-22 06:22 | china-k12 | 待观察 0.0 | 待观察 0.0 | 家长：Analysis failed；教师：Analysis failed |
+| CAND-48d09c941f | [中文标题待补译](https://news.google.com/rss/articles/CBMiVkFVX3lxTE5IMU1GNUg0YklzLTZyU0hDeUowOGdrY3lFWDl1R3pzUzVKeUM4SDZKS01EMExKcjVycEwwV1NmeXBtV2NSY0g0d05id2FtY01PUkNDN193?oc=5)<br>中文概述待补译，请查看原文链接。 | Google News 中文：儿童 AI 教育 | 2026-09-21 07:02 | china-k12 | 待观察 0.0 | 待观察 0.0 | 家长：Analysis failed；教师：Analysis failed |
+| CAND-a686647678 | [中文标题待补译](https://news.google.com/rss/articles/CBMiXkFVX3lxTE5PVlBkSktVWFR1eURZcUtnZUdJQWdkc3VXb0FHYWZERUREOEtVak5hSGc1cS1oWXdzVU1QZjM5bno1MVR3dnQ2N0pRNnVIZ1lDVDRKQkdOZTR2ZDQ3cUE?oc=5)<br>中文概述待补译，请查看原文链接。 | Google News 中文：家长、孩子与 AI 学习 | 2026-09-21 15:45 | family-k12-ai | 待观察 0.0 | 待观察 0.0 | 家长：Analysis failed；教师：Analysis failed |
+| CAND-a8bf8197c9 | [中文标题待补译](https://news.google.com/rss/articles/CBMimAFBVV95cUxOSWcySVNzSVphMGJueHlhekdYeEtwbmRmY0dJLU9LMDA5MTcxZjJDaV81MjdSUkRrMWZIX0JYRlJMNGhiM0FSQWRZTTMtLTNwY0IzbVZlSGtxblNoQk5DZERka0Itc0F6Q05aMXdUaXBrM3B1R1hoTUlPa0t6bWx2bGY3NTJZN19NUFZodVJRaWtzc3B3NWNvSQ?oc=5)<br>中文概述待补译，请查看原文链接。 | Google News 中文：家长、孩子与 AI 学习 | 2026-09-22 01:30 | family-k12-ai | 待观察 0.0 | 待观察 0.0 | 家长：Analysis failed；教师：Analysis failed |
+| CAND-4583d27410 | [中文标题待补译](https://news.google.com/rss/articles/CBMicEFVX3lxTE1sTmZuaTl4QU5JQlBRQ2pMTU00UUxOR2ZaY0NsYVRKRUtDN0kxblB0eXp5X1F4amZHNG5qRXhvc1E0T0RyTUhDVktid0VkRm1jUVh1VGtfN2lQdllac2ZGMHF1RWduUkxsY2dTeGxIbVY?oc=5)<br>中文概述待补译，请查看原文链接。 | Google News 中文：家长、孩子与 AI 学习 | 2026-09-21 12:43 | family-k12-ai | 待观察 0.0 | 待观察 0.0 | 家长：Analysis failed；教师：Analysis failed |
+| CAND-ba9344df36 | [中文标题待补译](https://news.google.com/rss/articles/CBMiX0FVX3lxTE01aERPMDhQTE05ZmlDcnAySTJ6dXFDeW5YQmFEVlctTndsRERsNFEtYjl5Q2VBUnpaY1RZcDhJcDB2cllndUEyeFZPbll0TFdGd0JDc2JNandnS0pQZS1B?oc=5)<br>中文概述待补译，请查看原文链接。 | Google News 中文：儿童学习与成长 | 2026-09-21 12:43 | child-growth | 待观察 0.0 | 待观察 0.0 | 家长：Analysis failed；教师：Analysis failed |
+| CAND-9d2fb40da0 | [中文标题待补译](https://news.google.com/rss/articles/CBMiX0FVX3lxTFBHS19yVElCVktOWWtQa3pYQm8tZVo4djI3NXFVd2pIMDExSTV1WnYzQVhoem1zRUk0Q093UXJsbWk1YWRrS3BrZnluQnZkT2JsNE1JS05rUjVvX3hUTDVN?oc=5)<br>中文概述待补译，请查看原文链接。 | Google News 中文：中小学家庭教育与学习选择 | 2026-09-21 09:02 | family-education-decision | 待观察 0.0 | 待观察 0.0 | 家长：Analysis failed；教师：Analysis failed |
+| CAND-f504c0017a | [中文标题待补译](https://news.google.com/rss/articles/CBMidEFVX3lxTE5zZkxJcjRHbm5TTkxtYV9tOHdyZkNldkVQNDhlY2hLaUZZWTRmTkVxR3BiX1l1cGpaN3RxRjZjWHpCTERHMXNJRjRocmdhSTVwSGUxRER4RThueEJnUjJOX1B6M2ZoRC1SNmtqTXVfQmtQY0p1?oc=5)<br>中文概述待补译，请查看原文链接。 | Google News：教育部与学校 AI 政策（中国一手线索） | 2026-09-21 07:44 | official-policy | 待观察 0.0 | 待观察 0.0 | 家长：Analysis failed；教师：Analysis failed |
+| CAND-3df9f9f515 | [中文标题待补译](https://news.google.com/rss/articles/CBMifEFVX3lxTE1La1pMRy1lZ3p6bDE1bmF3eGt2SEN2SHFKM2RaeW5rZkZxUGhLSzN5T01QUl9XUzFoaGtNTjFnUmxxeng0LWp3OGNtYTFaRU1IazBUWWV6bzJxaWVVNE1NclRpbWN2ZDZtanJ1XzZXWTZSVTVEcjZ0bUpBYlk?oc=5)<br>中文概述待补译，请查看原文链接。 | Google News：教育部与学校 AI 政策（中国一手线索） | 2026-09-22 02:03 | official-policy | 待观察 0.0 | 待观察 0.0 | 家长：Analysis failed；教师：Analysis failed |
+| CAND-436acd2565 | [中文标题待补译](https://news.google.com/rss/articles/CBMiYkFVX3lxTFA0Q2NJUlZYUy1Dak40YWp0OUVhSG5ZYlRBZWVpU3Y4ZmZqZUU2QnlRVVFySGV2cGYzQ1Nqajl3WVk0UVVWUXoyRU8xY2F1ZXF0eTh1ZVpNN0pfMTlyRXlRSHN3?oc=5)<br>中文概述待补译，请查看原文链接。 | Google News：教育部与学校 AI 政策（中国一手线索） | 2026-09-21 13:05 | official-policy | 待观察 0.0 | 待观察 0.0 | 家长：Analysis failed；教师：Analysis failed |
