@@ -1,0 +1,23 @@
+---
+layout: default
+title: "K12 AI 低分待观察资讯: 2026-10-05 (ZH)"
+date: 2026-10-05
+lang: zh
+artifact: low-score-watchlist
+---
+
+> 收录当天未进入家长端或教师端选题池，且两端评分均低于 4.0 分的 3 条资讯。
+
+> 仅供回看方向，不进入长期知识页，也不代表内容错误或永远无价值。
+
+## 1. [新型AI带娃方式兴起，看似科学有用，实则暗藏危机，父母别毁了娃](https://news.google.com/rss/articles/CBMifkFVX3lxTE14YlJ3R29JQnAta0h5Z1AyQ2pFRlNJN3Z3bkVjamZsb2ZiVHhYU3RDNlA4czVpOVFFT19PVXRuR1h4cDFvMzNrT2NBSmVxM192cVFqeVVRS0NfbF9GMmxiMFMtLWRrNGF2bm93MWZhUWx0LVFqVWxYU1J2M3J0UQ?oc=5)
+
+- 简要概述：文章对当前流行的“AI带娃”现象提出警告，认为其可能带来潜在风险，但缺乏具体的实证数据与案例支持。
+
+## 2. [Globe通过GoLEARN平台向更多菲律宾学生推广可汗学院AI学习](https://news.google.com/rss/articles/CBMirAFBVV95cUxOeVFZZVhjSXAwZ1lFeFl1ay1NRkQ0ZEdPOWhVYUlqa3BxNnZna3RCc21tMHBrTV91M1lEODNDZkxpX3VZR3ZsdzRGd1BOVVZhalNOWGFGcTE2aW5PdXVJLWdMX3ZyWTAtUjQ0Ul90OXNKYWNvcEQzN1BaUHFvV2xVMkN4NHFzbmZ0c0dTNXBzaGlTVDJCb2xfOFlGQ2pyYVZzQUtTcnVQdERFVEE50gGyAUFVX3lxTE50ZTkwbV82UmFtUG5oN01hWWFSXzRjWVMxMHdtWS16VktUcXEtSWFlVVc2TDg0Vzk0WEZSRjdVdUUxR1NPU0lRT2tsazNlMi1tZGIyTU1vZ1dET0xnRklKcnZSaGtGU1ZuNFUxeUEyVGlTLV9TeUNPSm1jVWRGVlpnc3BrYV9KbWNXTlVEU0hjYzVwaFZxc3hoRjZsak1YSEFqWEJ6Rmgzb2hfaHJ2NFg0ZXc?oc=5)
+
+- 简要概述：菲律宾电信运营商Globe通过其GoLEARN平台与可汗学院合作，旨在推广AI学习工具与数字教育资源的普及。
+
+## 3. [印度 K-12 市场变局：部分学校生源爆满，部分学校招生艰难](https://news.google.com/rss/articles/CBMiqAJBVV95cUxQRC1hcnN3TmNvZ0VDNDNwR05uS0hFalJZU2JKd2swd1hzM0N0Z3prWVR3bFY1Mk0zM1h1aEpEMGZDdjhXVmFhajRtQ21nblo3TTZCeWhDcHlZUDZ4UlhkbjVlM29JaXJ0MHJfcjFkdGM2RGRodGd6UWlxYmxRcXUwVHRmMUwxTGdHSVdseXlUeXhJOFhXcllTX2FwYk9zNi1rYnE3UV9HWWdCU0pHemZmU29ydzk3Y1ZpY2xFYmhWczJsbUNVOGFlMHZycXhPeDFHT0p4djJnMndoa3hjNTFGVlhoUFZnNjJ3cThLRVBxNEZYMWlNVGVOOHh0OXpTeGhUcGY0emtCTGhST3FRTEtDdGRBOTRhdG55RXd2bjY0dXpIOHNIaDZkVA?oc=5)
+
+- 简要概述：文章探讨印度 K-12 基础教育市场的生源分化现象，分析不同学校在招纳学生与经营管理中面临的挑战。
