@@ -1,0 +1,23 @@
+---
+layout: default
+title: "K12 AI 低分待观察资讯: 2026-10-26 (ZH)"
+date: 2026-10-26
+lang: zh
+artifact: low-score-watchlist
+---
+
+> 收录当天未进入家长端或教师端选题池，且两端评分均低于 4.0 分的 3 条资讯。
+
+> 仅供回看方向，不进入长期知识页，也不代表内容错误或永远无价值。
+
+## 1. [李劲华博士谈AI：东华三院辛亥年总理中学学生探讨科技与社会](https://news.google.com/rss/articles/CBMiqgNBVV95cUxQTGFtM2FNZnNWLVBCWWY4S2Y3SGRxTE9Ga2VwRzgwRUY1VzlMVWc0cVFQbHAyRHBtYWFuRHFRZ2tENWt5Smw3ZENYeWx4NXVVN2xVMWRzQlotVGtPWlNhcmxaNm1kZU9DbVAxbWdJVGxMbnVidUZNcGlKSFZqNnlMckNwT0ZYS1RaX1UwejhmeVVfdTRHRjl4NTN3VnAwMmFhZE9Td2tXVjNqYWtseko4SzNDYVUtY2FFYXlDbXMzLXpEbjBCOFd3QjNTVk9ycVJpckVTVHBZSXNrS3pqZU45SWFjMkljVHVkeUZEckFpZmljTUFmV0xTVDNUanEwQy01bU83TTJiUnllZV9xSEVsNmZTOU44WDRxa041cVZLdGZCZkVnd3lJZDJYWGFleWlaUXFnREt5T0lFNDAwa2xRWlNCZHdaTUdqcTN2QjhCRVBJZ3dWTVVIOE5HS21Jbm56aWd0dUI5VGxOMzRsSWNqWFNNOXk5dzhQR0o0MFFYY2g4M0NXRkZ2SFZab2htZXloT1RXR0x6OVdoNFJITE44R3ctMWVNc0NvaHc?oc=5)
+
+- 简要概述：香港东华三院辛亥年总理中学邀请李劲华博士举办讲座，引导学生认识人工智能对科技与社会的影响。
+
+## 2. [小学教育三大现象及其对孩子未来的影响](https://news.google.com/rss/articles/CBMijAFBVV95cUxPS1hFdk5KcU1iWEt3UG55N1ZQY3pBOFNQYXpJYWtRQzNlZHdMaHlKUFVSeG5UMFIwclpfemhvbU9aUGpYbkdUMnUxY2JaSWlCNnEyZmNIUTVsSDlKeV9HUFpQbF9vQ3BmNDZGQS05Z3lfSEduNmZsX3dJY29XSUpnR1lwU3RKWThRanc5Sg?oc=5)
+
+- 简要概述：文章讨论了小学阶段常见的教育现象与观点，但缺乏具体实证研究、明确数据或可操作的家庭与教学建议。
+
+## 3. [北京市卫健委：医教协同新格局，科学科普促健康](https://news.google.com/rss/articles/CBMifEFVX3lxTE1Fb2pDWnhHcVBMX0JCYTJ1ZWplVGs5ZTVzakVjYlZOSVA4M1dQd1FjbmFneXNuZzVtZVRUR3Z4WWZZS2lYcGZCWEwyOGthU2xEVGNIYlpldWs1R2tFWE5ia1BlZ05NRVZBMnMzdk5qZzNtcXpHMHJrQ2ozaVM?oc=5)
+
+- 简要概述：该条目为北京市卫生健康委员会发布的宣传标题，提及医教协同与健康科普工作，未提供具体针对中小学教学或家庭教育的具体实施细则与事实证据。
