@@ -1,0 +1,20 @@
+---
+layout: default
+title: "K12 AI 全部候选资讯: 2026-11-08 (ZH)"
+date: 2026-11-08
+lang: zh
+artifact: all-candidates
+---
+
+> 保存当天去重后进入 AI 评分阶段的 6 条候选。家长端入选 0 条，教师端入选 0 条。
+
+> 未入选不等于无价值；本表用于回看筛选方向。标题和概述均为中文，链接仍指向原始来源；候选不会仅因未进入前 3—5 条而消失。
+
+| 候选 ID | 中文标题与概述（原文链接） | 来源 | 发布时间 | 分类 | 家长素材价值 | 教师素材价值 | 未入选／待观察原因 |
+|---|---|---|---|---|---|---|---|
+| CAND-1755903b96 | [AI普及动摇传统学校评估信任，高分学生难以脱颖而出](https://news.google.com/rss/articles/CBMijgJBVV95cUxNU1hYcHVwTHRKY28ycXh0cjl0WlBCaHRTdjhyS3A3RWdBUnNrVW1pSV9wM1FmNy1qUk9xd1NyTUI3amFyRmtZYVJXV2RHMDc3QlR0dmo3eXRuLWxmd2prbnNSZFVFLUJ0OWF1TkJkdnc1djdpVTZOMV9aY2hSU2dOd3RHQzAzNi1hMGJVX2h5RmZTZ2dRQXRQZEVIcVE5Qi1ncTdtMnA3RDhUaGFhcVRMd2h6bGV6dlFaSzNHUXpHaUkzMUlLWkZIQzBrQlVON0xkbGVOQTJnZWlENXJHWFZVMFFWSGwtVFJfOXlJV25QWHdDeVNFSTNleWFVUnlMa0NnVGpyd0VrcU1rdk1zanc?oc=5)<br>澳大利亚媒体报道称，生成式AI工具在学生中的广泛使用正破坏对传统学校作业和评估机制的信任。这种变化使得优秀学生难以将其原创思考与AI辅助完成的作业区分开来。 当AI能够轻松生成优质书面作业时，传统的课后评估方式失去了准确衡量学生真实理解能力的作用。教育者和家长需要重新审视评价方式，保护并激励真正具有独立思考能力的优秀… | Google News English: teachers, AI a… | 2026-11-08 05:24 | teacher-k12-ai | 高价值待核 7.0 | 高价值待核 8.0 | 家长：评估机制失真直接影响家长对孩子真实学习水平的判断，优秀学生区分度下降也是家长密切关注的问题；但目前仅有新闻标题，缺…；教师：切中一线教师的核心痛点：传统评测体系在 AI 时代失效，导致学生作业同质化、优秀生难以突出，倒逼教师重新设计课堂与… |
+| CAND-8ca5eaf383 | [当孩子迷信“AI什么都会”，如何借助AI真正实现因材施教？](https://news.google.com/rss/articles/CBMiTEFVX3lxTE1QTjRQVU4tZEtvVGlMNE03VmFSckl1TnVybWh5Y3laQjBNWmtaUDhiOG9ZUGU4Mm1MWkdDcVJ2cTgyWXZhQW0zY1djME8?oc=5)<br>凤凰网发表报道，探讨在中小学生普遍产生“AI什么都会”的盲目崇拜心理下，如何利用智能教育工具实现切实的“因材施教”。 随着中小学生使用生成式AI工具越来越普遍，如何引导孩子从依赖AI给答案转向个性化辅导，成为K12家庭与学校教育的核心议题。 目前仅有新闻标题报道，缺乏正文中的具体产品方案、试点学校案例或实验数据，相关… | Google News 中文：家长、孩子与 AI 学习 | 2026-11-07 12:50 | family-k12-ai | 待观察 4.0 | 待观察 4.0 | 家长：标题切中了孩子对AI产生过度依赖或盲目崇拜（“AI什么都会”）的真实家庭场景，但由于缺少正文，无法提取具体的家庭教…；教师：涉及因材施教与AI教学应用的讨论，但缺乏具体教学设计、课堂反馈或试点数据，难以评估其对一线教学的参考价值。 |
+| CAND-6264210cf6 | [2026“羊城杯”网络安全大赛收官，AI提示词攻击与模型数据泄露入选考题](https://news.google.com/rss/articles/CBMicEFVX3lxTE5UTDBHSVAxQWhybURhT3FhTUVLSnVlVVJTa1VEaEkzRXIyeFZRdEEwcktra0JoRlZDenBtdWR0UE5HZGJ6ajMzZEV1YUtsMV80b0JpZGtGb2xHZ3ZvdGdsVmxxa05qeXR6MFJVSWFRNG8?oc=5)<br>2026“羊城杯”网络安全大赛落幕，赛事首次将“AI提示词攻击”与“模型数据泄露”等前沿人工智能安全风险纳入竞赛考题。 | Google News：教育部与学校 AI 政策（中国一手线索） | 2026-11-08 01:38 | official-policy | 待观察 2.0 | 待观察 3.0 | 家长：该赛事主要面向成人及专业选手，缺乏针对3-9年级中小学生日常学习、安全上网或家庭教育决策的直接信号与具体落地落地场…；教师：虽然“提示词攻击”体现了最新的AI安全考点，但该内容并非面向中小学课堂教学、学科融合或教师教学任务，参考价值有限。 |
+| CAND-f0464a79f6 | [北京市政府门户网站报道36位产业一线科技人才宣讲实干精神](https://news.google.com/rss/articles/CBMidEFVX3lxTE9kX1VraUxEdmQ4ZGpOT001T3lONHk1akNJZzJFU1Z6X0hpRFpmWmlTdmZTVGdRV0tOdnBsQ0praWZOeGV2c3Q4RHZuZ2ViTmZ6Z2JYNlNRZmNnQlE0Wk5Bdm9YR0tmNnlXTjk4TmRWRmttZHlT?oc=5)<br>报道展示了北京市36位来自产业一线的科技人才弘扬实干奋斗精神的相关活动，不涉及中小学教育或教学实践细节。 | Google News：教育部与学校 AI 政策（中国一手线索） | 2026-11-08 01:32 | official-policy | 待观察 1.0 | 待观察 1.0 | 家长：属于政务新闻与产业人才宣传，缺乏针对 3-9 年级学生学习行为、家庭教育决策或 AI 工具应用的具体事实。；教师：内容为产业一线人才宣传，未包含中小学学科教学、作业评估、班级管理或教师专业发展相关细节。 |
+| CAND-423f5d9f43 | [房山加快建设科教融合文化名区、新质智造产业新城](https://news.google.com/rss/articles/CBMidEFVX3lxTE84cDNhTDJ5c1NvdmIyeVkwV29JOFhnSGU2anAwVkpYQzZxS241M1pRTHdoSFFVYW9QRGhnbVVydldkY3FhaGJGVTMxaHBMV2VOYU1KQmctOVFHTzJBY3lsNmNURFVWbFJPUVNPNUlfN1ZSM3Az?oc=5)<br>北京市房山区发布关于推进科教融合与新质智造产业发展的宏观区域规划新闻。 | Google News：教育部与学校 AI 政策（中国一手线索） | 2026-11-08 01:46 | official-policy | 待观察 1.0 | 待观察 1.0 | 家长：属于地方政府区域发展与产业规划宣传，缺乏针对3-9年级家庭教育、孩子学习行为或具体教育选择的事实与场景。；教师：属于宏观政务宣传，未涉及中小学课堂教学、课程设计、学生评价或教师教学实践的具体信息。 |
+| CAND-231b375ff9 | [晋源区开展“AI赋能新课堂”专题培训](https://news.google.com/rss/articles/CBMiXkFVX3lxTE9IcHZEUU1PR2ZNZXlPOXNNMjBxNHRiSE1DUWdDb3U4d2l6Y0hqQW9RWC13SkRGd3NJWTg2Q19xNkp6bEEwVFdhbEZ4OHlrZnFVYTI1ZE5yOXNNQTJ6VXc?oc=5)<br>据报道，太原市晋源区开展了“AI赋能新课堂”专题培训，旨在推动人工智能技术在教育教学中的应用。 这体现了地方教育部门推动中小学教师提升数字素养与AI教学应用能力的趋势。 由于目前仅有新闻标题与简介，具体的培训课程内容、参训教师规模以及实际应用效果等细节尚待原文进一步核验。 | Google News 中文：儿童 AI 教育 | 2026-11-07 13:36 | china-k12 | 待观察 0.0 | 待观察 0.0 | 家长：Analysis response parse failed；教师：Analysis response parse failed |
