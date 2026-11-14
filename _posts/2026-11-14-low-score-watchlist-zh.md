@@ -1,0 +1,79 @@
+---
+layout: default
+title: "K12 AI 低分待观察资讯: 2026-11-14 (ZH)"
+date: 2026-11-14
+lang: zh
+artifact: low-score-watchlist
+---
+
+> 收录当天未进入家长端或教师端选题池，且两端评分均低于 4.0 分的 17 条资讯。
+
+> 仅供回看方向，不进入长期知识页，也不代表内容错误或永远无价值。
+
+## 1. [慕德中学结合艺术与科技教学培育全人领袖](https://news.google.com/rss/articles/CBMi1wNBVV95cUxNSXZRTHBiVXQyUjMzb1RUUVdxb0otcWgtNGt0Z1JjaS1ldkxPa3pVY3pKSVduZzdzdzlYT3dpQ29kajBnVVl1WkdNN1JkckpMUUVvZjMzN2xKOXpab00ycWZDV2Q2ZDlMN2tZSkZJTWtmZ0JoMUJPXzA2ZkJtNExNYVVzTVlKcXpMRTdkbWtUdFZnTGQtOHY1SkVtTWlqNjNoalEyOC1WTGNZejkyRlMtVlg1U1Fzc2g3Tlo5c3cyVFN2OTBEVl9nQXhzMWZPQW9Id2VpQlZWM1ktbFlDbU5hNlkyOG9YSjg0MFpoMHJZUkdNdEhFNEJoLVFNMzlLellEclJ2eGUzXzItLXFVdmJLdEpmZnJfVks4TzMxbjNpTjdnbWVKYmdQcDBZdWpObmpJQW1nZU9WQUNfSE1oSk5HZVZ3ZUVWTDZGV0Q0cW9lbGs4MlBaQVFYa3NoUXBKbFA4TDJTN3FiWXk1azlTUmNmVEhNSEozU24zOHNZSi1ScGNxY29kOGx3Sk5BcWcyOVpQM3ZiTjlaVmVJQXNlTWJRdXJicWVlcDdGWGJELWhHNnkwZ3pPM0FPMm45ZE5jWGRoNDUzQ1lqcG9ibzVGeG1YVUNKZmljZEE?oc=5)
+
+- 简要概述：该报道简述了香港慕德中学结合艺术与科技教学推行全人教育的理念，但缺乏具体的课堂实施细节与学习效果证据。
+
+## 2. [研究显示线上学习与中国高中生失眠症状减少存在相关性](https://news.google.com/rss/articles/CBMiqAFBVV95cUxNUjRBcXpqaE9kclBJd1Y3VGVlUjVDQ2xXbDc2UXhuREo3WVVOeHBVazA4Rko5RzZnTjJ3MHlSZnR3QTdaQTEwQ1NSVkZzbGc1dTNLTTd6U2dacC05NmhBNmdXM282Nmpab29rWnB5TWVrZmJrQWw1WGN6VWtLMTJPUjF6Yjd3bFhTa2MzZ1NKMFVaWkM3THlxOExFQWZTYmNGdUhjcVZFV1M?oc=5)
+
+- 简要概述：报道提及一项针对中国高中生的研究，指出线上学习与较低的失眠症状存在相关性。
+
+## 3. [英国教育部择校与学校对比查询门户](https://www.gov.uk/find-compare-schools-colleges)
+
+- 简要概述：英国教育部提供的官方查询工具，可用于搜索英格兰各地区的学校、对比学校学术表现、查看 Ofsted 评估报告及招生与行为政策。
+
+## 4. [平谷职校开展智慧农业与AI全场景赋能科普活动](https://news.google.com/rss/articles/CBMiW0FVX3lxTE5GNlhrM1ZQVk93Z2dsenVyOXNhZjYyQXBERkkzRUZ5UklCMDJCRmNVLUpxVUtGUWtjTHpTS3p4d2FqcFBHem8wNlAtVGhpd3BYQmp0QWE0QlQtcVE?oc=5)
+
+- 简要概述：首都文明网报道平谷职校与企业联动，举办“智绘农田·数义未来”科普活动，向学生展示AI在智慧农业中的应用。
+
+## 5. [首都高校新生“大思政课”在清华大学开讲](https://news.google.com/rss/articles/CBMif0FVX3lxTFBhdFNGczluY1Z3dEY2aFY0dzYyQ2p1TU5yVkVNdkVMOC14d0wxWXBzb0FzNVJuRHRuSE8wWmZIZzYzNkxVRkhab3VORjFjcFZFbk5kUERUZ2pvV2xuT0hyWmZSdDFNWGhpM3dBSnkzV2Q0UnhKTXEzOF9iQTdVNWs?oc=5)
+
+- 简要概述：北京市面向首都高校新生举办“大思政课”开学第一课活动，在清华大学开讲。
+
+## 6. [北京计划到2035年基本建成国际交往中心](https://news.google.com/rss/articles/CBMidEFVX3lxTE9sSF9FR1phN19idjhXTWxGb2thc2RTZTBwaUpkZUV2clFueTlPV2JxYmE1ZVN4b0Y4R1J2WWs3dDJYOGswZUFsaTM0VG1DdGVxbVpDaE1Pb3J5SGJPOFJDM2stTkw3ZmRzRnRNcHR1c0w4N3VR?oc=5)
+
+- 简要概述：北京市人民政府发布规划，提议到2035年基本建成具有全球影响力和吸引力的国际交往中心。
+
+## 7. [百度Apollo World世界模型亮相](https://news.google.com/rss/articles/CBMifkFVX3lxTE1QQTUybHBoUnZUOGlZcDN0QmdPTGxIUkVoYW8tNm50TkQ3ZnQ5SGlNdHZERy15Uy1GRFpQSk1rVXRGV3hpemJ0QWRWS1FzWktGNzJSeTlwelkxTk83NUpqWGI2NFplajRCM0JXTGFuZ1d4WEVXc2hUU1ZRbU1Fdw?oc=5)
+
+- 简要概述：百度展示了面向自动驾驶领域的Apollo World世界模型，涉及通用人工智能在自动驾驶场景的技术应用。
+
+## 8. [第三届人工智能、数字媒体技术与社会计算国际学术会议信息](https://news.google.com/rss/articles/CBMibkFVX3lxTE8yUHliY1R6TmpvUVA4LVVBek5VSkdxVG5XNlpMTG1LUmd2a2ZudDA2WkxfRnlSV3NWQnF1YnlyY2I2SkFIVjlObG5MS05sQWpLd2JSd254aUdMSVdlM3luaGtscXlYWDcyRVpnZ0ZB?oc=5)
+
+- 简要概述：该条目为泛领域学术会议宣介，未涉及中小学（3-9年级）教育实务或AI在基础教育中的应用证据。
+
+## 9. [中文标题待补译](https://news.google.com/rss/articles/CBMifkFVX3lxTE1ra3p2QTA0OG5QamU1MzVRUmtadF9NdG9ZUUg5UXhBcG45WURwWUQzWm4xb3A5cTVvUjZYOUdHZDA1VkZ4NW8tR1JtVnkxVDNoQU1vcFlUX1FmMHdaNXhJeEd0UVlJSnliVmFiN253UzRxcE1IRVVhR1NPeFBndw?oc=5)
+
+- 简要概述：中文概述待补译，请查看原文链接。
+
+## 10. [中文标题待补译](https://news.google.com/rss/articles/CBMibkFVX3lxTFAxdHBIUGJmQ1lWNVRSUE1kejZ3RmlTN2ZHTWZGbEtZNEk3Wm41cjJkUERaYXFzN1drRGo2RXptdXQwRzVmWDFlZzBCNGpUaXkzYTVjcmk0YV9PRHB5MGFlMWxLRld2VU8yUzltcVJR?oc=5)
+
+- 简要概述：中文概述待补译，请查看原文链接。
+
+## 11. [经合组织报告：拉丁美洲吸收全球钢铁过剩产能情况](https://news.google.com/rss/articles/CBMisgFBVV95cUxQLS05ZENnZmFTVlJ1NXd3WnRVYVhFWWVqWGlyUDBjWWhuaHdIc0laaUpUWE50RXRudUU3dzZ3OHBySkFsdkwxU0VTcG1iSzIzWDJWRlBwd3ExQzZjSGlmd3BXTEtLLTRnRkhwd0hqZWczWFRxMFU0T3l1RHJzMjJoSEZkQ1NnRW1iLXZzU1dBQnM0N0RvUUptMWlMMUdiT3gwa1hnY0V1MGtORzBCWXY3M1BB?oc=5)
+
+- 简要概述：该文章讨论了经合组织关于拉丁美洲如何吸收全球钢铁过剩产能的相关报告与工业经济政策。
+
+## 12. [经合组织：马来西亚与钢铁相关的非市场政策与外国直接投资实践](https://news.google.com/rss/articles/CBMivAFBVV95cUxNajQ2Z28yeUcxRWhHN3d2VUw5dG4wRzhadUdXRXVFVjk3dlpNbmpPbi1fa19oQjJZemJ0MlpDZFk3enJVUTAyeUdsaWtyaXQ0ZUNXQnlYSEFPdXJ1cThjSDZfc0VsZWdETER5RmRHeFdfamVhSExLcEx2WXl0eHcteEtEVG1WX2hQQW9MTkFQam5lcnkwQ0dnRDNLc2VGR2h5YmQwTm1UN3J0OUpMWktSOVhHMWYyOVdqeXZIbw?oc=5)
+
+- 简要概述：该文章为经合组织关于马来西亚钢铁行业非市场政策及外国直接投资的分析报告，与K12教育无关。
+
+## 13. [中文标题待补译](https://news.google.com/rss/articles/CBMiyAFBVV95cUxNMW9SYnF6dnVkRUhhMVhqM1ZYSDkxNWJJSzFpY3Nya3hrbGZMRDdWTVEtZzI2cldHbHpyYWpuMzh6RV9STjBCUnFSU25TM3d4dzJ1WlRGclBxQjN6TGdzSVFGOGNFczl3YVJ2NjNGNHZFOUllMXU2aUxFUU5FZU50TzdvbUF1THJwVlhPVUpHY3JWeWUxY2g0RUVRUE11dFlza2hIWDhYMTdyQl8zRDdBdElSc1hGWUk1UWxGRTZtUlhlbDBta2QzRw?oc=5)
+
+- 简要概述：中文概述待补译，请查看原文链接。
+
+## 14. [中文标题待补译](https://news.google.com/rss/articles/CBMivgFBVV95cUxONTRxbDNPNjRHWmxtN29MekE0YzI2UmcyU1NnM0w2NWtOb2dhOUlyY1hvMEUzdDdULWk1Z0Y2N1FVWFJKWWVyMWlrQ0xMR3JkVmdjaDZlWkwxWElEekczak5QWDBka3BkQXR1R0c3bnpvRGliUTFsZTQwR3RTUHZPWk03RmpzYlljc3pRODNWWWFLZGU4TlM4dmVXWWJLY2tTT3BrM05ra293ZHppYjQ5LTVtRjFjRklqc1AyUVd3?oc=5)
+
+- 简要概述：中文概述待补译，请查看原文链接。
+
+## 15. [中文标题待补译](https://news.google.com/rss/articles/CBMi0wFBVV95cUxPOW1McWtRcTNDdDNkaV9jUUFXU2VVMnkwQVoweFJIcmVXcWNyR3pnNjktTFVSWWRlS2VYZWpyay0xZUc0d3RpbkUxdkszY25ua25LRkY2Y2E0OXNoSldOY0RrNy1JbzFFWFZQd2pqOGFBRDZlNU02UTZfanR6aVRpdkQwajNtSkY0aVg1WHVCelFUYjgySWp1UFR2UUlHR1FpOC1mLTRGQVo3ZGF2S01mRkJBNy1uNDBfUWxqSFY4Mm9tbG5Gc24yZGdoTjh1ZkFLNkcw?oc=5)
+
+- 简要概述：中文概述待补译，请查看原文链接。
+
+## 16. [中文标题待补译](https://news.google.com/rss/articles/CBMijgFBVV95cUxOeGJLZUJqQmhwOWJrTTJ2ZlM3V0ZGTmw0MXNvTjFCY3lNZVRYMXJ5SjdrdEtoYU15b1BwZ1YzcVhtUmhoUktaYkZ6a29BR2VWaVMzOXptMzRWOHhRdHZoOURrUnRZb0d2S09DazBROHJMZWFjYmxqRmRqR19PbTJ0TEtVbVhwbm9zeVdZTVhn?oc=5)
+
+- 简要概述：中文概述待补译，请查看原文链接。
+
+## 17. [中文标题待补译](https://news.google.com/rss/articles/CBMioAFBVV95cUxNeEdFMnFlVF9TdU5YUFVYU0YyRW1CdldUeTNTSXlnQ1RkVUxoX2VGcmVNNmc5RE5ySDk2SmdyUFh2Um9KM3VWTXNXN3lSdV93c01LdWVVZy1fbzhVemU0WXFLaW91eEhxak04U1RZX05zUTAyLVZuN0lNRnIybzdTSXg3M1NWb1ptMVlUQXU1VmJqOTRod0tBOVBRYnpDQVdC?oc=5)
+
+- 简要概述：中文概述待补译，请查看原文链接。
